@@ -1,0 +1,41 @@
+.form-wrapper{
+}
+label{
+    margin:20px;
+}
+input{
+    margin:20px;
+    padding:4px;
+    width:15rem;
+    border-radius:6px;
+    border-style:groove;
+}
+
+select{
+    padding:4px;
+    background-color: white;
+    border-style: groove;
+    border-radius: 6px;
+
+}
+
+#slots{
+    width:10rem;
+}
+
+.slots-box{
+    margin:20px;
+    background-color: #333745;
+    text-align:center;
+    color:white;
+    border-radius:6px;
+    width:25rem;
+    padding:6px;
+}
+#slot-add-btn{
+    background-color: #333745;
+    color:white;
+    height:40px;
+    font-size:400;
+    border-style:groove;
+}

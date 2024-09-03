@@ -1,18 +1,29 @@
 import '../styles/Courses.css'
 
-function Courses() {
+function Courses({courseArray}) {
+    const courses = courseArray;
 return(
-    <div class="courses-wrapper">
-        <div class='course'>
-            <p>CSI2001</p>
-            <p>Intro to some bullshit</p>
-            <div class="slots">
-                <p>C1+L54+L55</p>
-                <p>C2+L4+L5</p>
-                <p>C2+L4+L5</p>
-            </div>
+    <div style={{ display: courseArray.length === 0 ? 'none' : 'block' }} class="courses-wrapper">
+
+        <div style = {{fontWeight: 'bolder'}}class='course'>
+            <p>CODE</p>
+            <p>TITLE</p>
+            <p>SLOTS</p>
             <br></br>
         </div>
+
+        {courseArray.map((course) => (
+          <div class='course'>
+            <p>{course.code}</p>
+            <p>{course.title}</p>
+            <div class="slots">
+                {course.slots.map((slot) =>(
+                    <p>{slot.name}</p>
+                ))}
+            </div>
+            <br></br>
+          </div>
+        ))}
     </div>
 )
 }

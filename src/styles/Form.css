@@ -9,6 +9,12 @@ form{
     display:flex;
     flex-direction:column;
 }
+
+.btn{
+    background-color: #333745;
+    color:white;
+}
+
 label{
     float:left;
     clear:left;

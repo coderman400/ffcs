@@ -9,6 +9,7 @@
 .course{
     display:grid;
     grid-template-columns: 17% 50% 100%;
+    border-bottom:groove 2px;
 }
 .slots{
     display:flex;

@@ -4,6 +4,7 @@ import Courses from './Courses.jsx';
 
 function Form() {
   const [slotsArray, setSlotsArray] = useState([]);
+  const [courseArray, setCourseArray] = useState([]);
 
   const handleAddSlot = (event) => {
     event.preventDefault();
@@ -19,9 +20,29 @@ function Form() {
     }
   };
 
+  const handleAddCourse = (event) => {
+    event.preventDefault();
+    const titleInput = document.getElementById('title');
+    const codeInput = document.getElementById('code');
+
+    const newCourse = {
+      title: titleInput.value,
+      code: codeInput.value,
+      slots: slotsArray
+    }
+
+    if(newCourse){
+      setCourseArray([...courseArray, newCourse]);
+      titleInput.value='';
+      codeInput.value='';
+      setSlotsArray([]);
+    }
+  }
+
   return (
+    <>
+    
     <div className="form-wrapper">
-      
       <form>
         <div>
           <label htmlFor="title">Course Title: </label>
@@ -31,19 +52,13 @@ function Form() {
           <label htmlFor="code">Course Code: </label>
           <input type="text" id="code" name="code" />
         </div>
-        <div>
-          <label htmlFor="type">Type:</label>
-          <select id="type" name="type">
-            <option value="eth">Embedded Lab + Theory</option>
-            <option value="th">Theory Only</option>
-          </select>
-        </div>
         <br />
         <div>
           <label htmlFor="slots">Enter Slots:</label>
           <input type="text" id="slots" name="slots" />
           <button id="slot-add-btn" onClick={handleAddSlot}>+</button>
         </div>
+        <button id="course-add-btn" onClick={handleAddCourse}class="btn">ADD COURSE</button>
       </form>
 
       <div className="slots-box">
@@ -52,6 +67,8 @@ function Form() {
         ))}
       </div>
     </div>
+    <Courses courseArray={courseArray}></Courses>
+  </>
   );
 }
 

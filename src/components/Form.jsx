@@ -1,6 +1,6 @@
 import '../styles/Form.css';
 import { useState } from 'react';
-import Slots from './Slots.jsx';
+import Courses from './Courses.jsx';
 
 function Form() {
   const [slotsArray, setSlotsArray] = useState([]);
@@ -21,24 +21,29 @@ function Form() {
 
   return (
     <div className="form-wrapper">
+      
       <form>
-        <label htmlFor="title">Course Title: </label>
-        <input type="text" id="title" name="title" />
-
-        <label htmlFor="code">Course Code: </label>
-        <input type="text" id="code" name="code" />
-
-        <label htmlFor="type">Type:</label>
-        <select id="type" name="type">
-          <option value="eth">Embedded Lab + Theory</option>
-          <option value="th">Theory Only</option>
-        </select>
+        <div>
+          <label htmlFor="title">Course Title: </label>
+          <input type="text" id="title" name="title" />
+        </div>
+        <div>
+          <label htmlFor="code">Course Code: </label>
+          <input type="text" id="code" name="code" />
+        </div>
+        <div>
+          <label htmlFor="type">Type:</label>
+          <select id="type" name="type">
+            <option value="eth">Embedded Lab + Theory</option>
+            <option value="th">Theory Only</option>
+          </select>
+        </div>
         <br />
-
-        <label htmlFor="slots">Enter Slots:</label>
-        <input type="text" id="slots" name="slots" />
-
-        <button id="slot-add-btn" onClick={handleAddSlot}>+</button>
+        <div>
+          <label htmlFor="slots">Enter Slots:</label>
+          <input type="text" id="slots" name="slots" />
+          <button id="slot-add-btn" onClick={handleAddSlot}>+</button>
+        </div>
       </form>
 
       <div className="slots-box">

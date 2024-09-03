@@ -1,24 +1,43 @@
 .form-wrapper{
+    background-color: white;
+    display:flex;
+    margin:20px;
+    border-radius:20px;
+    padding:10px;
+}
+form{
+    display:flex;
+    flex-direction:column;
 }
 label{
+    float:left;
+    clear:left;
+    text-align: right;
     margin:20px;
 }
-input{
+input, select, button{
+    float:left;
     margin:20px;
     padding:4px;
-    width:15rem;
+    width:15em;
     border-radius:6px;
     border-style:groove;
+    vertical-align: top;
+}
+input, select, option {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;  
 }
 
 select{
+    display:block;
     padding:4px;
     background-color: white;
     border-style: groove;
     border-radius: 6px;
 
 }
-
 #slots{
     width:10rem;
 }
@@ -34,6 +53,9 @@ select{
 }
 #slot-add-btn{
     background-color: #333745;
+    width:50px;
+
+    text-align: center;
     color:white;
     height:40px;
     font-size:400;

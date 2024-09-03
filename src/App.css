@@ -1,12 +1,10 @@
 body{
   background-color: rgb(230, 230, 230);
   display:flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .container{
-  background-color: white;
   border-radius:20px;
-  width:95vw;;
-  height:95vh;
+  padding:10px;
 }

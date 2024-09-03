@@ -1,0 +1,19 @@
+.courses-wrapper{
+    background-color: white;
+    display:flex;
+    margin:20px;
+    border-radius:20px;
+    padding:10px;
+    flex-direction: column;
+}
+.course{
+    display:grid;
+    grid-template-columns: 17% 50% 100%;
+}
+.slots{
+    display:flex;
+    flex-direction: column;
+    margin: 0;
+    padding:0;
+    line-height: 0;
+}

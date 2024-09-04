@@ -9,14 +9,17 @@ function Form() {
   const handleAddSlot = (event) => {
     event.preventDefault();
     const slotsInput = document.getElementById('slots');
+    const profInput = document.getElementById('prof');
     const newSlot = {
-      name: slotsInput.value.trim(),
+      prof: profInput.value,
+      slots: slotsInput.value.trim(),
       id: crypto.randomUUID()
     };
 
     if (newSlot) {
       setSlotsArray([...slotsArray, newSlot]); 
       slotsInput.value = ''; 
+      profInput.value = '';
     }
   };
 
@@ -54,6 +57,10 @@ function Form() {
         </div>
         <br />
         <div>
+          <label htmlFor="prof">Professor: </label>
+          <input type="text" id="prof" name="prof" />
+        </div>
+        <div>
           <label htmlFor="slots">Enter Slots:</label>
           <input type="text" id="slots" name="slots" />
           <button id="slot-add-btn" onClick={handleAddSlot}>+</button>
@@ -63,7 +70,7 @@ function Form() {
 
       <div className="slots-box">
         {slotsArray.map((slot) => (
-          <p key={slot.id}>{slot.name}</p>
+          <p key={slot.id}>{slot.prof}: {slot.slots}</p>
         ))}
       </div>
     </div>

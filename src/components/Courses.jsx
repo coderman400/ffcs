@@ -17,9 +17,9 @@ return(
             <p>{course.code}</p>
             <p>{course.title}</p>
             <div class="slots">
-                {course.slots.map((slot) =>(
-                    <p>{slot.name}</p>
-                ))}
+            {course.slots.map((slot)=> (
+                <p>{slot.prof}: {slot.slots}</p>
+            ))}
             </div>
             <br></br>
           </div>

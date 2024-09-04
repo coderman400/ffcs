@@ -5,7 +5,7 @@ function Courses({courseArray}) {
 return(
     <div style={{ display: courseArray.length === 0 ? 'none' : 'block' }} class="courses-wrapper">
 
-        <div style = {{fontWeight: 'bolder'}}class='course'>
+        <div style = {{fontWeight: 'bolder'}}class='course-head'>
             <p>CODE</p>
             <p>TITLE</p>
             <p>SLOTS</p>

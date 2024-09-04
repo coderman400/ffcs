@@ -1,7 +1,7 @@
 .form-wrapper{
     background-color: white;
     display:flex;
-    margin:20px;
+    margin:30px;
     border-radius:20px;
     padding:10px;
 }
@@ -45,7 +45,7 @@ select{
 
 }
 #slots{
-    width:10rem;
+    width:10em;
 }
 
 .slots-box{
@@ -54,7 +54,7 @@ select{
     text-align:center;
     color:white;
     border-radius:6px;
-    width:25rem;
+    width:20rem;
     padding:6px;
 }
 #slot-add-btn{

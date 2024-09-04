@@ -1,15 +1,27 @@
 .courses-wrapper{
-    background-color: white;
+    background-color:#333745;
+    color:white;
+    font-weight:900;
     display:flex;
     margin:20px;
     border-radius:20px;
     padding:10px;
     flex-direction: column;
 }
+.course-head{
+    display:grid;
+    grid-template-columns: 17% 50% 100%;
+   
+}
 .course{
     display:grid;
     grid-template-columns: 17% 50% 100%;
-    border-bottom:groove 2px;
+    border-radius:20px;
+    background-color: white;
+    color:black;
+    padding:10px;
+    margin-top:20px;
+    overflow-x:scroll;
 }
 
 .slots{

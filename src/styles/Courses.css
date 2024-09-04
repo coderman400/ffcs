@@ -9,6 +9,7 @@
     flex-direction: column;
 }
 .course-head{
+    padding-left:13px;
     display:grid;
     grid-template-columns: 17% 50% 100%;
    

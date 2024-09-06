@@ -13,7 +13,7 @@ return(
         </div>
 
         {courseArray.map((course) => (
-          <div class='course'>
+          <div className='course'>
             <p>{course.code}</p>
             <p>{course.title}</p>
             <div class="slots">

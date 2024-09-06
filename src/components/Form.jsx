@@ -1,12 +1,13 @@
 import '../styles/Form.css';
 import { useState } from 'react';
 import Courses from './Courses.jsx';
+import Submit from './Submit.jsx';
 
 function Form() {
   const [slotsArray, setSlotsArray] = useState([]);
   const [courseArray, setCourseArray] = useState([]);
   const [error, setError] = useState('');
-
+  const [show,setShow] = useState(false);
  const slotRegex = /^(?:([A-G][1-2]|(TAA[12]|TCC[12]|TBB2|TDD2)|V[1-7]|L([1-5]?[0-9])\+L(\3|[1-5]?[0-9]))(?:\+[TA][A-G][1-2])?)(?:,(?:([A-G][1-2]|(TAA[12]|TCC[12]|TBB2|TDD2)|V[1-7]|L([1-5]?[0-9])\+L(\7|[1-5]?[0-9]))(?:\+[TA][A-G][1-2])?))*$/i;
 
 
@@ -38,6 +39,7 @@ function Form() {
   };
 
   const handleAddCourse = (event) => {
+    setShow(true);
     event.preventDefault();
     const titleInput = document.getElementById('title');
     const codeInput = document.getElementById('code');
@@ -56,6 +58,10 @@ function Form() {
     }
   };
 
+  const props = {
+    courseArray: courseArray,
+    show: show
+  }
   return (
     <>
       <div className="form-wrapper">
@@ -93,6 +99,7 @@ function Form() {
         </div>
       </div>
       <Courses courseArray={courseArray} />
+      <Submit courseArray={courseArray} show={show}></Submit>
     </>
   );
 }

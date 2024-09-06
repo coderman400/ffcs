@@ -6,14 +6,13 @@ import Courses from './components/Courses.jsx'
 import Result from './components/Result.jsx'
 function App() {
   return(
-    <div className='container'>
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Form />}></Route>
           <Route path="/result" element={<Result />}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
   )
 }
 

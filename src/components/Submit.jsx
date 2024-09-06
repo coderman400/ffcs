@@ -8,7 +8,7 @@ function Submit(props) {
 
   function handleSubmit() {
     console.log("CLICKED RESULT");
-    navigate('/result');
+    navigate('/result', {state: {data: courseArray}});
   }
 
   return (

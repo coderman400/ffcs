@@ -63,7 +63,7 @@ function Form() {
     show: show
   }
   return (
-    <>
+    <div className='container'>
       <div className="form-wrapper">
         <form>
           <div>
@@ -100,7 +100,7 @@ function Form() {
       </div>
       <Courses courseArray={courseArray} />
       <Submit courseArray={courseArray} show={show}></Submit>
-    </>
+    </div>
   );
 }
 

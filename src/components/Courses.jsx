@@ -3,9 +3,9 @@ import '../styles/Courses.css'
 function Courses({courseArray}) {
     const courses = courseArray;
 return(
-    <div style={{ display: courseArray.length === 0 ? 'none' : 'block' }} class="courses-wrapper">
+    <div style={{ display: courseArray.length === 0 ? 'none' : 'block' }} className="courses-wrapper">
 
-        <div style = {{fontWeight: 'bolder'}}class='course-head'>
+        <div style = {{fontWeight: 'bolder'}}className='course-head'>
             <p>CODE</p>
             <p>TITLE</p>
             <p>SLOTS</p>
@@ -16,7 +16,7 @@ return(
           <div className='course'>
             <p>{course.code}</p>
             <p>{course.title}</p>
-            <div class="slots">
+            <div className="slots">
             {course.slots.map((slot)=> (
                 <p>{slot.prof}: {slot.slots}</p>
             ))}

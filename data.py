@@ -92,7 +92,7 @@ input_data = '''
       "slots": [
         {
           "prof": "Dhivyaa CR",
-          "slots": "B1+TB1,B2+TB2,L27+L28.L43+L44"
+          "slots": "B1+TB1,B2+TB2,L27+L28,L43+L44"
         },
         {
           "prof": "Muthunagai",

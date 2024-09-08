@@ -9,23 +9,27 @@ function Submit(props) {
   const courseArray = props.courseArray;
   const navigate = useNavigate();
 
- async function handleSubmit() {
-    console.log("CLICKED RESULT");
-    setLoading(true)
-    try{
-      const response = await axios.post('http://192.168.59.109:8000/apis/combined/',{
-        courses: courseArray
-      });
+//  async function handleSubmit() {
+//     console.log("CLICKED RESULT");
+//     setLoading(true)
+//     try{
+//       const response = await axios.post('http://192.168.59.109:8000/apis/combined/',{
+//         courses: courseArray
+//       });
 
-      const resultData = await response.data;
+//       const resultData = await response.data;
 
-      navigate('/result', {state: {data: resultData}})
-    }catch(e){
-      console.error('ERROR SENDING DATA: ', e)
-    }finally{
-      setLoading(false)
-    }
+//       navigate('/result', {state: {data: resultData}})
+//     }catch(e){
+//       console.error('ERROR SENDING DATA: ', e)
+//     }finally{
+//       setLoading(false)
+//     }
     
+//   }
+
+  function handleSubmit(){
+    navigate('/result')
   }
 
   return (

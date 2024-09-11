@@ -1,9 +1,11 @@
 import { useLocation } from "react-router-dom"
 import timetableData from '../assets/schema.json'
 import '../styles/Result.css'
+import courseData from '../assets/result.json'
 function Result(){
    const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
 
+  const courses = [...courseData.courses]
 
   const allSlots = [
     ...timetableData.theory.filter(slot => slot.days), 
@@ -16,14 +18,13 @@ function Result(){
   const theoryTimeSlots = timetableData.theory.map(slot => slot.lunch ? 'Lunch Break' : `${slot.start} - ${slot.end}`);
   const labTimeSlots = timetableData.lab.map(slot => slot.lunch ? 'Lunch Break' : `${slot.start} - ${slot.end}`);
 
+
   const renderDayRow = (day) => (
     <>
     <tr key={day}>
       <td>{day.toUpperCase()}</td>
       {theorySlots.map((slot, index) => {
-        if (slot.lunch) {
-          return <td key={`${day}-lunch-${index}`} className="lunch"></td>;
-        }
+        if(slot.days && slot.days[day])
         if (slot.days && slot.days[day]) {
           return <td key={`${day}-${index}`}>{slot.days[day]}</td>;
         }
@@ -33,9 +34,7 @@ function Result(){
     <tr key={day}>
       <td>{day.toUpperCase()}</td>
       {labSlots.map((slot, index) => {
-        if (slot.lunch) {
-          return <td key={`${day}-lunch-${index}`} className="lunch"></td>;
-        }
+
         if (slot.days && slot.days[day]) {
           return <td key={`${day}-${index}`}>{slot.days[day]}</td>;
         }

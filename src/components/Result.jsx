@@ -3,9 +3,11 @@ import timetableData from '../assets/small-schema.json'
 import '../styles/Result.css'
 import courseData from '../assets/result.json'
 
-const takenSlotColor = '#8b635c'
-const takenSlotText = 'white'
+const thTakenSlotColor = '#8b635c'
+const thtakenSlotText = 'white'
 
+const labTakenSlotColor = '#DCBF85'
+const labtakenSlotText = 'white'
 
 function Result(){
    const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
@@ -31,22 +33,27 @@ function Result(){
       {theorySlots.map((slot, index) => {
         if (slot.days && slot.days[day]) {
           let dispSlot;
-          
+          let bgColor;
+          let txtColor;
           // Check for both slots
           const slotDay1 = slot.days[day][0];
           const slotDay2 = slot.days[day][1];
 
           if (resultSlots[slotDay1]) {
             dispSlot = resultSlots[slotDay1];
+            bgColor= thTakenSlotColor;
+            txtColor = thtakenSlotText;
           } else if (resultSlots[slotDay2]) {
             dispSlot = resultSlots[slotDay2];
+            bgColor= labTakenSlotColor;
+            txtColor = labtakenSlotText;
           }
 
           console.log(slot.days[day]);
 
           if (dispSlot) {
             return (
-              <td style={{ backgroundColor: takenSlotColor, color: takenSlotText }} key={`${day}-${index}`}>
+              <td style={{ backgroundColor: bgColor, color: txtColor }} key={`${day}-${index}`}>
                 {slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''} <br /> {dispSlot}
               </td>
             );

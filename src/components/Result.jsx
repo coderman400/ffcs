@@ -2,10 +2,13 @@ import { useLocation } from "react-router-dom"
 import timetableData from '../assets/schema.json'
 import '../styles/Result.css'
 import courseData from '../assets/result.json'
+
+const takenSlotColor = '#8b635c'
+const takenSlotText = 'white'
 function Result(){
    const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
 
-  const courses = [...courseData.courses]
+  const resultSlots = courseData.slots
 
   const allSlots = [
     ...timetableData.theory.filter(slot => slot.days), 
@@ -24,9 +27,15 @@ function Result(){
     <tr key={day}>
       <td>{day.toUpperCase()}</td>
       {theorySlots.map((slot, index) => {
-        if(slot.days && slot.days[day])
-        if (slot.days && slot.days[day]) {
-          return <td key={`${day}-${index}`}>{slot.days[day]}</td>;
+        if(slot.days && slot.days[day] && resultSlots[slot.days[day]]){
+          return(
+            <td style={{backgroundColor:takenSlotColor, color:takenSlotText} }key={`${day}-${index}`}>{slot.days[day]} <br></br> {resultSlots[slot.days[day]]} </td>
+          )
+        }
+        else if (slot.days && slot.days[day]) {
+          return (
+          <td key={`${day}-${index}`}>{slot.days[day]}</td>
+        );
         }
         return <td key={`${day}-${index}`}>-</td>;
       })}

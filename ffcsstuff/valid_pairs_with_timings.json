@@ -1,0 +1,390 @@
+{
+    "Arulkumar V-CSI3029": [
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L15+L16 (Wednesday 0950-1130)"
+        ],
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L35+L36 (Monday 1830-1920)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L15+L16 (Wednesday 0950-1130)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L35+L36 (Monday 1830-1920)"
+        ]
+    ],
+    "Dhinakaran N-CSI3029": [
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L1+L2 (Monday 0800-0940)"
+        ]
+    ],
+    "Sudhakar P-CSI3025": [
+        [
+            "B1 (Tuesday 0800-0850, Thursday 0900-0950)",
+            "L1+L2 (Monday 0800-0940)"
+        ],
+        [
+            "B1 (Tuesday 0800-0850, Thursday 0900-0950)",
+            "L55+L56 (Friday 1400-1540)"
+        ],
+        [
+            "B2 (Tuesday 1400-1450, Thursday 1500-1550)",
+            "L1+L2 (Monday 0800-0940)"
+        ],
+        [
+            "B2 (Tuesday 1400-1450, Thursday 1500-1550)",
+            "L55+L56 (Friday 1400-1540)"
+        ]
+    ],
+    "Tamizharasi T-CSI3003": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Madhan E S-CSI3003": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Sathya K-CSI3003": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Jeevanantham A.K.-CSI3003": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Siva Sankari S-CSI3003": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Yuvaraj N-CSI3003": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Sivakumar V-CSI3003": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Ganesh Shamrao Khekare-CSI3003": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Nivitha K-CSI3002": [
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L11+L12 (Tuesday 1140-1230)"
+        ],
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L41+L42 (Tuesday 1800-1920)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L11+L12 (Tuesday 1140-1230)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L41+L42 (Tuesday 1800-1920)"
+        ]
+    ],
+    "Thangaramya K-CSI3002": [
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L25+L26 (Friday 0800-0940)"
+        ],
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L51+L52 (Thursday 1550-1730)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L25+L26 (Friday 0800-0940)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L51+L52 (Thursday 1550-1730)"
+        ]
+    ],
+    "S M Farooq-CSI3002": [
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L7+L8 (Tuesday 0800-0940)"
+        ],
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L51+L52 (Thursday 1550-1730)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L7+L8 (Tuesday 0800-0940)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L51+L52 (Thursday 1550-1730)"
+        ]
+    ],
+    "Sunil Kumar-CSI3002": [
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L11+L12 (Tuesday 1140-1230)"
+        ],
+        [
+            "A1 (Monday 0800-0850, Wednesday 0900-0950)",
+            "L41+L42 (Tuesday 1800-1920)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L11+L12 (Tuesday 1140-1230)"
+        ],
+        [
+            "A2 (Monday 1400-1450, Wednesday 1500-1550)",
+            "L41+L42 (Tuesday 1800-1920)"
+        ]
+    ],
+    "Dhivyaa CR-CSI3001": [
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L27+L28 (Friday 0950-1130)"
+        ],
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L43+L44 (Wednesday 1400-1540)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L27+L28 (Friday 0950-1130)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L43+L44 (Wednesday 1400-1540)"
+        ]
+    ],
+    "Muthunagai-CSI3001": [
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L13+L14 (Wednesday 0800-0940)"
+        ],
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L43+L44 (Wednesday 1400-1540)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L13+L14 (Wednesday 0800-0940)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L43+L44 (Wednesday 1400-1540)"
+        ]
+    ],
+    "Ranjithkumar S-CSI3001": [
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L27+L28 (Friday 0950-1130)"
+        ],
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L53+L54 (Thursday 1740-1920)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L27+L28 (Friday 0950-1130)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L53+L54 (Thursday 1740-1920)"
+        ]
+    ],
+    "Pushpa Gothwal-CSI3001": [
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L13+L14 (Wednesday 0800-0940)"
+        ],
+        [
+            "B1+TB1 (Tuesday 0800-0850, Thursday 0900-0950, Monday 1100-1150)",
+            "L59+L60 (Friday 1740-1920)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L13+L14 (Wednesday 0800-0940)"
+        ],
+        [
+            "B2+TB2 (Tuesday 1400-1450, Thursday 1500-1550, Monday 1700-1750)",
+            "L59+L60 (Friday 1740-1920)"
+        ]
+    ],
+    "Ganesh Shamrao Khekare-CSI3004": [
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L21+L22 (Thursday 0950-1130)"
+        ],
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L31+L32 (Monday 1400-1540)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L21+L22 (Thursday 0950-1130)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L31+L32 (Monday 1400-1540)"
+        ]
+    ],
+    "Meenakshi SP-CSI3004": [
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L21+L22 (Thursday 0950-1130)"
+        ],
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)",
+            "L31+L32 (Monday 1400-1540)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L21+L22 (Thursday 0950-1130)"
+        ],
+        [
+            "C2 (Wednesday 1400-1450, Friday 1500-1550)",
+            "L31+L32 (Monday 1400-1540)"
+        ]
+    ],
+    "Thirunavukkarasan M-CSI3021": [
+        [
+            "E1+TE1 (Friday 0800-0850, Tuesday 1000-1050, Thursday 1100-1150)"
+        ]
+    ],
+    "Sreethar S-CSI3021": [
+        [
+            "E1+TE1 (Friday 0800-0850, Tuesday 1000-1050, Thursday 1100-1150)"
+        ]
+    ],
+    "Narmalli Jayakrishna-CSI3021": [
+        [
+            "E1+TE1 (Friday 0800-0850, Tuesday 1000-1050, Thursday 1100-1150)"
+        ]
+    ],
+    "Suresh A-CSI3021": [
+        [
+            "E1+TE1 (Friday 0800-0850, Tuesday 1000-1050, Thursday 1100-1150)"
+        ]
+    ],
+    "Krishnaraj N-CSI3021": [
+        [
+            "E2+TE2 (Tuesday 1600-1650, Friday 1400-1450, Thursday 1700-1750)"
+        ]
+    ],
+    "Deepa D-CSI3021": [
+        [
+            "E2+TE2 (Tuesday 1600-1650, Friday 1400-1450, Thursday 1700-1750)"
+        ]
+    ],
+    "Pushpa Gothwal-CSI3021": [
+        [
+            "E2+TE2 (Tuesday 1600-1650, Friday 1400-1450, Thursday 1700-1750)"
+        ]
+    ],
+    "Latha Reddy N-CSI3021": [
+        [
+            "E2+TE2 (Tuesday 1600-1650, Friday 1400-1450, Thursday 1700-1750)"
+        ]
+    ],
+    "Khanjan-JAP1001": [
+        [
+            "B1 (Tuesday 0800-0850, Thursday 0900-0950)"
+        ]
+    ],
+    "Hiya Mukherjee-JAP1001": [
+        [
+            "C1 (Wednesday 0800-0850, Friday 0900-0950)"
+        ]
+    ],
+    "Deepika J-MDI3004": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Thangaramya K-MDI3004": [
+        [
+            "G1+TG1 (Tuesday 0900-0950, Thursday 1000-1050, Monday 1200-1250)"
+        ]
+    ],
+    "Saurabh Agrawal-MDI3004": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Jeevanajyothi Pujari-MDI3004": [
+        [
+            "G2+TG2 (Tuesday 1500-1550, Thursday 1600-1650, Monday 1800-1850)"
+        ]
+    ],
+    "Ethnus-STS3021": [
+        [
+            "D1+TD1 (Thursday 0800-0850, Monday 1000-1050, Friday 1200-1250)"
+        ],
+        [
+            "D2+TD2 (Monday 1600-1650, Thursday 1400-1450, Wednesday 1700-1750)"
+        ]
+    ],
+    "Face-STS3021": [
+        [
+            "D1+TD1 (Thursday 0800-0850, Monday 1000-1050, Friday 1200-1250)"
+        ],
+        [
+            "D2+TD2 (Monday 1600-1650, Thursday 1400-1450, Wednesday 1700-1750)"
+        ]
+    ],
+    "Bhawana Tyagi-CSI4002": [
+        [
+            "F1+TF1 (Monday 0900-0950, Wednesday 1000-1050, Friday 1100-1150)"
+        ]
+    ],
+    "Somasundaram SK-CSI4002": [
+        [
+            "F1+TF1 (Monday 0900-0950, Wednesday 1000-1050, Friday 1100-1150)"
+        ]
+    ],
+    "Uma Priya D-CSI4002": [
+        [
+            "F1+TF1 (Monday 0900-0950, Wednesday 1000-1050, Friday 1100-1150)"
+        ]
+    ],
+    "Rohini S-CSI4002": [
+        [
+            "F1+TF1 (Monday 0900-0950, Wednesday 1000-1050, Friday 1100-1150)"
+        ]
+    ],
+    "Nivethitha k-CSI4002": [
+        [
+            "F2+TF2 (Monday 1500-1550, Wednesday 1600-1650, Friday 1700-1750)"
+        ]
+    ],
+    "Dinesh R-CSI4002": [
+        [
+            "F2+TF2 (Monday 1500-1550, Wednesday 1600-1650, Friday 1700-1750)"
+        ]
+    ],
+    "Malini S-CSI4002": [
+        [
+            "F2+TF2 (Monday 1500-1550, Wednesday 1600-1650, Friday 1700-1750)"
+        ]
+    ],
+    "Pavithra M-CSI4002": [
+        [
+            "F2+TF2 (Monday 1500-1550, Wednesday 1600-1650, Friday 1700-1750)"
+        ]
+    ]
+}

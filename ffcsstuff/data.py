@@ -4,7 +4,7 @@ input_data = '''
   "courses": [
     {
       "title": "Front End Design and Testing",
-      "code": "CSI3029",
+      "code": "CSI:3029",
       "slots": [
         {
           "prof": "Arulkumar V",
@@ -18,7 +18,7 @@ input_data = '''
     },
     {
       "title": "Application Development and Deployment Architecture",
-      "code": "CSI3025",
+      "code": "CSI:3025",
       "slots": [
         {
           "prof": "Sudhakar P",
@@ -28,7 +28,7 @@ input_data = '''
     },
     {
       "title": "Artificial Intelligence and Expert Systems",
-      "code": "CSI3003",
+      "code": "CSI3:003",
       "slots": [
         {
           "prof": "Tamizharasi T",
@@ -66,7 +66,7 @@ input_data = '''
     },
     {
       "title": "Applied Cryptography and Network Security",
-      "code": "CSI3002",
+      "code": "CSI3:002",
       "slots": [
         {
           "prof": "Nivitha K",
@@ -88,7 +88,7 @@ input_data = '''
     },
     {
       "title": "Cloud Computing and methodologies",
-      "code": "CSI3001",
+      "code": "CSI3:001",
       "slots": [
         {
           "prof": "Dhivyaa CR",
@@ -110,7 +110,7 @@ input_data = '''
     },
     {
       "title": "Data Science Programming",
-      "code": "CSI3004",
+      "code": "CSI3:004",
       "slots": [
         {
           "prof": "Ganesh Shamrao Khekare",
@@ -124,7 +124,7 @@ input_data = '''
     },
     {
       "title": "Advanced Computer Architecture",
-      "code": "CSI3021",
+      "code": "CSI:3021",
       "slots": [
         {
           "prof": "Thirunavukkarasan M",
@@ -162,7 +162,7 @@ input_data = '''
     },
     {
       "title": "Japanese for Beginners",
-      "code": "JAP1001",
+      "code": "JAP1:001",
       "slots": [
         {
           "prof": "Khanjan",
@@ -176,7 +176,7 @@ input_data = '''
     },
     {
       "title": "Intelligent Database Systems",
-      "code": "MDI3004",
+      "code": "MDI3:004",
       "slots": [
         {
           "prof": "Deepika J",
@@ -198,7 +198,7 @@ input_data = '''
     },
     {
       "title": "Getting Started to Skill Enhancemnets",
-      "code": "STS3021",
+      "code": "STS:3021",
       "slots": [
         {
           "prof": "Ethnus",
@@ -212,7 +212,7 @@ input_data = '''
     },
     {
       "title": "Logic and Combanitorics for Computer Science",
-      "code": "CSI4002",
+      "code": "CSI4:002",
       "slots": [
         {
           "prof": "Bhawana Tyagi",
@@ -254,77 +254,77 @@ input_data = '''
 
 #slot mapped with it's timing
 slot_timings = {
-    "A1": [("Monday", "0800-0850"), ("Wednesday", "0900-0950")],
-    "TA1": [("Friday", "1000-1050")],
-    "TAA1": [("Tuesday", "1200-1250")],
-    "B1": [("Tuesday", "0800-0850"), ("Thursday", "0900-0950")],
-    "TB1": [("Monday", "1100-1150")],
-    "C1": [("Wednesday", "0800-0850"), ("Friday", "0900-0950")],
-    "TC1": [("Tuesday", "1100-1150")],
-    "TCC1": [("Thursday", "1200-1250")],
-    "D1": [("Thursday", "0800-0850"), ("Monday", "1000-1050")],
-    "TD1": [("Friday", "1200-1250")],
-    "E1": [("Friday", "0800-0850"), ("Tuesday", "1000-1050")],
-    "TE1": [("Thursday", "1100-1150")],
-    "F1": [("Monday", "0900-0950"), ("Wednesday", "1000-1050")],
-    "TF1": [("Friday", "1100-1150")],
-    "G1": [("Tuesday", "0900-0950"), ("Thursday", "1000-1050")],
-    "TG1": [("Monday", "1200-1250")],
-    "A2": [("Monday", "1400-1450"), ("Wednesday", "1500-1550")],
-    "F2": [("Monday", "1500-1550"), ("Wednesday", "1600-1650")],
-    "D2": [("Monday", "1600-1650"), ("Thursday", "1400-1450")],
-    "TB2": [("Monday", "1700-1750")],
-    "TG2": [("Monday", "1800-1850")],
-    "B2": [("Tuesday", "1400-1450"), ("Thursday", "1500-1550")],
-    "G2": [("Tuesday", "1500-1550"), ("Thursday", "1600-1650")],
-    "E2": [("Tuesday", "1600-1650"), ("Friday", "1400-1450")],
-    "TC2": [("Tuesday", "1700-1750")],
-    "TAA2": [("Tuesday", "1800-1850")],
-    "C2": [("Wednesday", "1400-1450"), ("Friday", "1500-1550")],
-    "TD2": [("Wednesday", "1700-1750")],
-    "TBB2": [("Wednesday", "1800-1850")],
-    "TE2": [("Thursday", "1700-1750")],
-    "TCC2": [("Thursday", "1800-1850")],
-    "TA2": [("Friday", "1600-1650")],
-    "TF2": [("Friday", "1700-1750")],
-    "TDD2": [("Friday", "1800-1850")],
-    "L1+L2": [("Monday", "0800-0940")],
-    "L3+L4": [("Monday", "0950-1130")],
-    "L5+L6": [("Monday", "1140-1230")],
-    "L7+L8": [("Tuesday", "0800-0940")],
-    "L9+L10": [("Tuesday", "0950-1130")],
-    "L11+L12": [("Tuesday", "1140-1230")],
-    "L13+L14": [("Wednesday", "0800-0940")],
-    "L15+L16": [("Wednesday", "0950-1130")],
-    "L17+L18": [("Wednesday", "1140-1230")],
-    "L19+L20": [("Thursday", "0800-0940")],
-    "L21+L22": [("Thursday", "0950-1130")],
-    "L23+L24": [("Thursday", "1140-1230")],
-    "L25+L26": [("Friday", "0800-0940")],
-    "L27+L28": [("Friday", "0950-1130")],
-    "L29+L30": [("Friday", "1140-1230")],
-    "L31+L32": [("Monday", "1400-1540")],
-    "L33+L34": [("Monday", "1550-1730")],
-    "L35+L36": [("Monday", "1830-1920")],
-    "L37+L38": [("Tuesday", "1400-1540")],
-    "L39+L40": [("Tuesday", "1550-1730")],
-    "L41+L42": [("Tuesday", "1800-1920")],
-    "L43+L44": [("Wednesday", "1400-1540")],
-    "L45+L46": [("Wednesday", "1550-1730")],
-    "L47+L48": [("Wednesday", "1740-1920")],
-    "L49+L50": [("Thursday", "1400-1540")],
-    "L51+L52": [("Thursday", "1550-1730")],
-    "L53+L54": [("Thursday", "1740-1920")],
-    "L55+L56": [("Friday", "1400-1540")],
-    "L57+L58": [("Friday", "1550-1730")],
-    "L59+L60": [("Friday", "1740-1920")],
-    "V1": [("Wednesday", "1100-1150")],
+    "A1": [("Monday", "08:00-08:50"), ("Wednesday", "09:00-09:50")],
+    "TA1": [("Friday", "10:00-10:50")],
+    "TAA1": [("Tuesday", "12:00-12:50")],
+    "B1": [("Tuesday", "08:00-08:50"), ("Thursday", "09:00-09:50")],
+    "TB1": [("Monday", "11:00-11:50")],
+    "C1": [("Wednesday", "08:00-08:50"), ("Friday", "09:00-09:50")],
+    "TC1": [("Tuesday", "11:00-11:50")],
+    "TCC1": [("Thursday", "12:00-12:50")],
+    "D1": [("Thursday", "08:00-08:50"), ("Monday", "10:00-10:50")],
+    "TD1": [("Friday", "12:00-12:50")],
+    "E1": [("Friday", "08:00-08:50"), ("Tuesday", "10:00-10:50")],
+    "TE1": [("Thursday", "11:00-11:50")],
+    "F1": [("Monday", "09:00-09:50"), ("Wednesday", "10:00-10:50")],
+    "TF1": [("Friday", "11:00-11:50")],
+    "G1": [("Tuesday", "09:00-09:50"), ("Thursday", "10:00-10:50")],
+    "TG1": [("Monday", "12:00-12:50")],
+    "A2": [("Monday", "14:00-14:50"), ("Wednesday", "15:00-15:50")],
+    "F2": [("Monday", "15:00-15:50"), ("Wednesday", "16:00-16:50")],
+    "D2": [("Monday", "16:00-16:50"), ("Thursday", "14:00-14:50")],
+    "TB2": [("Monday", "17:00-17:50")],
+    "TG2": [("Monday", "18:00-18:50")],
+    "B2": [("Tuesday", "14:00-14:50"), ("Thursday", "15:00-15:50")],
+    "G2": [("Tuesday", "15:00-15:50"), ("Thursday", "16:00-16:50")],
+    "E2": [("Tuesday", "16:00-16:50"), ("Friday", "14:00-14:50")],
+    "TC2": [("Tuesday", "17:00-17:50")],
+    "TAA2": [("Tuesday", "18:00-18:50")],
+    "C2": [("Wednesday", "14:00-14:50"), ("Friday", "15:00-15:50")],
+    "TD2": [("Wednesday", "17:00-17:50")],
+    "TBB2": [("Wednesday", "18:00-18:50")],
+    "TE2": [("Thursday", "17:00-17:50")],
+    "TCC2": [("Thursday", "18:00-18:50")],
+    "TA2": [("Friday", "16:00-16:50")],
+    "TF2": [("Friday", "17:00-17:50")],
+    "TDD2": [("Friday", "18:00-18:50")],
+    "L1+L2": [("Monday", "08:00-09:40")],
+    "L3+L4": [("Monday", "09:50-11:30")],
+    "L5+L6": [("Monday", "11:40-12:30")],
+    "L7+L8": [("Tuesday", "08:00-09:40")],
+    "L9+L10": [("Tuesday", "09:50-11:30")],
+    "L11+L12": [("Tuesday", "11:40-12:30")],
+    "L13+L14": [("Wednesday", "08:00-09:40")],
+    "L15+L16": [("Wednesday", "09:50-11:30")],
+    "L17+L18": [("Wednesday", "11:40-12:30")],
+    "L19+L20": [("Thursday", "08:00-09:40")],
+    "L21+L22": [("Thursday", "09:50-11:30")],
+    "L23+L24": [("Thursday", "11:40-12:30")],
+    "L25+L26": [("Friday", "08:00-09:40")],
+    "L27+L28": [("Friday", "09:50-11:30")],
+    "L29+L30": [("Friday", "11:40-12:30")],
+    "L31+L32": [("Monday", "14:00-15:40")],
+    "L33+L34": [("Monday", "15:50-17:30")],
+    "L35+L36": [("Monday", "18:30-1920")],
+    "L37+L38": [("Tuesday", "14:00-15:40")],
+    "L39+L40": [("Tuesday", "15:50-17:30")],
+    "L41+L42": [("Tuesday", "18:00-1920")],
+    "L43+L44": [("Wednesday", "14:00-15:40")],
+    "L45+L46": [("Wednesday", "15:50-17:30")],
+    "L47+L48": [("Wednesday", "17:40-1920")],
+    "L49+L:50": [("Thursday", "14:00-15:40")],
+    "L51+L52": [("Thursday", "15:50-17:30")],
+    "L53+L54": [("Thursday", "17:40-1920")],
+    "L55+L56": [("Friday", "14:00-15:40")],
+    "L57+L58": [("Friday", "15:50-17:30")],
+    "L59+L60": [("Friday", "17:40-1920")],
+    "V1": [("Wednesday", "11:00-11:50")],
     # Add any additional slots if necessary
 }
 
 
 course_data = {
-    "CSI3029": {
+    "CSI:3029": {
         "title": "Front End Design and Testing",
         "professors": {
             "Arulkumar V": [
@@ -353,7 +353,7 @@ course_data = {
             ]
         }
     },
-    "CSI3025": {
+    "CSI:3025": {
         "title": "Application Development and Deployment Architecture",
         "professors": {
             "Sudhakar P": [
@@ -376,7 +376,7 @@ course_data = {
             ]
         }
     },
-    "CSI3003": {
+    "CSI3:003": {
         "title": "Artificial Intelligence and Expert Systems",
         "professors": {
             "Tamizharasi T": [
@@ -421,7 +421,7 @@ course_data = {
             ]
         }
     },
-    "CSI3002": {
+    "CSI3:002": {
         "title": "Applied Cryptography and Network Security",
         "professors": {
             "Nivitha K": [
@@ -498,7 +498,7 @@ course_data = {
             ]
         }
     },
-    "CSI3001": {
+    "CSI3:001": {
         "title": "Cloud Computing and methodologies",
         "professors": {
             "Dhivyaa CR": [
@@ -575,7 +575,7 @@ course_data = {
             ]
         }
     },
-    "CSI3004": {
+    "CSI3:004": {
         "title": "Data Science Programming",
         "professors": {
             "Ganesh Shamrao Khekare": [
@@ -616,7 +616,7 @@ course_data = {
             ]
         }
     },
-    "CSI3021": {
+    "CSI:3021": {
         "title": "Advanced Computer Architecture",
         "professors": {
             "Thirunavukkarasan M": [
@@ -661,7 +661,7 @@ course_data = {
             ]
         }
     },
-    "JAP1001": {
+    "JAP1:001": {
         "title": "Japanese for Beginners",
         "professors": {
             "Khanjan": [
@@ -676,7 +676,7 @@ course_data = {
             ]
         }
     },
-    "MDI3004": {
+    "MDI3:004": {
         "title": "Intelligent Database Systems",
         "professors": {
             "Deepika J": [
@@ -701,7 +701,7 @@ course_data = {
             ]
         }
     },
-    "STS3021": {
+    "STS:3021": {
         "title": "Getting Started to Skill Enhancemnets",
         "professors": {
             "Ethnus": [
@@ -722,7 +722,7 @@ course_data = {
             ]
         }
     },
-    "CSI4002": {
+    "CSI4:002": {
         "title": "Logic and Combanitorics for Computer Science",
         "professors": {
             "Bhawana Tyagi": [

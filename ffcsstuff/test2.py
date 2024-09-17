@@ -1,4 +1,5 @@
 from itertools import product
+from data import slot_timings
 
 # Sample data (replace this with your actual data)
 courses_data = {
@@ -448,41 +449,82 @@ courses_data = {
 }
 
 
+from itertools import combinations
 
-def generate_unique_combinations(courses_data):
-    # Collect all possible slots for each course
-    course_slots = {}
-    for course_code, course_info in courses_data.items():
-        slots = set()
-        for prof_slots in course_info["professors"].values():
-            for slot in prof_slots:
-                slots.add(tuple(slot))  # Convert list to tuple to make it hashable
-        course_slots[course_code] = list(slots)
+# Function to extract individual slot timings from composite slots
+def get_individual_slot_timings(composite_slot, slot_timings):
+    slots = composite_slot.split('+')
+    timings = []
+    for slot in slots:
+        if slot in slot_timings:
+            timings.extend(slot_timings[slot])
+    return timings
 
-    # Use a set to store unique combinations
-    unique_combinations = set()
-    
-    def backtrack(assigned_slots, available_courses):
-        if not available_courses:
-            # Convert the dictionary to a frozenset to be hashable
-            combination = frozenset(assigned_slots.items())
-            unique_combinations.add(combination)
-            return
-        
-        current_course = available_courses[0]
-        remaining_courses = available_courses[1:]
-        
-        for slot in course_slots[current_course]:
-            if slot not in assigned_slots.values():
-                assigned_slots[current_course] = slot
-                backtrack(assigned_slots, remaining_courses)
-                del assigned_slots[current_course]
-    
-    backtrack({}, list(course_slots.keys()))
-    
-    return unique_combinations
+# Function to check if two time slots conflict
+def has_conflict(slot1_timings, slot2_timings):
+    for day1, time1 in slot1_timings:
+        for day2, time2 in slot2_timings:
+            if day1 == day2:
+                start1, end1 = map(lambda t: int(t.replace(':', '')), time1.split('-'))
+                start2, end2 = map(lambda t: int(t.replace(':', '')), time2.split('-'))
+                if max(start1, start2) < min(end1, end2):
+                    return True
+    return False
 
-# Generate and print unique combinations
-unique_combinations = generate_unique_combinations(courses_data)
-for combo in unique_combinations:
-    print(dict(combo))
+# Function to find valid non-conflicting combinations of slots
+def find_valid_combinations(course_data, slot_timings, max_courses=7):
+    all_combinations = []
+    
+    for num_courses in range(1, min(len(course_data), max_courses) + 1):
+        for courses_subset in combinations(course_data.keys(), num_courses):
+            valid_combos = []
+            course_slots = []
+            
+            # Generate all slot options for the selected courses
+            for course in courses_subset:
+                for prof, slots in course_data[course]['professors'].items():
+                    for slot1 in slots:
+                        for slot in slot1:
+                            if len(slot) >= 2:
+                                composite_slot = slot[1]
+                                if '+' in composite_slot:
+                                    # Handle composite slots
+                                    slot_timings_current = get_individual_slot_timings(composite_slot, slot_timings)
+                                else:
+                                    # Handle single slots
+                                    slot_timings_current = slot_timings.get(composite_slot, [])
+                                    
+                                course_slots.append((course, prof, composite_slot, slot_timings_current))
+                            else:
+                                print(f"Unexpected slot format for course {course}, professor {prof}: {slot}")
+            
+            # Try combinations of the selected courses
+            for combo in combinations(course_slots, len(courses_subset)):
+                is_valid = True
+                used_slots = []
+                
+                for course, prof, slot, slot_timings_current in combo:
+                    # Check if this slot has a conflict with any previously selected slot
+                    if any(has_conflict(slot_timings_current, slot_timings[used_slot])
+                           for used_slot in used_slots):
+                        is_valid = False
+                        break
+                    
+                    used_slots.extend(slot_timings_current)
+                
+                if is_valid:
+                    valid_combos.append(combo)
+            
+            all_combinations.extend(valid_combos)
+    
+    return all_combinations
+
+
+
+# Find valid combinations with conflict checks
+valid_combinations = find_valid_combinations(courses_data, slot_timings)
+
+print(len(valid_combinations))
+# Print the results
+for combo in valid_combinations:
+    print(combo)

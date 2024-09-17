@@ -1,85 +1,511 @@
-import json
-import itertools
-import re
-from data import input_data
+from itertools import product
 
 
-# Define your slot timings here
-theory_slots = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'V1']
-lab_slots = ['L1+L2', 'L3+L4', 'L5+L6', 'L7+L8', 'L9+L10', 'L11+L12', 'L13+L14', 'L15+L16', 'L17+L18', 'L19+L20', 
-             'L21+L22', 'L23+L24', 'L25+L26', 'L27+L28', 'L29+L30', 'L31+L32', 'L33+L34', 'L35+L36', 'L37+L38', 
-             'L39+L40', 'L41+L42', 'L43+L44', 'L45+L46', 'L47+L48', 'L49+L50', 'L51+L52', 'L53+L54', 'L55+L56', 
-             'L57+L58', 'L59+L60']
-
-def is_theory_slot(slot):
-    return slot.startswith(('A', 'B', 'C', 'D', 'E', 'F', 'G')) 
-
-def is_lab_slot(slot):
-    return slot.startswith('L')
-
-def get_valid_slot_combinations(slots):
-    valid_combinations = []
-    
-    # Check for pairs with theory slots and lab slots
-    theory_slots_found = [slot for slot in slots if is_theory_slot(slot)]
-    lab_slots_found = [slot for slot in slots if is_lab_slot(slot)]
-
-    if theory_slots_found and lab_slots_found:
-        # Generate all combinations of theory and lab slots
-        for theory_slot in theory_slots_found:
-            for lab_slot in lab_slots_found:
-                valid_combinations.append((theory_slot, lab_slot))
-    elif theory_slots_found:
-        # If no lab slot is found, track theory slots without lab pairs
-        for theory_slot in theory_slots_found:
-            valid_combinations.append((theory_slot,))
-    
-    return valid_combinations
-
-def get_course_valid_pairs(courses):
-    course_valid_pairs = {}
-    
-    for course in courses:
-        course_code = course['code']
-        course_title = course['title']
-        course_pairs = {}
-
-        for slot_option in course['slots']:
-            prof = slot_option['prof']
-            slots = slot_option['slots'].split(',')
-            
-            # Get valid combinations of slots
-            valid_combinations = get_valid_slot_combinations(slots)
-            
-            # Extract Vn slots
-            v_slots = [slot for slot in slots if re.match(r'V[0-9]+', slot) or re.match(r'T[A-G][A-G][0-9]+', slot) or re.match(r'T[A-G][0-9]+', slot)]
-            
-            # Combine valid combinations with Vn slots
-            final_combinations = []
-            if v_slots:
-                # Add Vn slots to each valid combination
-                for combination in valid_combinations:
-                    final_combinations.append(combination + tuple(v_slots))
-            else:
-                final_combinations.extend(valid_combinations)
-            
-            course_pairs[prof] = final_combinations
-        
-        course_valid_pairs[course_code] = {
-            "title": course_title,
-            "professors": course_pairs
+courses_data = {
+    "CSI3029": {
+        "title": "Front End Design and Testing",
+        "professors": {
+            "Arulkumar V": [
+                [
+                    "C1",
+                    "L15+L16"
+                ],
+                [
+                    "C1",
+                    "L35+L36"
+                ],
+                [
+                    "C2",
+                    "L15+L16"
+                ],
+                [
+                    "C2",
+                    "L35+L36"
+                ]
+            ],
+            "Dhinakaran N": [
+                [
+                    "C2",
+                    "L1+L2"
+                ]
+            ]
         }
+    },
+    "CSI3025": {
+        "title": "Application Development and Deployment Architecture",
+        "professors": {
+            "Sudhakar P": [
+                [
+                    "B1",
+                    "L1+L2"
+                ],
+                [
+                    "B1",
+                    "L55+L56"
+                ],
+                [
+                    "B2",
+                    "L1+L2"
+                ],
+                [
+                    "B2",
+                    "L55+L56"
+                ]
+            ]
+        }
+    },
+    "CSI3003": {
+        "title": "Artificial Intelligence and Expert Systems",
+        "professors": {
+            "Tamizharasi T": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Madhan E S": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Sathya K": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Jeevanantham A.K.": [
+                [
+                    "G2+TG2"
+                ]
+            ],
+            "Siva Sankari S": [
+                [
+                    "G2+TG2"
+                ]
+            ],
+            "Yuvaraj N": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Sivakumar V": [
+                [
+                    "G2+TG2"
+                ]
+            ],
+            "Ganesh Shamrao Khekare": [
+                [
+                    "G2+TG2"
+                ]
+            ]
+        }
+    },
+    "CSI3002": {
+        "title": "Applied Cryptography and Network Security",
+        "professors": {
+            "Nivitha K": [
+                [
+                    "A1",
+                    "L11+L12"
+                ],
+                [
+                    "A1",
+                    "L41+L42"
+                ],
+                [
+                    "A2",
+                    "L11+L12"
+                ],
+                [
+                    "A2",
+                    "L41+L42"
+                ]
+            ],
+            "Thangaramya K": [
+                [
+                    "A1",
+                    "L25+L26"
+                ],
+                [
+                    "A1",
+                    "L51+L52"
+                ],
+                [
+                    "A2",
+                    "L25+L26"
+                ],
+                [
+                    "A2",
+                    "L51+L52"
+                ]
+            ],
+            "S M Farooq": [
+                [
+                    "A1",
+                    "L7+L8"
+                ],
+                [
+                    "A1",
+                    "L51+L52"
+                ],
+                [
+                    "A2",
+                    "L7+L8"
+                ],
+                [
+                    "A2",
+                    "L51+L52"
+                ]
+            ],
+            "Sunil Kumar": [
+                [
+                    "A1",
+                    "L11+L12"
+                ],
+                [
+                    "A1",
+                    "L41+L42"
+                ],
+                [
+                    "A2",
+                    "L11+L12"
+                ],
+                [
+                    "A2",
+                    "L41+L42"
+                ]
+            ]
+        }
+    },
+    "CSI3001": {
+        "title": "Cloud Computing and methodologies",
+        "professors": {
+            "Dhivyaa CR": [
+                [
+                    "B1+TB1",
+                    "L27+L28"
+                ],
+                [
+                    "B1+TB1",
+                    "L43+L44"
+                ],
+                [
+                    "B2+TB2",
+                    "L27+L28"
+                ],
+                [
+                    "B2+TB2",
+                    "L43+L44"
+                ]
+            ],
+            "Muthunagai": [
+                [
+                    "B1+TB1",
+                    "L13+L14"
+                ],
+                [
+                    "B1+TB1",
+                    "L43+L44"
+                ],
+                [
+                    "B2+TB2",
+                    "L13+L14"
+                ],
+                [
+                    "B2+TB2",
+                    "L43+L44"
+                ]
+            ],
+            "Ranjithkumar S": [
+                [
+                    "B1+TB1",
+                    "L27+L28"
+                ],
+                [
+                    "B1+TB1",
+                    "L53+L54"
+                ],
+                [
+                    "B2+TB2",
+                    "L27+L28"
+                ],
+                [
+                    "B2+TB2",
+                    "L53+L54"
+                ]
+            ],
+            "Pushpa Gothwal": [
+                [
+                    "B1+TB1",
+                    "L13+L14"
+                ],
+                [
+                    "B1+TB1",
+                    "L59+L60"
+                ],
+                [
+                    "B2+TB2",
+                    "L13+L14"
+                ],
+                [
+                    "B2+TB2",
+                    "L59+L60"
+                ]
+            ]
+        }
+    },
+    "CSI3004": {
+        "title": "Data Science Programming",
+        "professors": {
+            "Ganesh Shamrao Khekare": [
+                [
+                    "C1",
+                    "L21+L22"
+                ],
+                [
+                    "C1",
+                    "L31+L32"
+                ],
+                [
+                    "C2",
+                    "L21+L22"
+                ],
+                [
+                    "C2",
+                    "L31+L32"
+                ]
+            ],
+            "Meenakshi SP": [
+                [
+                    "C1",
+                    "L21+L22"
+                ],
+                [
+                    "C1",
+                    "L31+L32"
+                ],
+                [
+                    "C2",
+                    "L21+L22"
+                ],
+                [
+                    "C2",
+                    "L31+L32"
+                ]
+            ]
+        }
+    },
+    "CSI3021": {
+        "title": "Advanced Computer Architecture",
+        "professors": {
+            "Thirunavukkarasan M": [
+                [
+                    "E1+TE1"
+                ]
+            ],
+            "Sreethar S": [
+                [
+                    "E1+TE1"
+                ]
+            ],
+            "Narmalli Jayakrishna": [
+                [
+                    "E1+TE1"
+                ]
+            ],
+            "Suresh A": [
+                [
+                    "E1+TE1"
+                ]
+            ],
+            "Krishnaraj N": [
+                [
+                    "E2+TE2"
+                ]
+            ],
+            "Deepa D": [
+                [
+                    "E2+TE2"
+                ]
+            ],
+            "Pushpa Gothwal": [
+                [
+                    "E2+TE2"
+                ]
+            ],
+            "Latha Reddy N": [
+                [
+                    "E2+TE2"
+                ]
+            ]
+        }
+    },
+    "JAP1001": {
+        "title": "Japanese for Beginners",
+        "professors": {
+            "Khanjan": [
+                [
+                    "B1"
+                ]
+            ],
+            "Hiya Mukherjee": [
+                [
+                    "C1"
+                ]
+            ]
+        }
+    },
+    "MDI3004": {
+        "title": "Intelligent Database Systems",
+        "professors": {
+            "Deepika J": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Thangaramya K": [
+                [
+                    "G1+TG1"
+                ]
+            ],
+            "Saurabh Agrawal": [
+                [
+                    "G2+TG2"
+                ]
+            ],
+            "Jeevanajyothi Pujari": [
+                [
+                    "G2+TG2"
+                ]
+            ]
+        }
+    },
+    "STS3021": {
+        "title": "Getting Started to Skill Enhancemnets",
+        "professors": {
+            "Ethnus": [
+                [
+                    "D1+TD1"
+                ],
+                [
+                    "D2+TD2"
+                ]
+            ],
+            "Face": [
+                [
+                    "D1+TD1"
+                ],
+                [
+                    "D2+TD2"
+                ]
+            ]
+        }
+    },
+    "CSI4002": {
+        "title": "Logic and Combanitorics for Computer Science",
+        "professors": {
+            "Bhawana Tyagi": [
+                [
+                    "F1+TF1"
+                ]
+            ],
+            "Somasundaram SK": [
+                [
+                    "F1+TF1"
+                ]
+            ],
+            "Uma Priya D": [
+                [
+                    "F1+TF1"
+                ]
+            ],
+            "Rohini S": [
+                [
+                    "F1+TF1"
+                ]
+            ],
+            "Nivethitha k": [
+                [
+                    "F2+TF2"
+                ]
+            ],
+            "Dinesh R": [
+                [
+                    "F2+TF2"
+                ]
+            ],
+            "Malini S": [
+                [
+                    "F2+TF2"
+                ]
+            ],
+            "Pavithra M": [
+                [
+                    "F2+TF2"
+                ]
+            ]
+        }
+    }
+}
+import itertools
+
+def generate_slot_combinations(course_data, max_courses=7):
+    all_combinations = []
+    course_keys = list(course_data.keys())
     
-    return course_valid_pairs
+    # Generate slot choices for each course
+    course_slots = []
+    for course_key in course_keys:
+        professors = course_data[course_key]['professors']
+        course_slots.append([(course_key, professor, slot) for professor in professors for slot in professors[professor]])
 
-# Example input data
-data = json.loads(input_data)
+    # Generate combinations of slots with at most `max_courses` courses
+    for subset in itertools.combinations(range(len(course_slots)), max_courses):
+        for combo in itertools.product(*(course_slots[i] for i in subset)):
+            # Ensure no conflicting slots (e.g., same timing across different courses)
+            slot_times = []
+            valid = True
+            for course, prof, slot in combo:
+                slot_time = tuple(slot)  # Convert list to tuple to compare
+                if slot_time in slot_times:
+                    valid = False
+                    break
+                slot_times.append(slot_time)
+            if valid:
+                all_combinations.append(combo)
 
-# Get the valid pairs organized by course
-valid_pairs_by_course = get_course_valid_pairs(data['courses'])
+    return all_combinations
 
-# Save the results to a JSON file
-with open('valid_pairs_by_course.json', 'w') as json_file:
-    json.dump(valid_pairs_by_course, json_file, indent=4)
 
-print("Valid pairs by course have been saved to 'valid_pairs_by_course.json'.")
+# Example usage with test data:
+test_courses_data = {
+    "CSI3029": {
+        "title": "Front End Design and Testing",
+        "professors": {
+            "Arulkumar V": [
+                ["C1", "L15+L16"],
+                ["C1", "L35+L36"]
+            ],
+            "Dhinakaran N": [
+                ["C2", "L1+L2"]
+            ]
+        }
+    },
+    "CSI3003": {
+        "title": "Artificial Intelligence and Expert Systems",
+        "professors": {
+            "Tamizharasi T": [
+                ["G1+TG1"]
+            ],
+            "Jeevanantham A.K.": [
+                ["G2+TG2"]
+            ]
+        }
+    }
+}
+
+
+combinations = generate_slot_combinations(courses_data, max_courses=7)
+
+# Print the output
+for comb in combinations:
+    print(comb)

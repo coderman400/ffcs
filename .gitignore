@@ -132,3 +132,5 @@ dist
 slots_data.json
 template.json
 tests/*.jpg
+images/
+wrongs/

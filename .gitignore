@@ -134,3 +134,4 @@ template.json
 tests/*.jpg
 images/
 wrongs/
+*/__pycache__/

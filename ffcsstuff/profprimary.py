@@ -77,3 +77,5 @@ for prof, pairs in valid_pairs.items():
     print(f"Professor: {prof}")
     for pair in pairs:
         print(f"  Valid Pair: {', '.join(pair)}")
+
+

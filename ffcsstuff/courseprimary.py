@@ -1,4 +1,5 @@
 from itertools import product
+from data import slot_timings
 
 
 courses_data = {
@@ -446,38 +447,19 @@ courses_data = {
         }
     }
 }
-import itertools
+from itertools import combinations
 
-def generate_slot_combinations(course_data, max_courses=7):
-    all_combinations = []
-    course_keys = list(course_data.keys())
-    
-    # Generate slot choices for each course
-    course_slots = []
-    for course_key in course_keys:
-        professors = course_data[course_key]['professors']
-        course_slots.append([(course_key, professor, slot) for professor in professors for slot in professors[professor]])
+# Assuming this dict holds mapping of slots to their corresponding timings
+slot_timings = {
+    'A1': 'Monday 08:00-08:50',
+    'B1': 'Monday 09:00-09:50',
+    'C1': 'Monday 10:00-10:50',
+    'D1': 'Monday 11:00-11:50',
+    # Add more slots and timings here
+}
 
-    # Generate combinations of slots with at most `max_courses` courses
-    for subset in itertools.combinations(range(len(course_slots)), max_courses):
-        for combo in itertools.product(*(course_slots[i] for i in subset)):
-            # Ensure no conflicting slots (e.g., same timing across different courses)
-            slot_times = []
-            valid = True
-            for course, prof, slot in combo:
-                slot_time = tuple(slot)  # Convert list to tuple to compare
-                if slot_time in slot_times:
-                    valid = False
-                    break
-                slot_times.append(slot_time)
-            if valid:
-                all_combinations.append(combo)
-
-    return all_combinations
-
-
-# Example usage with test data:
-test_courses_data = {
+# Sample data from your structure
+course_slots = {
     "CSI3029": {
         "title": "Front End Design and Testing",
         "professors": {
@@ -490,22 +472,65 @@ test_courses_data = {
             ]
         }
     },
-    "CSI3003": {
-        "title": "Artificial Intelligence and Expert Systems",
+    "CSI3025": {
+        "title": "Application Development and Deployment Architecture",
         "professors": {
-            "Tamizharasi T": [
-                ["G1+TG1"]
-            ],
-            "Jeevanantham A.K.": [
-                ["G2+TG2"]
+            "Sudhakar P": [
+                ["B1", "L1+L2"],
+                ["B1", "L55+L56"]
             ]
         }
-    }
+    },
+    # Add more courses and professors...
 }
 
+def get_slot_timing(slot):
+    """Fetch the time range for a given slot."""
+    return slot_timings.get(slot)
 
-combinations = generate_slot_combinations(courses_data, max_courses=7)
+def has_time_conflict(selected_slots, new_slot):
+    """Check for time conflict with the newly selected slot."""
+    new_slot_time = get_slot_timing(new_slot)
+    
+    for slot in selected_slots:
+        existing_slot_time = get_slot_timing(slot)
+        
+        # Check if time ranges overlap (this is simplified, actual time parsing required)
+        if new_slot_time == existing_slot_time:
+            return True
+    return False
 
-# Print the output
-for comb in combinations:
-    print(comb)
+def generate_combinations(course_slots):
+    all_combinations = []
+    selected_slots = []
+    
+    def pick_slots(course_list, current_combination):
+        if len(current_combination) == 7 or len(course_list) == 0:
+            all_combinations.append(current_combination[:])
+            return
+        
+        for course, details in course_list.items():
+            for professor, slots in details['professors'].items():
+                for slot in slots:
+                    slot_id = slot[0]
+                    if not has_time_conflict(selected_slots, slot_id):
+                        selected_slots.append(slot_id)
+                        current_combination.append((course, professor, slot_id))
+                        
+                        # Recurse with the rest of the courses
+                        remaining_courses = {k: v for k, v in course_list.items() if k != course}
+                        pick_slots(remaining_courses, current_combination)
+                        
+                        # Backtrack
+                        current_combination.pop()
+                        selected_slots.remove(slot_id)
+
+    pick_slots(course_slots, [])
+    return all_combinations
+
+# Generate combinations
+combinations = generate_combinations(course_slots)
+
+# Output the combinations
+for combo in combinations:
+    print(combo)

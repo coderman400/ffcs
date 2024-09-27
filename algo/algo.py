@@ -25,9 +25,6 @@ selected = []
 # Function to check if a course can fit in available slots
 def fittable(available, course):
     for slot in course[1]:
-        print('CHECKING: ', slot)
-        print('AVAILABLE: ', available)
-
         # Split sections and time slots based on '+'
         sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
         sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
@@ -76,12 +73,14 @@ def removeTable(available, course, slot):
         if any(section in key for section in sections) or any(sub_slot in key for sub_slot in sub_slots):
             available[key] = ''  # Mark this key as free again
 
-# Backtracking function
-def backtrack(selected, available, index):
-    if len(selected) == 9:  # Base condition: 7 courses selected
-        return selected
-    # if index >= len(courses_list):  # No more courses to select
-    #     return selected
+# Modified backtracking function to collect all possible results
+def backtrack(selected, available, index, results):
+    if len(selected) >= 9:  # Base condition: at least 9 courses selected
+        results.append(list(selected))  # Store a copy of the current selection
+        return
+
+    if index >= len(courses_list):  # No more courses to select
+        return
 
     nextCourse = courses_list[index]
     # Try to fit the next course into available slots
@@ -92,18 +91,23 @@ def backtrack(selected, available, index):
         selected.append((nextCourse[0], fitting_slot))
 
         # Recurse to the next course
-        result = backtrack(selected, available, index + 1)
-        if len(result) == 7:  # If solution is found, return
-            return result
-        print('BACKTRACKING!!!')
+        backtrack(selected, available, index + 1, results)
+
         # Backtrack: remove the last added course and reset slots
         selected.pop()
         removeTable(available, nextCourse, fitting_slot)
 
     # Skip the current course and check with the next course
-    return backtrack(selected, available, index + 1)
+    backtrack(selected, available, index + 1, results)
 
-result = backtrack(selected,available,0)
-# Run the backtracking algorithm and print the results
-print(result)
-print(len(result))
+# Collect all results with at least 9 courses
+results = []
+backtrack(selected, available, 0, results)
+
+# Display all possible results
+if results:
+    for idx, res in enumerate(results):
+        print(f"Result {idx + 1}: {res}")
+        print(f"Number of courses: {len(res)}\n")
+else:
+    print('impossible')

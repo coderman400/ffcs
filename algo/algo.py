@@ -106,16 +106,44 @@ def calculateCredits(selected):
 
     return total_credits
 
+sts_preference = 0
 
 def backtrack(selected, available, index, results):
-    if calculateCredits(selected)==27:  # Base condition: 27 credits 
+    # Ensure that the STS course is always added first based on the preference
+    if not any(course[0].startswith("STS") for course in selected):
+        # Look for the first STS course in the list
+        for idx, course in enumerate(courses_list):
+            if course[0].startswith("STS"):
+                # Filter STS slots based on user preference (morning/afternoon)
+                preferred_slots = [
+                    slot for slot in course[1]
+                    if (slot[0][1] == "2") == (sts_preference == 1)  # Check second character for morning/afternoon
+                ]
+
+                for fitting_slot in preferred_slots:
+                    # Add STS course to the selected list and update slots
+                    updateTable(available, course, fitting_slot)
+                    selected.append((course[0], fitting_slot))
+
+                    # Continue to the next courses from index 0 (reset backtrack)
+                    backtrack(selected, available, 0, results)
+
+                    # Backtrack: remove the STS course and reset slots
+                    selected.pop()
+                    removeTable(available, course, fitting_slot)
+
+                return  # Return after processing the STS course to avoid skipping it
+
+    # Check the base condition: Total credits should equal 27
+    if calculateCredits(selected) == 27:
         results.append(list(selected))  # Store a copy of the current selection
         return
 
-    if index >= len(courses_list):  # No more courses to select then just quit
+    # No more courses to select if index exceeds list length
+    if index >= len(courses_list):
         return
 
-    #obtaining the next course to evaluate from the list
+    # Obtain the next course to evaluate from the list
     nextCourse = courses_list[index]
 
     # Try to fit the next course into available slots
@@ -132,8 +160,9 @@ def backtrack(selected, available, index, results):
         selected.pop()
         removeTable(available, nextCourse, fitting_slot)
 
-    # if slot couldnt fit, skip it and then try with next course
+    # If slot couldn't fit, skip it and then try with the next course
     backtrack(selected, available, index + 1, results)
+
 
 results = []
 backtrack(selected, available, 0, results)

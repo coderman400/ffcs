@@ -8,8 +8,9 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-TEMPLATE_IMAGE = Path("core/assets/template.jpg")
-OUTPUT_DIR = Path("core/outputs")
+TEMPLATE_IMAGE = Path("./assets/template.jpg")
+OUTPUT_DIR = Path("./outputs")
+INBETWEENS = Path("./assets/inbetweens")
 HIGH_CONTRAST_FACTOR = 2.0
 
 class TextExtraction:
@@ -25,12 +26,13 @@ class TextExtraction:
 
         self.setup_genai()
         self.text = self.extract()
+        self.post_process()
         self.clean_up()
 
     def setup_genai(self):
         """Setup GenAI with API key and configuration."""
         load_dotenv()
-        genai.configure(api_key=os.getenv("genai"))
+        genai.configure(api_key=os.getenv("api_key"))
         self.genai_image = genai.upload_file(self.optimized)
         self.model = genai.GenerativeModel("gemini-1.5-pro-latest", tools=self.tools())
 
@@ -60,9 +62,9 @@ class TextExtraction:
                 greater.append((x, y))
 
         contoured = self.matched_crop[0:max(greater)[1], 0:self.width]
-        contoured_path = OUTPUT_DIR / "contoured.jpg"
+        contoured_path = INBETWEENS/ "contoured.jpg"
         cv2.imwrite(str(contoured_path), contoured)
-
+        print(contoured_path)
         return contoured, str(contoured_path)
 
     def increase_contrast(self):
@@ -71,9 +73,9 @@ class TextExtraction:
         image = image.convert('L')
         enhancer = ImageEnhance.Contrast(image)
         enhanced_image = enhancer.enhance(HIGH_CONTRAST_FACTOR)
-        output_path = OUTPUT_DIR / "high_contrast_image.png"
+        output_path = INBETWEENS / "high_contrast_image.png"
         enhanced_image.save(str(output_path))
-
+        print(output_path)
         return str(output_path)
 
     def extract(self):
@@ -114,7 +116,7 @@ class TextExtraction:
             type=genai.protos.Type.OBJECT,
             properties={
                 'course_list': genai.protos.Schema(type=genai.protos.Type.STRING),
-                'semeseter': genai.protos.Schema(type=genai.protos.Type.STRING),
+                'semester': genai.protos.Schema(type=genai.protos.Type.STRING),
                 'curriculum_category': genai.protos.Schema(type=genai.protos.Type.STRING),
             },
         )
@@ -135,10 +137,55 @@ class TextExtraction:
 
         return [extract]
 
+    def post_process(self):
+        """Post-process the extracted text."""
+        data = self.text
+        for slot in data['slots']:
+            slot['prof'] = slot.pop('faculty')
+            slot['slots'] = slot.pop('slot')
+        
+        code,title = data['course']['course_list'].split("-",1)
+        data['title'] = title.strip()
+        data['code'] = code.strip()
+        if "semester" in data.keys() and "course" in data.keys():
+            data['semester'] = data['course']['semester']   
+            data['category'] = data['course']['curriculum_category']
+        del data['course']
+
+        profs = set()
+        for slot in data['slots']:
+            profs.add(slot['prof'])
+        
+        data["slots_new"] = []
+
+        for prof in profs:
+            prof_slots = []
+            for slot in data['slots']:
+                if slot['prof'] == prof:
+                    prof_slots.append(slot["slots"])
+            data["slots_new"].append({"prof": prof, "slots": ",".join(prof_slots)})
+
+        data["slots"] = data.pop("slots_new")
+        self.text = data
+
+    def write(self):
+        """Write the extracted text to a JSON file."""
+        output_path = OUTPUT_DIR / "output.json"
+        with open(output_path, 'r+') as f:
+            data = json.load(f)
+            data["courses"].append(self.text)
+            f.seek(0)
+            json.dump(data, f, indent=4)
+            f.truncate()
+
     def clean_up(self):
         """Remove all files in the output directory."""
-        for file in OUTPUT_DIR.glob('*'):
+        for file in INBETWEENS.glob('*'):
             file.unlink()
 
-base = TextExtraction(r"C:\Users\laksh\OneDrive\Desktop\WebDev\FFCS\images\1.jpg")
+
+
+
+base = TextExtraction(r".\images\19.jpg")
+base.write()
 print(base.printable())

@@ -1,254 +1,414 @@
 #input json
 input_data = '''
 {
-  "courses": [
-    {
-      "title": "Front End Design and Testing",
-      "code": "CSI:3029",
-      "slots": [
+    "courses": [
         {
-          "prof": "Arulkumar V",
-          "slots": "C1,C2,L15+L16,L35+L36"
+            "slots": [
+                {
+                    "prof": "SIVA SANKARI S",
+                    "slots": "G2+TG2"
+                },
+                {
+                    "prof": "SIVAKUMAR V",
+                    "slots": "G2+TG2"
+                },
+                {
+                    "prof": "GANESH SHAMRAO KHEKARE",
+                    "slots": "G2+TG2"
+                },
+                {
+                    "prof": "YUVARAJ N",
+                    "slots": "G1+TG1"
+                },
+                {
+                    "prof": "JEEVANANTHAM A.K.",
+                    "slots": "G2+TG2"
+                },
+                {
+                    "prof": "MADHAN E S",
+                    "slots": "G1+TG1"
+                },
+                {
+                    "prof": "TAMIZHARASI T",
+                    "slots": "G1+TG1"
+                },
+                {
+                    "prof": "SATHYA K",
+                    "slots": "G1+TG1"
+                }
+            ],
+            "title": "Artificial Intelligence and Expert Systems",
+            "code": "CS13003",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
         },
         {
-          "prof": "Dhinakaran N",
-          "slots": "C2,L1+L2"
+            "slots": [
+                {
+                    "prof": "DHINAKARAN N",
+                    "slots": "C2,L1+L2"
+                },
+                {
+                    "prof": "ARULKUMAR V",
+                    "slots": "C2,C1,L15+L16,L35+L36"
+                }
+            ],
+            "title": "Front End Design and Testing",
+            "code": "CS13029",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "SUDHAKAR P",
+                    "slots": "B2,B1,L1+L2,L55+L56"
+                }
+            ],
+            "title": "Application Development and Deployment Architecture",
+            "code": "CS13025",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "THANGARAMYA K",
+                    "slots": "A2,A1,L25+L26,L51+L52"
+                },
+                {
+                    "prof": "S M FAROOQ",
+                    "slots": "A2,A1,L7+L8,L51+L52"
+                },
+                {
+                    "prof": "NIVITHA K",
+                    "slots": "A2,A1,L11+L12,L41+L42"
+                },
+                {
+                    "prof": "SUNIL KUMAR",
+                    "slots": "A2,A1,L11+L12,L41+L42"
+                }
+            ],
+            "title": "Applied Cryptography and Network Security",
+            "code": "CSJ3002",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "MUTHUNAGAI S U",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "NIVITHA K.",
+                    "slots": "F1+TF1"
+                },
+                {
+                    "prof": "MOHAMMAD ARIF",
+                    "slots": "F1+TF1"
+                }
+            ],
+            "title": "Advanced Graph Algorithms",
+            "code": "CS13020",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "KHANJAN",
+                    "slots": "B1"
+                },
+                {
+                    "prof": "HIYA MUKHERJEE",
+                    "slots": "C1"
+                }
+            ],
+            "title": "Japanese for Beginners",
+            "code": "JAP1001",
+            "semester": "Fall Semester 2024-25",
+            "category": "UC - University Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "DHANOJ GUPTA",
+                    "slots": "TCC1"
+                },
+                {
+                    "prof": "SUMANGALA T P",
+                    "slots": "TAA1"
+                },
+                {
+                    "prof": "SASMITA MOHAKUD",
+                    "slots": "TAA2"
+                },
+                {
+                    "prof": "AMRITA DEY",
+                    "slots": "TCC2"
+                }
+            ],
+            "title": "Introduction to Innovative Projects",
+            "code": "PHY1901",
+            "semester": "Fall Semester 2024-25",
+            "category": "UC - University Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "NIVETHITHA K",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "UMA PRIYA D",
+                    "slots": "F1+TF1"
+                },
+                {
+                    "prof": "PAVITHRA M",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "MALINI S",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "SOMASUNDARAM S K",
+                    "slots": "F1+TF1"
+                },
+                {
+                    "prof": "DINESH R",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "BHAWANA TYAGI",
+                    "slots": "F1+TF1"
+                },
+                {
+                    "prof": "ROHINI S",
+                    "slots": "F1+TF1"
+                }
+            ],
+            "title": "Logic and Combinatorics for Computer Science",
+            "code": "CS14002",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "SAYAN SIKDER",
+                    "slots": "G1+TG1"
+                },
+                {
+                    "prof": "KAMANASISH BHATTACHARJEE",
+                    "slots": "G2+TG2"
+                }
+            ],
+            "title": "Game Theory",
+            "code": "CS14006",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "THIRUNAVUKKARASAN M",
+                    "slots": "C1,L7+L8,L51+L52,C2"
+                }
+            ],
+            "title": "Advanced Server Side Programming",
+            "code": "CS13023",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "DINESH R",
+                    "slots": "A2+TA2,A1+TA1,L15+L16,L53+L54"
+                },
+                {
+                    "prof": "PRIYANKA N",
+                    "slots": "A1+TA1,A2+TA2,L15+L16,L37+L38"
+                },
+                {
+                    "prof": "RAGAVAN K",
+                    "slots": "A1+TA1,A2+TA2,L21+L22,L53+L54"
+                }
+            ],
+            "title": "Advanced Wireless Networks",
+            "code": "CSJ3009",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "PUSHPA GOTHWAL",
+                    "slots": "E2+TE2"
+                },
+                {
+                    "prof": "LATHA REDDY N",
+                    "slots": "E2+TE2"
+                },
+                {
+                    "prof": "THIRUNAVUKKARASAN M",
+                    "slots": "E1+TE1"
+                },
+                {
+                    "prof": "NARMALLI JAYAKRISHNA",
+                    "slots": "E1+TE1"
+                },
+                {
+                    "prof": "SREEHARI S",
+                    "slots": "E1+TE1"
+                },
+                {
+                    "prof": "SURESH A",
+                    "slots": "E1+TE1"
+                },
+                {
+                    "prof": "DEEPA D",
+                    "slots": "E2+TE2"
+                },
+                {
+                    "prof": "KRISHNARAJ N",
+                    "slots": "E2+TE2"
+                }
+            ],
+            "title": "Advanced Computer Architecture",
+            "code": "CS13021",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "EBENEZER JULIET S",
+                    "slots": "B1+TB1,B2+TB2,L27+L28,L43+L44"
+                },
+                {
+                    "prof": "ARPAN GARAI",
+                    "slots": "B1+TB1,B2+TB2,L27+L28,L43+L44"
+                },
+                {
+                    "prof": "GAYATHRI S",
+                    "slots": "B1+TB1,B2+TB2,L13+L14,L43+L44"
+                }
+            ],
+            "title": "Computer Graphics and Multimedia",
+            "code": "CS3011",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "SIVA SANKARI S",
+                    "slots": "C2+TC2,C1+TC1,L5+L6,L49+L50"
+                },
+                {
+                    "prof": "PARTHIBAN K",
+                    "slots": "C1+TC1,C2+TC2,L5+L6,L35+L36"
+                },
+                {
+                    "prof": "KATARI BALAKRISHNA",
+                    "slots": "C2+TC2,L5+L6"
+                }
+            ],
+            "title": "Cyber Security and Application Security",
+            "code": "CS13022",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "MEENAKSHI S P",
+                    "slots": "C1,C2,L21+L22,L31+L32"
+                },
+                {
+                    "prof": "GANESH SHAMRAO KHEKARE",
+                    "slots": "C1,C2,L21+L22,L31+L32"
+                }
+            ],
+            "title": "Data Science Programming",
+            "code": "CS13004",
+            "semester": "Fall Semester 2024-25",
+            "category": "UE - University Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "NAVEEN KUMAR N",
+                    "slots": "F2+TF2"
+                },
+                {
+                    "prof": "BALAJI N",
+                    "slots": "F1+TF1"
+                },
+                {
+                    "prof": "ARUMUGA ARUN R",
+                    "slots": "F2+TF2"
+                }
+            ],
+            "title": "Advanced Data Compression Techniques",
+            "code": "CS13019",
+            "semester": "Fall Semester 2024-25",
+            "category": "PE - Programme Elective"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "KRISHNA RANI SAMAL K",
+                    "slots": "G2+TG2"
+                }
+            ],
+            "title": "Software Application Architecture",
+            "code": "CS13024",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "PUSHPA GOTHWAL",
+                    "slots": "B2+TB2,B1+TB1,L13+L14,L59+L60"
+                },
+                {
+                    "prof": "MUTHUNAGAI S U",
+                    "slots": "B2+TB2,B1+TB1,L13+L14,L43+L44"
+                },
+                {
+                    "prof": "DHIVYA C R",
+                    "slots": "B2+TB2,B1+TB1,L43+L44,L27+L28"
+                },
+                {
+                    "prof": "RANJITHKUMAR S",
+                    "slots": "B2+TB2,B1+TB1,L27+L28,L53+L54"
+                }
+            ],
+            "title": "Cloud Computing Methodologies",
+            "code": "CSJ3001",
+            "semester": "Fall Semester 2024-25",
+            "category": "PC - Programme Core"
+        },
+        {
+            "slots": [
+                {
+                    "prof": "FACE (APT)",
+                    "slots": "D2+TD2,D1+TD1,D2+TD2,D2+TD2,D2+TD2,D2+TD2,D1+TD1,D1+TD1,D1+TD1,D2+TD2"
+                },
+                {
+                    "prof": "ETHNUS (APT)",
+                    "slots": "D1+TD1,D2+TD2,D1+TD1,D1+TD1,D2+TD2,D2+TD2,D1+TD1,D1+TD1"
+                }
+            ],
+            "title": "Getting Started to Skill Enhancement",
+            "code": "STS3021"
         }
-      ]
-    },
-    {
-      "title": "Application Development and Deployment Architecture",
-      "code": "CSI:3025",
-      "slots": [
-        {
-          "prof": "Sudhakar P",
-          "slots": "B1,B2,L1+L2,L55+L56"
-        }
-      ]
-    },
-    {
-      "title": "Artificial Intelligence and Expert Systems",
-      "code": "CSI3:003",
-      "slots": [
-        {
-          "prof": "Tamizharasi T",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Madhan E S",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Sathya K",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Jeevanantham A.K.",
-          "slots": "G2+TG2"
-        },
-        {
-          "prof": "Siva Sankari S",
-          "slots": "G2+TG2"
-        },
-        {
-          "prof": "Yuvaraj N",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Sivakumar V",
-          "slots": "G2+TG2"
-        },
-        {
-          "prof": "Ganesh Shamrao Khekare",
-          "slots": "G2+TG2"
-        }
-      ]
-    },
-    {
-      "title": "Applied Cryptography and Network Security",
-      "code": "CSI3:002",
-      "slots": [
-        {
-          "prof": "Nivitha K",
-          "slots": "A1,A2,L11+L12,L41+L42"
-        },
-        {
-          "prof": "Thangaramya K",
-          "slots": "A1,A2,L25+L26,L51+L52"
-        },
-        {
-          "prof": "S M Farooq",
-          "slots": "A1,A2,L7+L8,L51+L52"
-        },
-        {
-          "prof": "Sunil Kumar",
-          "slots": "A1,A2,L11+L12,L41+L42"
-        }
-      ]
-    },
-    {
-      "title": "Cloud Computing and methodologies",
-      "code": "CSI3:001",
-      "slots": [
-        {
-          "prof": "Dhivyaa CR",
-          "slots": "B1+TB1,B2+TB2,L27+L28,L43+L44"
-        },
-        {
-          "prof": "Muthunagai",
-          "slots": "B1+TB1,B2+TB2,L13+L14,L43+L44"
-        },
-        {
-          "prof": "Ranjithkumar S",
-          "slots": "B1+TB1,B2+TB2,L27+L28,L53+L54"
-        },
-        {
-          "prof": "Pushpa Gothwal",
-          "slots": "B1+TB1,B2+TB2,L13+L14,L59+L60"
-        }
-      ]
-    },
-    {
-      "title": "Data Science Programming",
-      "code": "CSI3:004",
-      "slots": [
-        {
-          "prof": "Ganesh Shamrao Khekare",
-          "slots": "C1,C2,L21+L22,L31+L32"
-        },
-        {
-          "prof": "Meenakshi SP",
-          "slots": "C1,C2,L21+L22,L31+L32"
-        }
-      ]
-    },
-    {
-      "title": "Advanced Computer Architecture",
-      "code": "CSI:3021",
-      "slots": [
-        {
-          "prof": "Thirunavukkarasan M",
-          "slots": "E1+TE1"
-        },
-        {
-          "prof": "Sreethar S",
-          "slots": "E1+TE1"
-        },
-        {
-          "prof": "Narmalli Jayakrishna",
-          "slots": "E1+TE1"
-        },
-        {
-          "prof": "Suresh A",
-          "slots": "E1+TE1"
-        },
-        {
-          "prof": "Krishnaraj N",
-          "slots": "E2+TE2"
-        },
-        {
-          "prof": "Deepa D",
-          "slots": "E2+TE2"
-        },
-        {
-          "prof": "Pushpa Gothwal",
-          "slots": "E2+TE2"
-        },
-        {
-          "prof": "Latha Reddy N",
-          "slots": "E2+TE2"
-        }
-      ]
-    },
-    {
-      "title": "Japanese for Beginners",
-      "code": "JAP1:001",
-      "slots": [
-        {
-          "prof": "Khanjan",
-          "slots": "B1"
-        },
-        {
-          "prof": "Hiya Mukherjee",
-          "slots": "C1"
-        }
-      ]
-    },
-    {
-      "title": "Intelligent Database Systems",
-      "code": "MDI3:004",
-      "slots": [
-        {
-          "prof": "Deepika J",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Thangaramya K",
-          "slots": "G1+TG1"
-        },
-        {
-          "prof": "Saurabh Agrawal",
-          "slots": "G2+TG2"
-        },
-        {
-          "prof": "Jeevanajyothi Pujari",
-          "slots": "G2+TG2"
-        }
-      ]
-    },
-    {
-      "title": "Getting Started to Skill Enhancemnets",
-      "code": "STS:3021",
-      "slots": [
-        {
-          "prof": "Ethnus",
-          "slots": "D1+TD1,D2+TD2"
-        },
-        {
-          "prof": "Face",
-          "slots": "D1+TD1,D2+TD2"
-        }
-      ]
-    },
-    {
-      "title": "Logic and Combanitorics for Computer Science",
-      "code": "CSI4:002",
-      "slots": [
-        {
-          "prof": "Bhawana Tyagi",
-          "slots": "F1+TF1"
-        },
-        {
-          "prof": "Somasundaram SK",
-          "slots": "F1+TF1"
-        },
-        {
-          "prof": "Uma Priya D",
-          "slots": "F1+TF1"
-        },
-        {
-          "prof": "Rohini S",
-          "slots": "F1+TF1"
-        },
-        {
-          "prof": "Nivethitha k",
-          "slots": "F2+TF2"
-        },
-        {
-          "prof": "Dinesh R",
-          "slots": "F2+TF2"
-        },
-        {
-          "prof": "Malini S",
-          "slots": "F2+TF2"
-        },
-        {
-          "prof": "Pavithra M",
-          "slots": "F2+TF2"
-        }
-      ]
-    }
-  ]
+    ]
 }
 '''
 

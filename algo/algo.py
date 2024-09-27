@@ -1,7 +1,7 @@
 import json
 
 # Load courses and slots from JSON files
-with open('/home/arvind/ffcs/algo/courses.json', 'r') as file:
+with open('/home/arvind/ffcs/algo/final.json', 'r') as file:
     data = json.load(file)
 
 # Prepare courses_list as a list of tuples (course_code, unique_slots)
@@ -37,7 +37,7 @@ def fittable(available, course):
             any(sub_slot in key and available[key] == '' for key in available) for sub_slot in sub_slots
         )
 
-        # Ensure that none of the sections or sub-slots conflict
+        # # Ensure that none of the sections or sub-slots conflict
         conflicting_sections = any(
             section in key and available[key] != '' for key in available for section in sections
         )
@@ -73,41 +73,81 @@ def removeTable(available, course, slot):
         if any(section in key for section in sections) or any(sub_slot in key for sub_slot in sub_slots):
             available[key] = ''  # Mark this key as free again
 
-# Modified backtracking function to collect all possible results
+def calculateCredits(selected):
+    total_credits = 0
+    seen_courses = set()
+
+    for course_code, slot in selected:
+        if course_code in seen_courses:
+            continue
+
+        seen_courses.add(course_code)
+        slot_credits = 0
+        sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
+        sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
+
+        # Calculate credits for sections
+        for section in sections:
+            if section.startswith("T"):  # TA1, TA2, etc. are 1 credit
+                slot_credits += 1
+            else:  # A1, A2, B1, etc. are 2 credits
+                slot_credits += 2
+
+        # Calculate credits for sub-slots (L1, L2, etc.)
+        for sub_slot in sub_slots:
+            if sub_slot.startswith("L"):  # Each L slot (L1, L2, etc.) is 0.5 credit
+                slot_credits += 0.5
+
+        # Special case: STS courses
+        if course_code.startswith("STS"):
+            slot_credits = 1
+
+        total_credits += slot_credits
+
+    return total_credits
+
+
 def backtrack(selected, available, index, results):
-    if len(selected) >= 9:  # Base condition: at least 9 courses selected
+    if calculateCredits(selected)==27:  # Base condition: 27 credits 
         results.append(list(selected))  # Store a copy of the current selection
         return
 
-    if index >= len(courses_list):  # No more courses to select
+    if index >= len(courses_list):  # No more courses to select then just quit
         return
 
+    #obtaining the next course to evaluate from the list
     nextCourse = courses_list[index]
+
     # Try to fit the next course into available slots
     fitting_slot = fittable(available, nextCourse)
     if fitting_slot:
-        # If fitting slot is found, add course to selected and update slots
+        # If fitting slot is found, add course to selected and update slots of available
         updateTable(available, nextCourse, fitting_slot)
         selected.append((nextCourse[0], fitting_slot))
 
-        # Recurse to the next course
+        # Recurse to the next course on the list
         backtrack(selected, available, index + 1, results)
 
-        # Backtrack: remove the last added course and reset slots
+        # Backtrack: remove the last added course and the corresponding slots from available
         selected.pop()
         removeTable(available, nextCourse, fitting_slot)
 
-    # Skip the current course and check with the next course
+    # if slot couldnt fit, skip it and then try with next course
     backtrack(selected, available, index + 1, results)
 
-# Collect all results with at least 9 courses
 results = []
 backtrack(selected, available, 0, results)
 
 # Display all possible results
 if results:
+    #index, result in the list of results
     for idx, res in enumerate(results):
         print(f"Result {idx + 1}: {res}")
         print(f"Number of courses: {len(res)}\n")
 else:
     print('impossible')
+
+results = "\n".join([f"{result}," for result in results])
+
+with open('result.txt', 'w') as f:
+    f.write(results)

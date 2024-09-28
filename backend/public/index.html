@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload via WebSocket</title>
+</head>
+<body>
+    <h1>Upload Images</h1>
+    <input type="file" id="imageInput" multiple>
+    <button id="uploadButton">Upload</button>
+    <p id="status">Status: </p>
+
+    <script>
+        document.getElementById("uploadButton").addEventListener("click", function() {
+            const input = document.getElementById("imageInput");
+            const files = input.files;
+            if (files.length === 0) {
+                alert("Please select files.");
+                return;
+            }
+
+            const ws = new WebSocket("ws://localhost:8000/ws/process/");
+            ws.onopen = function() {
+                const fileDataArray = [];
+                for (const file of files) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const fileData = {
+                            filename: file.name,
+                            data: event.target.result.split(",")[1]  // Get the base64-encoded data
+                        };
+                        fileDataArray.push(fileData);
+                        
+                        if (fileDataArray.length === files.length) {
+                            ws.send(JSON.stringify({ files: fileDataArray }));
+                        }
+                    };
+                    reader.readAsDataURL(file);  // Convert file to base64
+                }
+            };
+
+            ws.onmessage = function(event) {
+                const response = JSON.parse(event.data);
+                console.log("Received message:", response); // Log the message
+            };    
+
+            ws.onclose = function() {
+                document.getElementById("status").textContent = "Status: Connection closed";
+            };
+        });
+    </script>
+</body>
+</html>

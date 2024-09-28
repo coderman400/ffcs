@@ -135,3 +135,5 @@ tests/*.jpg
 images/
 wrongs/
 */__pycache__/
+/core/outputs/
+/core/assets/inbetweens/

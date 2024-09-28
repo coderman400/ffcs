@@ -1,0 +1,424 @@
+Course Set 1:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 2:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 3:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 4:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 5:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 6:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 7:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 8:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 9:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 10:
+No clashes detected.
+
+Course Set 11:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 12:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 13:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 14:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 15:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 16:
+No clashes detected.
+
+Course Set 17:
+No clashes detected.
+
+Course Set 18:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 19:
+No clashes detected.
+
+Course Set 20:
+No clashes detected.
+
+Course Set 21:
+No clashes detected.
+
+Course Set 22:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 22:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 23:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 24:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 25:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 26:
+No clashes detected.
+
+Course Set 27:
+No clashes detected.
+
+Course Set 28:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 29:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 30:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 31:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 32:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 33:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 34:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 35:
+No clashes detected.
+
+Course Set 36:
+No clashes detected.
+
+Course Set 37:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 38:
+Clashing Course: Slot: B1+TB1, Code: CS3011, Title: 
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+
+Course Set 39:
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+Clashing Course: Slot: B1+TB1, Code: CSJ3001, Title: 
+
+Course Set 40:
+No clashes detected.
+
+Course Set 41:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 42:
+Clashing Course: Slot: B1+TB1, Code: CS3011, Title: 
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+
+Course Set 43:
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+Clashing Course: Slot: B1+TB1, Code: CSJ3001, Title: 
+
+Course Set 44:
+No clashes detected.
+
+Course Set 45:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 46:
+Clashing Course: Slot: B1+TB1, Code: CS3011, Title: 
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+
+Course Set 47:
+Clashing Course: Slot: L5+L6, Code: CS13022, Title: 
+Clashing Course: Slot: B1+TB1, Code: CSJ3001, Title: 
+
+Course Set 48:
+No clashes detected.
+
+Course Set 49:
+No clashes detected.
+
+Course Set 50:
+No clashes detected.
+
+Course Set 51:
+No clashes detected.
+
+Course Set 52:
+No clashes detected.
+
+Course Set 53:
+No clashes detected.
+
+Course Set 54:
+No clashes detected.
+
+Course Set 55:
+No clashes detected.
+
+Course Set 56:
+No clashes detected.
+
+Course Set 57:
+No clashes detected.
+
+Course Set 58:
+No clashes detected.
+
+Course Set 59:
+No clashes detected.
+
+Course Set 60:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 61:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 62:
+No clashes detected.
+
+Course Set 63:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 64:
+No clashes detected.
+
+Course Set 65:
+Clashing Course: Slot: L41+L42, Code: CSJ3002, Title: 
+Clashing Course: Slot: C2+TC2, Code: CS13022, Title: 
+
+Course Set 66:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 67:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 68:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 69:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 70:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 71:
+No clashes detected.
+
+Course Set 72:
+No clashes detected.
+
+Course Set 73:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 74:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 75:
+No clashes detected.
+
+Course Set 76:
+Clashing Course: Slot: L41+L42, Code: CSJ3002, Title: 
+Clashing Course: Slot: C2+TC2, Code: CS13022, Title: 
+
+Course Set 77:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 78:
+No clashes detected.
+
+Course Set 79:
+No clashes detected.
+
+Course Set 80:
+No clashes detected.
+
+Course Set 81:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+
+Course Set 82:
+Clashing Course: Slot: L53+L54, Code: CSJ3009, Title: 
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 83:
+No clashes detected.
+
+Course Set 84:
+No clashes detected.
+
+Course Set 85:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 86:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 87:
+No clashes detected.
+
+Course Set 88:
+Clashing Course: Slot: L41+L42, Code: CSJ3002, Title: 
+Clashing Course: Slot: C2+TC2, Code: CS13022, Title: 
+
+Course Set 89:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 90:
+No clashes detected.
+
+Course Set 91:
+Clashing Course: Slot: E2+TE2, Code: CS13021, Title: 
+Clashing Course: Slot: L53+L54, Code: CSJ3001, Title: 
+
+Course Set 92:
+No clashes detected.
+
+Course Set 93:
+No clashes detected.
+
+Course Set 94:
+No clashes detected.
+
+Course Set 95:
+No clashes detected.
+
+Course Set 96:
+No clashes detected.
+
+Course Set 97:
+No clashes detected.
+
+Course Set 98:
+No clashes detected.
+
+Course Set 99:
+Clashing Course: Slot: F2+TF2, Code: CS14002, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 100:
+No clashes detected.
+
+Course Set 101:
+No clashes detected.
+
+Course Set 102:
+No clashes detected.
+
+Course Set 103:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 104:
+No clashes detected.
+
+Course Set 105:
+No clashes detected.
+
+Course Set 106:
+No clashes detected.
+
+Course Set 107:
+Clashing Course: Slot: F2+TF2, Code: CS13019, Title: 
+Clashing Course: Slot: L59+L60, Code: CSJ3001, Title: 
+
+Course Set 108:
+No clashes detected.
+
+Course Set 109:
+No clashes detected.
+
+Course Set 110:
+Clashing Course: Slot: B2+TB2, Code: CS3011, Title: 
+Clashing Course: Slot: L35+L36, Code: CS13022, Title: 
+
+Course Set 111:
+Clashing Course: Slot: L35+L36, Code: CS13022, Title: 
+Clashing Course: Slot: B2+TB2, Code: CSJ3001, Title: 
+
+Course Set 112:
+No clashes detected.
+
+Course Set 113:
+No clashes detected.
+
+Course Set 114:
+No clashes detected.
+
+Course Set 115:
+No clashes detected.
+
+Course Set 116:
+No clashes detected.
+
+Course Set 117:
+No clashes detected.
+
+Course Set 118:
+No clashes detected.
+

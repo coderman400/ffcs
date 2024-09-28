@@ -29,7 +29,7 @@ function Result(){
   const renderDayRow = (day) => (
     <>
     <tr key={day}>
-      <td className="bg-[#333745] text-white font-bold p-8 border-solid border-white border text-center">{day.toUpperCase()}</td>
+      <td className="bg-gray-300 text-black font-bold p-8 border-solid border-gray-100 border text-center">{day.toUpperCase()}</td>
       {theorySlots.map((slot, index) => {
         if (slot.days && slot.days[day]) {
           let dispSlot;
@@ -39,15 +39,15 @@ function Result(){
           const slotDay1 = slot.days[day][0];
           const slotDay2 = slot.days[day][1];
 
-          let colorSelect = 'theory'
+          let colorSelect = 'charcoal'
 
           if (resultSlots[slotDay1]) {
             dispSlot = resultSlots[slotDay1];
-            colorSelect='theory'
+            colorSelect='charcoal'
             txtColor = thtakenSlotText;
           } else if (resultSlots[slotDay2]) {
             dispSlot = resultSlots[slotDay2];
-            colorSelect='lab'
+            colorSelect='persian'
             txtColor = labtakenSlotText;
           }
           
@@ -55,14 +55,14 @@ function Result(){
 
           if (dispSlot) {
             return (
-              <td className={`bg-${colorSelect} text-white border border-white font-bold text-center`} key={`${day}-${index}`}>
+              <td className={`bg-${colorSelect} text-white border border-gray-300 font-bold text-center`} key={`${day}-${index}`}>
                 {slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''} <br /> {dispSlot}
               </td>
             );
           }
 
           // Handling when there's only one slot
-          return <td className='bg-[#333745] text-white border border-white font-bold text-center'key={`${day}-${index}`}>{slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''}</td>;
+          return <td className='bg-cream text-black border border-gray-300 font-bold text-center'key={`${day}-${index}`}>{slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''}</td>;
         }
         return <td key={`${day}-${index}`}>-</td>;
       })}
@@ -73,15 +73,15 @@ function Result(){
 
   return (
     <div>
-      <table className="w-11/12 border-collapse bg-white rounded-lg m-20">
-      <thead className="p-10 text-center">
+      <table className="w-11/12  bg-white  m-20 shadow-xl border border-gray-100 rounded-2xl">
+      <thead className="p-10 bg-gray-300 text-center">
           <tr>
-            <th className="p-10 text-center border border-gray-400 ">Day</th>
+            <th className="p-10  text-center border border-gray-100 "></th>
             {theoryTimeSlots.map((timeSlot, index) => (
               timeSlot === 'Lunch Break' ? (
-                <th key={`lunch-${index}`} className="border border-gray-400 p-4"></th>
+                <th key={`lunch-${index}`} className="border   border-gray-100 p-4"></th>
               ) : (
-                <th key={`theory-${timeSlot}`} className="border border-gray-400 p-4">{timeSlot}</th>
+                <th key={`theory-${timeSlot}`} className="border   border-gray-100 p-4">{timeSlot}</th>
               )
             ))}
           </tr>
@@ -89,9 +89,9 @@ function Result(){
             <th></th>
             {labTimeSlots.map((timeSlot, index) => (
               timeSlot === 'Lunch Break' ? (
-                <th key={`lunch-${index}`} className="border border-gray-400 p-4" ></th>
+                <th key={`lunch-${index}`} className="border   border-gray-100 p-4" ></th>
               ) : (
-                <th key={`lab-${timeSlot}`} className="border border-gray-400 p-4">{timeSlot}</th>
+                <th key={`lab-${timeSlot}`} className="border border-gray-100 p-4  ">{timeSlot}</th>
               )
             ))}
           </tr>

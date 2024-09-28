@@ -7,8 +7,11 @@ export default {
   theme: {
     extend: {
       colors:{
-        'theory':'#8b635c',
-        'lab':'#DCBF85',
+        'charcoal':'#264653',
+        'persian':'#2A9D8F',
+        'saffron':'#E9C46A',
+        'sandy':'#F4A261',
+        'sienna':'#E76F51'
       },
     },
   },

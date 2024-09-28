@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import timetableData from '../assets/small-schema.json';
 import courseData from '../assets/result.json';
-
+import  {useLocation} from 'react-router-dom';
 
 function Result() {
+  // const location = useLocation();
+  // const courseData = location.state || {}
+  if(!courseData.slots){
+    alert('NO TIMETABLES MAN')
+  }
   const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const [timetableIndex, setTimetableIndex] = useState(0);  // State for current timetable index
 

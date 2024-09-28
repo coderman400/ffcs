@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 // Replace with your API address if you have one
-const apiAddress = '172.17.92.42:8000';
+const apiAddress = '192.168.57.109:8000';
 
 const Images = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Handle file input changes
+  // Handle file input changes  
   const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
   };
@@ -35,6 +36,7 @@ const Images = () => {
         },
       });
       console.log(response.data);
+      navigate('/result', {state: response.data})
       alert('Images uploaded successfully!');
     } catch (error) {
       console.error('Error uploading images:', error);

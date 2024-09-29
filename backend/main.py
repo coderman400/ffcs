@@ -2,7 +2,7 @@
 import shutil
 
 from fastapi import (BackgroundTasks, Depends, FastAPI, File, HTTPException,
-                     UploadFile, WebSocket, WebSocketDisconnect)
+                     UploadFile)
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -28,12 +28,6 @@ app.add_middleware(
 def clean_up():
     for file in UPLOADS.iterdir():
         file.unlink()
-
-
-async def timetable_generation(websocket: WebSocket,file_paths,db):
-    pipeline = await Pipeline(file_paths,db)
-    print(pipeline.response)
-    return pipeline.response
 
 
 @app.post("/process/")

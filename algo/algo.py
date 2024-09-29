@@ -22,10 +22,11 @@ available = {tuple(key.strip("()").split(", ")): value for key, value in raw_slo
 
 selected = []
 
-time_clash = ['D1','E1','F1','G1','TA1','TB1','TC1',
-              'V1','TE1','TF1','TG1','TAA1','TCC1',
-              'TD1','TDD2','TBB2']
-
+time_clash = ['L4','L10','L16','L22','L28',
+              'L5','L11','L17','L23','L29',
+              'L34','L40','L46','L52','L58',
+              'L35','L41','L47','L53','L59',
+              'L36','L42','L48','L54','L60']
    # # Check if all sections and sub-slots are free in `available`
         # sections_available = all(
         #     any(section in key and available[key] == '' for key in available) for section in sections
@@ -41,8 +42,6 @@ def fittable(available, course):
         sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
         sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
 
-     
-
         # # Ensure that none of the sections or sub-slots conflict
         conflicting_sections = any(
             section in key and available[key] != '' for key in available for section in sections
@@ -51,8 +50,42 @@ def fittable(available, course):
             sub_slot in key and available[key] != '' for key in available for sub_slot in sub_slots
         )
 
+        clashes = False
+        #FOR SECTIONS
+        for section in sections:
+            #find corresponding tuple
+            for slotTuple in available:
+                if(slotTuple[0]==section):
+                    #once found the tuple, check the lab slot and derive next lab slot
+                    lab_slot = slotTuple[1]
+                    next_lab_slot =  f"{lab_slot[0]}{int(lab_slot[1:])+1}"
+                    #if the next lab slot is a time clashing slot
+                    if(next_lab_slot in time_clash):
+                        #find the coresponding tuple of next lab slot
+                        for eachTuple in available:
+                            if(len(eachTuple)>1):
+                                if(eachTuple[1]==next_lab_slot):
+                                    break
+                        #then check if there is a lab course in the value of that tuple
+                        if('LAB' in available[eachTuple]):
+                            print('CLASHINGG ')
+                            clashes=True
+
+        for sub_slot in sub_slots:
+            #find corresponding tuple
+            if(sub_slot in time_clash):
+                prev_lab_slot =  f"{sub_slot[0]}{int(sub_slot[1:])-1}"
+                #find tuple corresponding to prev lab slot
+                for slotTuple in available:
+                    if(slotTuple[1]==prev_lab_slot):
+                        break
+               #once found the tuple, check if it has a THEORY course
+                if('THEORY' in available[slotTuple]):
+                    print('CLASHINGG ')
+                    clashes=True
+                    
         # If both sections and sub-slots are available and not conflicting, consider this slot as fittable
-        if not (conflicting_sections or conflicting_sub_slots):
+        if not (conflicting_sections or conflicting_sub_slots or clashes):
             return slot
 
     # If no slot is fittable, return None

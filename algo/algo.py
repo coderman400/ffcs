@@ -1,17 +1,45 @@
 import json
 
+#user preferences
+morning = True
+creditsRequired = 27
+
 # Load courses and slots from JSON files
 with open('/home/arvind/ffcs/algo/final.json', 'r') as file:
     data = json.load(file)
 
-# Prepare courses_list as a list of tuples (course_code, unique_slots)
+# Function to generate a sorting key based on the `morning` preference
+def sort_key(slot):
+    section = slot[0]  # First element is the section, e.g., 'A1', 'A2', 'B1'
+    if morning:
+        # Prioritize sections ending with '1' if morning is True
+        if section[-1] == '1':
+            return (0, section)
+        elif section[-1] == '2':
+            return (1, section)
+    else:
+        # Prioritize sections ending with '2' if morning is False
+        if section[-1] == '2':
+            return (0, section)
+        elif section[-1] == '1':
+            return (1, section)
+    
+    # Default priority for other sections
+    return (2, section)
+
+# Prepare courses_list as a list of tuples (course_code, sorted_unique_slots)
 courses_list = []
 for course_code, course_info in data.items():
     slots = set()
     for professor, slot_list in course_info['professors'].items():
         for slot in slot_list:
             slots.add(tuple(slot))  # Convert list to tuple for set uniqueness
-    courses_list.append((course_code, list(slots)))
+
+    # Sort the slots using the custom key based on morning preference
+    sorted_slots = sorted(slots, key=sort_key)
+    
+    # Append to the course list using the sorted order
+    courses_list.append((course_code, list(sorted_slots)))
 
 # Load the available slots table from JSON
 with open('/home/arvind/ffcs/algo/slots.json', 'r') as file:
@@ -27,14 +55,7 @@ time_clash = ['L4','L10','L16','L22','L28',
               'L34','L40','L46','L52','L58',
               'L35','L41','L47','L53','L59',
               'L36','L42','L48','L54','L60']
-   # # Check if all sections and sub-slots are free in `available`
-        # sections_available = all(
-        #     any(section in key and available[key] == '' for key in available) for section in sections
-        # )
-        # sub_slots_available = all(
-        #     any(sub_slot in key and available[key] == '' for key in available) for sub_slot in sub_slots
-        # )
-        
+
 # Function to check if a course can fit in available slots
 def fittable(available, course):
     for slot in course[1]:
@@ -68,7 +89,6 @@ def fittable(available, course):
                                     break
                         #then check if there is a lab course in the value of that tuple
                         if('LAB' in available[eachTuple]):
-                            print('CLASHINGG ')
                             clashes=True
 
         for sub_slot in sub_slots:
@@ -81,7 +101,6 @@ def fittable(available, course):
                         break
                #once found the tuple, check if it has a THEORY course
                 if('THEORY' in available[slotTuple]):
-                    print('CLASHINGG ')
                     clashes=True
                     
         # If both sections and sub-slots are available and not conflicting, consider this slot as fittable
@@ -150,7 +169,7 @@ def calculateCredits(selected):
 
     return total_credits
 
-sts_preference = 0
+
 
 def backtrack(selected, available, index, results):
     # Ensure that the STS course is always added first based on the preference
@@ -161,7 +180,7 @@ def backtrack(selected, available, index, results):
                 # Filter STS slots based on user preference (morning/afternoon)
                 preferred_slots = [
                     slot for slot in course[1]
-                    if (slot[0][1] == "2") == (sts_preference == 1)  # Check second character for morning/afternoon
+                    if (slot[0][1] == "2") == (morning==False)  # Check second character for morning/afternoon
                 ]
 
                 for fitting_slot in preferred_slots:
@@ -178,8 +197,8 @@ def backtrack(selected, available, index, results):
 
                 return  # Return after processing the STS course to avoid skipping it
 
-    # Check the base condition: Total credits should equal 27
-    if calculateCredits(selected) == 27:
+    # Check the base condition: Total credits should equal the limit
+    if calculateCredits(selected) == creditsRequired:
         results.append(list(selected))  # Store a copy of the current selection
         return
 
@@ -222,5 +241,5 @@ else:
 
 results = "\n".join([f"{result}," for result in results])
 
-with open('result.txt', 'w') as f:
+with open('result.txt', 'a') as f:
     f.write(results)

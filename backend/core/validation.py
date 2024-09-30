@@ -13,7 +13,6 @@ course_sets = data[shift:]
 
 driver = webdriver.Chrome()
 
-
 url = "https://ffcsonthego.vatz88.in/"
 
 driver.get(url)
@@ -24,6 +23,7 @@ adv_opts.click()
 
 
 def process_courses(course_set, index):
+
     for course in course_set:
         course_code, slots = course
 
@@ -62,7 +62,8 @@ def process_courses(course_set, index):
 
 
     with open("clashing_courses.txt", "a") as f:
-        f.write(f"Course Set {index + shift + 1}:\n")
+        key = 1 if shift == 0 else 0
+        f.write(f"Course Set {index + shift + key}:\n")
         if clashing_courses:
             for clash in clashing_courses:
                 f.write(f"Clashing Course: Slot: {clash[0]}, Code: {clash[1]}, Title: {clash[2]}\n")

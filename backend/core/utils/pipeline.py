@@ -1,45 +1,25 @@
-import json
-import os
-
-from fastapi import Depends
-from sqlalchemy.orm import Session
-from tqdm import tqdm
-
-from models.crud import create_course
-from models.database import get_db
-
 from ..ffcs.algorithm import Algorithm
-from .extraction import TextExtraction
-from .restructure import Restructure
-
+import json
 
 class Pipeline:
-    def __init__(self,image_paths,db):
-        self.image_paths = image_paths
-        self.db = db
-        self.json_path = self.extract()
-        self.add_to_db()
-        self.restructured = Restructure(self.json_path)
-        self.base = Algorithm(self.restructured.data)
-        self.response = self.make_response(self.base.results)
-        
+    def __init__(self,data = None,morning=True,creditsRequired=27):
+        self.data = data
+        print(self.data.keys())
+        self.results = []
+        self.base = Algorithm(self.data,
+                            morning=morning,
+                            creditsRequired=creditsRequired)
+        self.results += self.base.results
+        print(len(self.results))
 
-    def add_to_db(self):
-        with open(self.json_path) as f:
-            data = json.load(f)
-        for course in data["courses"]:
-            print(course["code"])
-            create_course(self.db,course)
+        self.sample = self.sample(6)
+        self.response = self.make_response(self.sample)
+        print(self.response)
 
-        
-    def extract(self):
-        """Extract text from images."""
-        for image_path in tqdm(self.image_paths):
-            base = TextExtraction(image_path)
-            path = base.write()
-
-        return path
-    
+    def sample(self,k):
+        length = len(self.results)
+        partition = length // k
+        return [self.results[i] for i in range(0, length, partition)][:k]    
     
     def make_response(self,data):
         final = {"slots" : []}
@@ -49,5 +29,17 @@ class Pipeline:
             data = flatten(timetable)
             response = {slot:course for course,slots in data for slot in slots}
             final["slots"].append(response)
-
+        print(len(final["slots"]))
         return final
+    
+
+# with open(r"core\ffcs\final.json",'r') as f:
+#     data = json.load(f)
+
+# base = Pipeline(data=data)
+
+
+# image_paths = ['C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\1.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\2.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\3.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\4.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\5.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\6.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\7.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\8.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\9.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\10.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\11.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\12.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\13.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\14.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\15.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\16.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\17.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\18.jpg', 'C:\\Users\\laksh\\OneDrive\\Desktop\\Web Development\\FFCS\\backend\\uploads\\19.jpg']
+
+# base = Pipeline(image_paths=image_paths)
+# print(base.response)

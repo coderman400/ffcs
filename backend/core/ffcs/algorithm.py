@@ -1,32 +1,61 @@
 import json
 
-from config import ROOT_DIR
+# from config import ROOT_DIR
 
-slots_json = ROOT_DIR / "core" / "ffcs" / "slots.json"
-# slots_json = "core/ffcs/slots.json"
+# slots_json = ROOT_DIR / "core" / "ffcs" / "slots.json"
+slots_json = "core/ffcs/slots.json"
 
 class Algorithm:
-    def __init__(self,data):
+    def __init__(self,data,morning=True,creditsRequired=27):
+        self.morning = morning
+        self.creditsRequired = creditsRequired
+        self.time_clash  = [
+                    'L4','L10','L16','L22','L28',
+                    'L5','L11','L17','L23','L29',
+                    'L34','L40','L46','L52','L58',
+                    'L35','L41','L47','L53','L59',
+                    'L36','L42','L48','L54','L60'
+                    ]
+        
         self.data = data
+        print(data)
+        print(morning)
+        print(creditsRequired)
         self.selected = []
         self.results = []
         self.courses_list = self.prep_courses_list()
+        print("prepped course list")
         self.available = self.prep_available_slots()
-        self.sts_preference = 0
+        print("prepped available slots")
         self.backtrack(self.available,0)
+        print("Results",len(self.results))
         self.write()
-        self.results = self.sample(6)
-
 
     def write(self):
-        text = "\n".join([f"{result}," for result in self.results])
-        with open("output.txt", "w") as file:
-            file.write(text)
+        print(self.results)
+        results = "\n".join([f"{result}," for result in self.results])
+        with open("core/ffcs/output.txt","a") as f:
+            f.write(results)
 
-    def sample(self,k):
-        length = len(self.results)
-        partition = length // k
-        return [self.results[i] for i in range(0, length, partition)][:k]
+
+    def sort_key(self,slot):
+        print("sorted")
+        section = slot[0]  # First element is the section, e.g., 'A1', 'A2', 'B1'
+        if self.morning:
+            # Prioritize sections ending with '1' if morning is True
+            if section[-1] == '1':
+                return (0, section)
+            elif section[-1] == '2':
+                return (1, section)
+        else:
+            # Prioritize sections ending with '2' if morning is False
+            if section[-1] == '2':
+                return (0, section)
+            elif section[-1] == '1':
+                return (1, section)
+        
+        # Default priority for other sections
+        return (2, section)
 
 
     def prep_courses_list(self):
@@ -36,11 +65,12 @@ class Algorithm:
             for professor, slot_list in course_info['professors'].items():
                 for slot in slot_list:
                     slots.add(tuple(slot))  # Convert list to tuple for set uniqueness
-            courses_list.append((course_code, list(slots)))
+            sorted_slots = sorted(slots,key=self.sort_key)
+            courses_list.append((course_code, list(sorted_slots)))
         return courses_list
     
     def prep_available_slots(self):
-        with open(str(slots_json), 'r') as file:
+        with open(slots_json, 'r') as file:
             raw_slots_dict = json.load(file)
 
         # Parse keys and values to a dictionary of tuples
@@ -49,18 +79,11 @@ class Algorithm:
 
     # Function to check if a course can fit in available slots
     def fittable(self,available, course):
+        print("fitting course")
         for slot in course[1]:
             # Split sections and time slots based on '+'
             sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
             sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
-
-            # Check if all sections and sub-slots are free in `available`
-            sections_available = all(
-                any(section in key and available[key] == '' for key in available) for section in sections
-            )
-            sub_slots_available = all(
-                any(sub_slot in key and available[key] == '' for key in available) for sub_slot in sub_slots
-            )
 
             # # Ensure that none of the sections or sub-slots conflict
             conflicting_sections = any(
@@ -70,8 +93,33 @@ class Algorithm:
                 sub_slot in key and available[key] != '' for key in available for sub_slot in sub_slots
             )
 
-            # If both sections and sub-slots are available and not conflicting, consider this slot as fittable
-            if sections_available and sub_slots_available and not (conflicting_sections or conflicting_sub_slots):
+            clashes = False
+
+            for section in sections:
+                for slotTuple in available:
+                    if(slotTuple[0] == section):
+                        lab_slot = slotTuple[1]
+                        next_lab_slot = f"{lab_slot[0]}{int(lab_slot[1:])+1}"
+                        if(next_lab_slot in self.time_clash):
+                            for eachTuple in available:
+                                if(len(eachTuple) > 1):
+                                    if(eachTuple[1] == next_lab_slot):
+                                        break
+                            if('LAB' in available[eachTuple]):
+                                print("CLASHING")
+                                clashes=True
+            
+            for sub_slot in sub_slots:
+                if(sub_slot in self.time_clash):
+                    prev_lab_slot = f"{sub_slot[0]}{int(sub_slot[1:])-1}"
+                    for slotTuple in available:
+                        if(slotTuple[1] == prev_lab_slot):
+                            break
+                    if('THEORY' in available[slotTuple]):
+                        print("CLASHING")
+                        clashes=True
+            
+            if not(conflicting_sections or conflicting_sub_slots or clashes):
                 return slot
 
         # If no slot is fittable, return None
@@ -85,8 +133,12 @@ class Algorithm:
 
         # Update every key in `available` that contains any of these sections or sub-slots
         for key in available:
-            if any(section in key for section in sections) or any(sub_slot in key for sub_slot in sub_slots):
-                available[key] = course_code  # Mark this key as occupied by the course code
+            if any(section in key for section in sections):
+                available[key] = f"{course_code} THEORY"  # Mark section as occupied
+
+            # Fill in as "course_code LAB" for matching sub-slots
+            if any(sub_slot in key for sub_slot in sub_slots):
+                available[key] = f"{course_code} LAB"  # Mark sub-slot as occupied
 
     # Function to free up the slots in the available slots table
     def removeTable(self,available, course, slot):
@@ -128,6 +180,7 @@ class Algorithm:
                 slot_credits = 1
 
             total_credits += slot_credits
+        print(total_credits)
 
         return total_credits
 
@@ -141,7 +194,7 @@ class Algorithm:
                     # Filter STS slots based on user preference (morning/afternoon)
                     preferred_slots = [
                         slot for slot in course[1]
-                        if (slot[0][1] == "2") == (self.sts_preference == 1)  # Check second character for morning/afternoon
+                        if (slot[0][1] == "2") == (self.morning == False)  # Check second character for morning/afternoon
                     ]
 
                     for fitting_slot in preferred_slots:
@@ -155,16 +208,18 @@ class Algorithm:
                         # Backtrack: remove the STS course and reset slots
                         self.selected.pop()
                         self.removeTable(available, course, fitting_slot)
-
+                    print("STS")
                     return  # Return after processing the STS course to avoid skipping it
 
         # Check the base condition: Total credits should equal 27
-        if self.calculateCredits(self.selected) == 27:
+        if self.calculateCredits(self.selected) == self.creditsRequired:
             self.results.append(list(self.selected))  # Store a copy of the current selection
+            print("found")
             return
 
         # No more courses to select if index exceeds list length
         if index >= len(self.courses_list):
+            print("done courses")
             return
 
         # Obtain the next course to evaluate from the list
@@ -177,6 +232,7 @@ class Algorithm:
             self.updateTable(available, nextCourse, fitting_slot)
             self.selected.append((nextCourse[0], fitting_slot))
 
+            print("fitted next slot")
             # Recurse to the next course on the list
             self.backtrack(available, index + 1)
 
@@ -184,12 +240,11 @@ class Algorithm:
             self.selected.pop()
             self.removeTable(available, nextCourse, fitting_slot)
 
+        print("trying next course")
         # If slot couldn't fit, skip it and then try with the next course
         self.backtrack(available, index + 1)
 
 
 
-
-# final = r"core/ffcs/final.json"
-# base = Algorithm(json.load(open(final,"r")))
-# print(len(base.results))
+# base = Algorithm(json.load(open(r"core\ffcs\final.json")),morning=True,creditsRequired=27)
+# print(base.results)

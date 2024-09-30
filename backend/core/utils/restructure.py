@@ -9,10 +9,9 @@ lab_slots = ['L1+L2', 'L3+L4', 'L5+L6', 'L7+L8', 'L9+L10', 'L11+L12', 'L13+L14',
 
 
 class Restructure:
-    def __init__(self,json_path):
-        self.json_path = json_path
+    def __init__(self,data:dict[str,list]):
+        self.data = data
         self.data = self.restructure()
-        self.clean_up()
     
     def is_theory_slot(self,slot):
         return slot.startswith(('A', 'B', 'C', 'D', 'E', 'F', 'G'))
@@ -60,10 +59,7 @@ class Restructure:
         return valid_pairs
 
     def restructure(self):
-        with open(self.json_path) as f:
-            input_data = f.read()
-
-        data = json.loads(input_data)
+        data = self.data
         prof_course_slots = {}
 
         for course in data['courses']:
@@ -87,7 +83,3 @@ class Restructure:
             final[course]["professors"][prof] = flatten(pairs)
 
         return final
-
-    def clean_up(self):
-        with open(self.json_path, 'w') as f:
-            json.dump({"courses" : []}, f, indent=4)

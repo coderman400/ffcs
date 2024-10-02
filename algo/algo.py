@@ -199,6 +199,7 @@ def backtrack(selected, available, index, results):
 
     # Check the base condition: Total credits should equal the limit
     if calculateCredits(selected) == creditsRequired:
+        #check if atleast 2 more timing preferred slots than 
         morningSlots=0
         afternoon=0
         for courseTuple in list(selected):
@@ -207,7 +208,7 @@ def backtrack(selected, available, index, results):
                 afternoon+=1
             else:
                 morningSlots+=1
-        if(afternoon-morningSlots>=2):
+        if((not morning and afternoon-morningSlots>=2) or (morning and morningSlots-afternoon>=2)):
             results.append(list(selected))  # Store a copy of the current selection
             return
 

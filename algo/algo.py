@@ -58,6 +58,7 @@ time_clash = ['L4','L10','L16','L22','L28',
 
 # Function to check if a course can fit in available slots
 def fittable(available, course):
+    fittableSlots = []
     for slot in course[1]:
         # Split sections and time slots based on '+'
         sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
@@ -105,10 +106,10 @@ def fittable(available, course):
                     
         # If both sections and sub-slots are available and not conflicting, consider this slot as fittable
         if not (conflicting_sections or conflicting_sub_slots or clashes):
-            return slot
+            fittableSlots.append(slot)
 
     # If no slot is fittable, return None
-    return None
+    return fittableSlots
 
 # Function to mark the selected slot as filled in the available slots
 def updateTable(available, course, slot):
@@ -196,6 +197,8 @@ def backtrack(selected, available, index, results):
                     removeTable(available, course, fitting_slot)
 
                 return  # Return after processing the STS course to avoid skipping it
+    if(len(results)==500):
+        return
 
     # Check the base condition: Total credits should equal the limit
     if calculateCredits(selected) == creditsRequired:
@@ -220,18 +223,19 @@ def backtrack(selected, available, index, results):
     nextCourse = courses_list[index]
 
     # Try to fit the next course into available slots
-    fitting_slot = fittable(available, nextCourse)
-    if fitting_slot:
-        # If fitting slot is found, add course to selected and update slots of available
-        updateTable(available, nextCourse, fitting_slot)
-        selected.append((nextCourse[0], fitting_slot))
+    fitting_slots = fittable(available, nextCourse)
+    if len(fitting_slots)>0:
+        for fitting_slot in fitting_slots:
+            # If fitting slot is found, add course to selected and update slots of available
+            updateTable(available, nextCourse, fitting_slot)
+            selected.append((nextCourse[0], fitting_slot))
 
-        # Recurse to the next course on the list
-        backtrack(selected, available, index + 1, results)
+            # Recurse to the next course on the list
+            backtrack(selected, available, index + 1, results)
 
-        # Backtrack: remove the last added course and the corresponding slots from available
-        selected.pop()
-        removeTable(available, nextCourse, fitting_slot)
+            # Backtrack: remove the last added course and the corresponding slots from available
+            selected.pop()
+            removeTable(available, nextCourse, fitting_slot)
 
     # If slot couldn't fit, skip it and then try with the next course
     backtrack(selected, available, index + 1, results)
@@ -261,5 +265,5 @@ else:
 
 results = "\n".join([f"{result}," for result in results])
 
-with open('result.txt', 'a') as f:
+with open('result.txt', 'w') as f:
     f.write(results)

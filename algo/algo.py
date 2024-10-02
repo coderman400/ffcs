@@ -1,7 +1,7 @@
 import json
 
 #user preferences
-morning = True
+morning = False
 creditsRequired = 27
 
 # Load courses and slots from JSON files
@@ -199,8 +199,17 @@ def backtrack(selected, available, index, results):
 
     # Check the base condition: Total credits should equal the limit
     if calculateCredits(selected) == creditsRequired:
-        results.append(list(selected))  # Store a copy of the current selection
-        return
+        morningSlots=0
+        afternoon=0
+        for courseTuple in list(selected):
+            slot = courseTuple[1][0]
+            if(slot[1]=='2'):
+                afternoon+=1
+            else:
+                morningSlots+=1
+        if(afternoon-morningSlots>=2):
+            results.append(list(selected))  # Store a copy of the current selection
+            return
 
     # No more courses to select if index exceeds list length
     if index >= len(courses_list):
@@ -234,8 +243,18 @@ backtrack(selected, available, 0, results)
 if results:
     #index, result in the list of results
     for idx, res in enumerate(results):
+        afternoon=0
+        morningSlots=0
         print(f"Result {idx + 1}: {res}")
         print(f"Number of courses: {len(res)}\n")
+        for courseTuple in res:
+            slot = courseTuple[1][0]
+            if(slot[1]=='2'):
+                afternoon+=1
+            else:
+                morningSlots+=1
+        print("Afternoon: ", afternoon, " Morning: ", morningSlots)
+        
 else:
     print('impossible')
 

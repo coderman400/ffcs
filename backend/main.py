@@ -30,7 +30,6 @@ def extract(image_paths):
     data = {"courses" : []}
     for image_path in tqdm(image_paths):
         base = TextExtraction(image_path)
-        base.write()
         data["courses"].append(base.text)
     
     return data

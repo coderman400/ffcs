@@ -154,8 +154,6 @@ class CourseScheduler:
         if index >= len(self.courses_list):
             return
 
-        next_course = self.courses_list[index]
-
         if not any(course[0].startswith("STS") for course in self.selected):
             print("THERE IS NOT AN STS COURSE: ", self.selected)
             for idx, course in enumerate(self.courses_list):
@@ -165,21 +163,22 @@ class CourseScheduler:
                     if(len(fitting_slots)>0):
                         self.update_table(self.available,course,fitting_slots[0])
                         self.selected.append((course[0], fitting_slots[0]))
-                        self.backtrack(index+1)
+
+        next_course = self.courses_list[index]
         
         if(next_course[0].startswith("STS")):
             self.backtrack(index+1)
+        else:
+            fitting_slots = self.fittable(self.available, next_course)
+            if len(fitting_slots) > 0:
+                for fitting_slot in fitting_slots:
+                    self.update_table(self.available, next_course, fitting_slot)
+                    self.selected.append((next_course[0], fitting_slot))
+                    self.backtrack(index + 1)
+                    self.selected.pop()
+                    self.remove_table(self.available, next_course, fitting_slot)
 
-        fitting_slots = self.fittable(self.available, next_course)
-        if len(fitting_slots) > 0:
-            for fitting_slot in fitting_slots:
-                self.update_table(self.available, next_course, fitting_slot)
-                self.selected.append((next_course[0], fitting_slot))
-                self.backtrack(index + 1)
-                self.selected.pop()
-                self.remove_table(self.available, next_course, fitting_slot)
-
-        self.backtrack(index + 1)
+            self.backtrack(index + 1)
 
     def generate_schedules(self):
         self.backtrack(0)

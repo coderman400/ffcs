@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiAddress = '192.168.89.109:8000';
+const apiAddress = 'ffcs.onrender.com';
 
 const Images = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -49,7 +49,7 @@ const Images = () => {
     }
 
     try {
-      const response = await axios.post(`http://${apiAddress}/process`, formData, {
+      const response = await axios.post(`https://${apiAddress}/process`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -166,6 +166,9 @@ class CourseScheduler:
                         self.update_table(self.available,course,fitting_slots[0])
                         self.selected.append((course[0], fitting_slots[0]))
                         self.backtrack(index+1)
+        
+        if(next_course[0].startswith("STS")):
+            self.backtrack(index+1)
 
         fitting_slots = self.fittable(self.available, next_course)
         if len(fitting_slots) > 0:

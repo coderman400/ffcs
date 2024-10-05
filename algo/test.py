@@ -141,7 +141,7 @@ class CourseScheduler:
         return total_credits
 
     def backtrack(self, index):
-        if len(self.results) == 300:
+        if len(self.results) == 200:
             return
 
         if self.calculate_credits(self.selected) == self.credits_required:
@@ -157,20 +157,15 @@ class CourseScheduler:
         next_course = self.courses_list[index]
 
         if not any(course[0].startswith("STS") for course in self.selected):
+            print("THERE IS NOT AN STS COURSE: ", self.selected)
             for idx, course in enumerate(self.courses_list):
                 if course[0].startswith("STS"):
-                    preferred_slots = [
-                        slot for slot in course[1]
-                        if (slot[0][1] == "2") == (self.morning == False)
-                    ]
-
-                    for fitting_slot in preferred_slots:
-                        self.update_table(self.available, course, fitting_slot)
-                        self.selected.append((course[0], fitting_slot))
-                        self.backtrack(0)
-                        self.selected.pop()
-                        self.remove_table(self.available, course, fitting_slot)
-                    return
+                    print("FOUND STS COURSE: ", course)
+                    fitting_slots = self.fittable(self.available, course)
+                    if(len(fitting_slots)>0):
+                        self.update_table(self.available,course,fitting_slots[0])
+                        self.selected.append((course[0], fitting_slots[0]))
+                        self.backtrack(index+1)
 
         fitting_slots = self.fittable(self.available, next_course)
         if len(fitting_slots) > 0:
@@ -188,7 +183,7 @@ class CourseScheduler:
         return self.results
 
 # Example usage
-scheduler = CourseScheduler(morning=True, credits_required=27, data_file='./final.json', slots_file='slots.json')
+scheduler = CourseScheduler(morning=False, credits_required=27, data_file='./restructured.json', slots_file='slots.json')
 results = scheduler.generate_schedules()
 
 # Display results

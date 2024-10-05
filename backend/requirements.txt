@@ -6,3 +6,4 @@ python-dotenv
 numpy
 sqlalchemy
 opencv-python
+python-multipart

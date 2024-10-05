@@ -1,4 +1,3 @@
-import json
 import os
 import textwrap
 from pathlib import Path
@@ -38,7 +37,7 @@ class TextExtraction:
         load_dotenv()
         genai.configure(api_key=os.getenv("api_key"))
         self.genai_image = genai.upload_file(self.optimized)
-        self.model = genai.GenerativeModel("gemini-1.5-pro-latest", tools=self.tools())
+        self.model = genai.GenerativeModel("gemini-1.5-flash-latest", tools=self.tools())
 
     def template_matching(self):
         """Perform template matching to find the crop area."""
@@ -84,7 +83,7 @@ class TextExtraction:
         """Extract text from the image using GenAI."""
         result = self.model.generate_content([   
             self.genai_image,
-            "Extract information from the image"],
+            "Extract information from the image. Extract the course code and title information as well",],
             tool_config={'function_calling_config': 'ANY'}
         )
         fc = result.candidates[0].content.parts[0].function_call
@@ -92,10 +91,6 @@ class TextExtraction:
         
         return data["args"]
     
-    def printable(self) -> str:
-        """Return the extracted text as a formatted JSON string."""
-        return json.dumps(self.text, indent=4)
-
     def tools(self):
         """Define the tools schema for GenAI."""
         slot = genai.protos.Schema(
@@ -114,15 +109,6 @@ class TextExtraction:
             items=slot
         )
 
-        course = genai.protos.Schema(
-            type=genai.protos.Type.OBJECT,
-            properties={
-                'course_list': genai.protos.Schema(type=genai.protos.Type.STRING),
-                'semester': genai.protos.Schema(type=genai.protos.Type.STRING),
-                'curriculum_category': genai.protos.Schema(type=genai.protos.Type.STRING),
-            },
-        )
-
         extract = genai.protos.FunctionDeclaration(
             name="add_to_database",
             description=textwrap.dedent("""\
@@ -131,7 +117,8 @@ class TextExtraction:
             parameters=genai.protos.Schema(
                 type=genai.protos.Type.OBJECT,
                 properties={
-                    'course': course,
+                    'course_code': genai.protos.Schema(type=genai.protos.Type.STRING),
+                    'course_title': genai.protos.Schema(type=genai.protos.Type.STRING),
                     'slots': slots
                 }
             )
@@ -146,15 +133,16 @@ class TextExtraction:
             slot['prof'] = slot.pop('faculty')
             slot['slots'] = slot.pop('slot')
         
-        code,title = data['course']['course_list'].split("-",1)
+        code = data['course_code']
+        title = data['course_title']
         data['title'] = title.strip()
         data['code'] = code.strip()
-        if "semester" in data.keys() and "course" in data.keys():
-            data['semester'] = data['course']['semester']   
-            data['category'] = data['course']['curriculum_category']
-        del data['course']
+
+        del data['course_code']
+        del data['course_title']
 
         profs = set()
+
         for slot in data['slots']:
             profs.add(slot['prof'])
         
@@ -170,18 +158,8 @@ class TextExtraction:
         data["slots"] = data.pop("slots_new")
         self.text = data
 
-    def write(self):
-        """Write the extracted text to a JSON file."""
-        output_path = OUTPUT_DIR / "output.json"
-        with open(output_path, 'r+') as f:
-            data = json.load(f)
-            data["courses"].append(self.text)
-            f.seek(0)
-            json.dump(data, f, indent=4)
-            f.truncate()
-        return output_path
-
     def clean_up(self):
         """Remove all files in the output directory."""
         for file in INBETWEENS.glob('*'):
             file.unlink()
+

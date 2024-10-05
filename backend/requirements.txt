@@ -1,0 +1,10 @@
+fastapi
+pillow
+google-generativeai
+tqdm
+python-dotenv
+numpy
+sqlalchemy
+opencv-python
+python-multipart
+uvicorn

@@ -24,7 +24,6 @@ const Images = () => {
   };
 
   const handleButtonClick = async () => {
-    // Validate credits input
     const creditsValue = parseInt(credits, 10);
     if (creditsValue < 16 || creditsValue > 27 || isNaN(creditsValue)) {
       setCreditsError('Credits value must be between 16 and 27.');
@@ -41,8 +40,8 @@ const Images = () => {
 
     const formData = new FormData();
 
-    formData.append('credits', creditsValue)
-    formData.append('timing',timing)
+    formData.append('credits', creditsValue);
+    formData.append('timing', timing);
 
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('image', selectedFiles[i]);
@@ -67,7 +66,7 @@ const Images = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-50">
-      <div className="flex flex-col md:flex-row bg-white shadow-xl rounded-lg overflow-hidden p-8 md:p-12 lg:p-16">
+      <div className="flex flex-col md:flex-row bg-white shadow-xl rounded-lg overflow-hidden p-8 md:p-12 lg:p-16 max-w-5xl">
         <div className="flex-1 p-4">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Timetable Preference</h2>
           <form className="space-y-4">
@@ -104,7 +103,7 @@ const Images = () => {
           </form>
         </div>
 
-        <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-6 md:ml-8 mt-8 md:mt-0 shadow-inner">
+        <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-6 md:ml-8 mt-8 md:mt-0 shadow-inner relative">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Upload Slot Images</h2>
           <div className="mb-4">
             <input
@@ -125,10 +124,25 @@ const Images = () => {
             disabled={loading}
             className={`w-full py-2 px-4 rounded-lg font-semibold transition duration-200
             ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}
-            text-white shadow-sm`}
+            text-white shadow-sm flex items-center justify-center`}
           >
-            {loading ? 'Uploading...' : 'Submit'}
+            {loading ? (
+              <>
+                <svg className="animate-spin mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                Uploading...
+              </>
+            ) : (
+              'Submit'
+            )}
           </button>
+          {loading && (
+            <p className="absolute bottom-4 left-4 text-sm text-gray-500">
+              This may take up to 5-6 minutes, please don't refresh the page.
+            </p>
+          )}
         </div>
       </div>
     </div>

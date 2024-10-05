@@ -56,12 +56,15 @@ function Result() {
 
           if (dispSlot) {
             return (
+              // Update the className to dynamically generate the class using template literals
               <td
-                className={`bg-${colorSelect} text-white border border-gray-300 font-bold text-center`}
-                key={`${day}-${index}`}
-              >
-                {slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''} <br /> {dispSlot}
-              </td>
+                  style={{ backgroundColor: colorSelect === 'persian' ? '#2A9D8F' : '#264653' }}
+                  className="text-white border border-gray-300 font-bold text-center"
+                  key={`${day}-${index}`}
+                >
+                  {slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''} <br /> {dispSlot}
+                </td>
+
             );
           }
 

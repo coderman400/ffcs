@@ -1,0 +1,7 @@
+fastapi
+pillow
+google-generativeai
+tqdm
+python-dotenv
+numpy
+sqlalchemy

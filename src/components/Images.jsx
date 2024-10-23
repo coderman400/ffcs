@@ -31,6 +31,7 @@ const Images = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials:true
       });
       console.log(response.data);
       navigate('/edit', { state: response.data.courses });
@@ -44,9 +45,9 @@ const Images = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-50">
-      <div className="flex flex-col md:flex-row bg-white shadow-xl rounded-lg overflow-hidden p-8 md:p-12 lg:p-16 max-w-5xl">
-        <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-6 md:ml-8 mt-8 md:mt-0 shadow-inner relative">
+    <div className="flex items-center justify-center h-screen bg-gray-50 w-full">
+      <div className="flex flex-col items-center md:flex-row bg-white shadow-xl rounded-lg overflow-hidden p-8 md:p-12 lg:p-16 max-w-5xl">
+        <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-6 mt-8 md:mt-0 shadow-inner relative">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Upload Slot Images</h2>
           <div className="mb-4">
             <input
@@ -58,7 +59,7 @@ const Images = () => {
                      file:mr-4 file:py-2 file:px-4 
                      file:rounded-lg file:border-0
                      file:text-sm file:font-semibold
-                     file:bg-blue-50 file:text-blue-700
+                     file:bg-blue-50 file:text-blue-500
                      hover:file:bg-blue-100"
             />
           </div>
@@ -66,7 +67,7 @@ const Images = () => {
             onClick={handleButtonClick}
             disabled={loading}
             className={`w-full py-2 px-4 rounded-lg font-semibold transition duration-200
-            ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}
+            ${loading ? 'bg-charcoal cursor-not-allowed' : 'bg-persian hover:bg-charcoal'}
             text-white shadow-sm flex items-center justify-center`}
           >
             {loading ? (
@@ -81,11 +82,14 @@ const Images = () => {
               'Submit'
             )}
           </button>
-            {loading && (
-              <p className="absolute top-4 left-4 text-sm text-gray-500">
+          <div className='h-10 relative'>
+          {loading && (
+              <p className="text-sm text-gray-500 absolute">
                 This may take up to 5-6 minutes, please don't refresh the page.
               </p>
             )}
+          </div>
+            
           
         </div>
       </div>

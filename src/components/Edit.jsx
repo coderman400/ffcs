@@ -14,6 +14,7 @@ const Edit = () => {
   const [credits, setCredits] = useState('');
   const [creditsError, setCreditsError] = useState('');
   const [timing, setTiming] = useState('morning');
+  const [loading ,setLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,33 +67,36 @@ const Edit = () => {
     formData.append('credits',credits)
     formData.append('timing', timing)
 
-    let result = courses.map((course,index) => ({
-      code: course.code,
-      title: course.title,
-      slots: course.slots,
-      mandatory: mandatory[index] || false,
+    let result = courses
+    .filter((course,index)=>mandatory[index])
+    .map((course)=> ({
+      code: course.code
     }))
-
+    console.log(result)
     formData.append('courses',JSON.stringify(result))
     try{
+      setLoading(true)
       const response = await axios.post(`${apiAddress}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        withCredentials:true
       })
       console.log(response.data)
       // navigate('/result', { state: response.data });
     }catch{
       alert("error!")
+    }finally{
+      setLoading(false)
     }
   }
 
 
 
   return (
-    <div className='flex flex-col items-center mt-10 justify-center'>
-      <table className='w-3/4 border shadow-md bg-white'>
-        <thead className='bg-gray-800 text-white'> 
+    <div className='flex flex-col items-center mt-28 justify-center'>
+      <table className='w-3/4 border shadow-md bg-white mb-8'>
+        <thead className='bg-charcoal text-white'> 
           <tr>
             <th>Code</th>
             <th className='md:block sm:hidden'>Course title</th>
@@ -106,7 +110,7 @@ const Edit = () => {
               <td>{course.code}</td>
               <td className='md:block sm:hidden'>{course.title}</td>
               <td>
-                <div className='flex flex-row mr-2 justify-between'>
+                <div className='flex flex-row justify-between'>
                   <p>{course.slots[0]}</p>
                   {course.slots.length>1 && 
                   <button className='font-bold' onClick={()=>toggleExpansion(index)}>
@@ -128,7 +132,7 @@ const Edit = () => {
         </tbody>
       </table>
       <div className='flex md:flex-row sm:flex-col justify-between w-3/4 m-4'>
-          <div className="flex-1 mr-4 p-8 md:w-1/2 sm:w-full shadow-md bg-white rounded-lg">
+          <div className="flex-1 mr-16 p-8 md:w-1/2 sm:w-full shadow-md bg-white rounded-lg">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">Timetable Preferences</h2>
             <form className="space-y-4">
               <div>
@@ -192,7 +196,23 @@ const Edit = () => {
       </div>
       
       <div className='w-3/4 flex justify-end'>
-        <button className='m-4 py-2 px-4  bg-white rounded-md shadow-md hover:bg-persian hover:text-white duration-150' onClick={()=>handleSubmit()}>Submit</button>
+        <button
+         className={`m-4 mr-0 w-32 flex justify-center py-4 text-lg font-bold bg-white rounded-md shadow-md hover:bg-persian hover:text-white duration-200 ${loading && 'bg-persian transition cursor-not-allowed' } `}
+         onClick={()=>handleSubmit()}
+         disabled={loading}
+
+         >
+          {loading ? (
+              <>
+                <svg className="animate-spin  h-7 w-7 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+              </>
+            ) : (
+              'Submit'
+            )}
+         </button>
       </div>
       
     </div>

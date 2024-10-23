@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiAddress = 'ffcs.onrender.com';
+const apiAddress = '192.168.204.109:8000';
 
 const Images = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [credits, setCredits] = useState('');
-  const [creditsError, setCreditsError] = useState('');
-  const [timing, setTiming] = useState('morning');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -16,19 +13,7 @@ const Images = () => {
     setSelectedFiles(event.target.files);
   };
 
-  const handleCreditsChange = (event) => {
-    setCredits(event.target.value);
-  };
-  const handleTimingChange = (event) => {
-    setTiming(event.target.value);
-  };
-
   const handleButtonClick = async () => {
-    const creditsValue = parseInt(credits, 10);
-    if (creditsValue < 16 || creditsValue > 27 || isNaN(creditsValue)) {
-      setCreditsError('Credits value must be between 16 and 27.');
-      return;
-    }
 
     if (selectedFiles.length === 0) {
       alert('Please select images before submitting.');
@@ -36,25 +21,19 @@ const Images = () => {
     }
 
     setLoading(true);
-    setCreditsError('');
-
     const formData = new FormData();
-
-    formData.append('credits', creditsValue);
-    formData.append('timing', timing);
-
     for (let i = 0; i < selectedFiles.length; i++) {
       formData.append('image', selectedFiles[i]);
     }
 
     try {
-      const response = await axios.post(`https://${apiAddress}/process`, formData, {
+      const response = await axios.post(`http://${apiAddress}/process2`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       console.log(response.data);
-      navigate('/result', { state: response.data });
+      navigate('/edit', { state: response.data.courses });
       alert('Images uploaded successfully!');
     } catch (error) {
       console.error('Error uploading images:', error);
@@ -67,42 +46,6 @@ const Images = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gray-50">
       <div className="flex flex-col md:flex-row bg-white shadow-xl rounded-lg overflow-hidden p-8 md:p-12 lg:p-16 max-w-5xl">
-        <div className="flex-1 p-4">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Timetable Preference</h2>
-          <form className="space-y-4">
-            <div>
-              <label htmlFor="credits" className="block text-gray-600 font-medium mb-1">
-                Credits:
-              </label>
-              <input
-                type="number"
-                value={credits}
-                onChange={handleCreditsChange}
-                id="credits"
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 
-                ${creditsError ? 'border-red-500' : 'border-gray-300'}`}
-                placeholder="Enter credits (16 - 27)"
-              />
-              {creditsError && (
-                <p className="text-red-500 text-sm mt-1">{creditsError}</p>
-              )}
-            </div>
-            <div>
-              <label htmlFor="time" className="block text-gray-600 font-medium mb-1">
-                Preferred Timing:
-              </label>
-              <select
-                id="time"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                onChange={handleTimingChange}
-              >
-                <option value="morning">Morning</option>
-                <option value="afternoon">Afternoon</option>
-              </select>
-            </div>
-          </form>
-        </div>
-
         <div className="flex-1 bg-gray-50 border border-gray-200 rounded-lg p-6 md:ml-8 mt-8 md:mt-0 shadow-inner relative">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">Upload Slot Images</h2>
           <div className="mb-4">
@@ -138,11 +81,12 @@ const Images = () => {
               'Submit'
             )}
           </button>
-          {loading && (
-            <p className="absolute bottom-4 left-4 text-sm text-gray-500">
-              This may take up to 5-6 minutes, please don't refresh the page.
-            </p>
-          )}
+            {loading && (
+              <p className="absolute top-4 left-4 text-sm text-gray-500">
+                This may take up to 5-6 minutes, please don't refresh the page.
+              </p>
+            )}
+          
         </div>
       </div>
     </div>

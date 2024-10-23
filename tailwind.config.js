@@ -13,6 +13,9 @@ export default {
         'sandy':'#F4A261',
         'sienna':'#E76F51'
       },
+      screens:{
+        'sm': '320px'
+      }
     },
   },
   plugins: [],

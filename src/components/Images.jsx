@@ -33,8 +33,8 @@ const Images = () => {
         },
         withCredentials:true
       });
-      console.log(response.data);
-      navigate('/edit', { state: response.data.courses });
+      console.log(response);
+      navigate('/edit', { state: response.data });
       alert('Images uploaded successfully!');
     } catch (error) {
       console.error('Error uploading images:', error);

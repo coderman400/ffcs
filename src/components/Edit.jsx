@@ -18,7 +18,9 @@ const Edit = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const courses = location.state || {}
+  const data = location.state || {}
+  const courses = data.courses
+  const id = data.id
 
   //   let courses = [
   //   {
@@ -63,7 +65,7 @@ const Edit = () => {
     setCreditsError('')
 
     let formData = new FormData()
-
+    formData.append('id', id)
     formData.append('credits',credits)
     formData.append('timing', timing)
 

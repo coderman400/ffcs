@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+th{
+    @apply py-6 px-4;
+}
+
+td{
+    @apply px-4 py-4;
+}
+
+tbody td{
+    @apply border-r-2 border-gray-300;
+}
+  
+tbody td:last-child {
+    border-right: none;
+}
+input[type="checkbox"] {
+    transform: scale(1);
+    width: 20px; 
+    height: 20px; 
+  }
+  

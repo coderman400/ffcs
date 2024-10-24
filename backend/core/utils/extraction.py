@@ -1,3 +1,4 @@
+import json
 import os
 import textwrap
 from pathlib import Path
@@ -9,6 +10,8 @@ from dotenv import load_dotenv
 from PIL import Image, ImageEnhance
 
 from config import ROOT_DIR
+
+# ROOT_DIR = Path(r"C:\Users\laksh\OneDrive\Desktop\Web Development\FFCS\backend")
 
 TEMPLATE_IMAGE = ROOT_DIR / "core" / "assets" / "template.jpg"  
 OUTPUT_DIR = ROOT_DIR / "core" / "assets"
@@ -31,6 +34,8 @@ class TextExtraction:
         self.text = self.extract()
         self.post_process()
         self.clean_up()
+
+        self.reformat = self.reformat()
 
     def setup_genai(self):
         """Setup GenAI with API key and configuration."""
@@ -163,3 +168,24 @@ class TextExtraction:
         for file in INBETWEENS.glob('*'):
             file.unlink()
 
+    def reformat(self):
+        """Reformat the extracted text."""
+        reformat = {"code":self.text["code"], "title":self.text["title"], "slots":[]}
+        reformat["slots"] = [*set([slot["slots"] for slot in self.text["slots"]])]
+
+        return reformat
+
+# def process_images():
+#     images_dir = ROOT_DIR / "images" / "images"
+#     output_json = ROOT_DIR / "core" / "assets" / "extracted_data.json"
+#     data = {"courses" : []}
+#     for image_file in images_dir.glob("*.jpg"):
+#         extractor = TextExtraction(str(image_file))
+#         data["courses"].append(extractor.text)
+#         print(extractor.text)
+
+#     with open(output_json, "a") as json_file:
+#         json.dump(data, json_file)
+#         json_file.write("\n")
+
+# process_images()

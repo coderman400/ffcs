@@ -1,3 +1,4 @@
+import json
 import re
 
 theory_slots = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'V1']
@@ -82,3 +83,13 @@ class Restructure:
             final[course]["professors"][prof] = flatten(pairs)
 
         return final
+    
+    def mandate(self,courses:list[str]):
+        for course in self.data.keys():
+            self.data[course]["mandatory"] = True if course in courses else False
+
+# base = Restructure(json.load(open(r"core/utils/extracted_data.json","r")))
+# print(base.data)
+
+# with open('core/utils/restructured_data.json', 'w') as json_file:
+#     json.dump(base.data, json_file, indent=4)

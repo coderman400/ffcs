@@ -16,6 +16,7 @@
     "ffcs": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-refresh": "^0.14.2",
     "react-scripts": "^5.0.1"
   },
   "devDependencies": {
@@ -32,9 +33,6 @@
     "react-router-dom": "^6.26.1",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.10"
-  },
-  "overrides": {
-  "react-refresh": "0.11.0"
   },
   "browserslist": {
     "production": [

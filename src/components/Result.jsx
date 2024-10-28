@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import timetableData from '../assets/small-schema.json';
-import courseData from '../assets/result.json';
+// import courseData from '../assets/result.json';
 import { useLocation } from 'react-router-dom';
 
 function Result() {
-  // const location = useLocation();
-  // const courseData = location.state || {}
+  const location = useLocation();
+  const courseData = location.state || {}
   if (!courseData.slots) {
     alert('NO TIMETABLES MAN');
   }
@@ -129,7 +129,7 @@ function Result() {
           </thead>
           <tbody>{days.map((day) => renderDayRow(day))}</tbody>
         </table>
-        <table className='w-8/12 bg-white rounded-md mb-8'>
+        {/* <table className='w-8/12 bg-white rounded-md mb-8'>
           <thead className='text-xl border-b text-white bg-charcoal'>
             <tr className=''>
               <th>Code</th>
@@ -149,7 +149,7 @@ function Result() {
             ))}
             
           </tbody>
-        </table>
+        </table> */}
       </div>
     </div>
   );

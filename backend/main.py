@@ -9,8 +9,10 @@ from tqdm import tqdm
 
 from config import ROOT_DIR, UPLOADS
 from core.utils.extraction import TextExtraction
-from core.utils.pipeline import Pipeline
 from core.utils.restructure import Restructure
+from core.utils.response import Response
+from core.utils.cache import Cache
+from core.ffcs.algorithm import CourseScheduler as Algorithm
 
 app = FastAPI()
 
@@ -41,19 +43,6 @@ def extract(image_paths):
     
     return {"base_reformat":reformat_data, "base_text":base_text}
 
-def cache_it(data):
-    id = str(uuid.uuid4())
-    with open(ROOT_DIR / "cache" / f"{id}.json", "w") as file: 
-        json.dump(data, file)
-    return id
-
-def retrieve_it(id):
-    with open(ROOT_DIR / "cache" / f"{id}.json", "r") as file:
-        data = json.load(file)
-    return data
-
-def delete_it(id):
-    (ROOT_DIR / "cache" / f"{id}.json").unlink()
 
 @app.post("/process2/")
 def process_images(
@@ -71,7 +60,7 @@ def process_images(
             shutil.copyfileobj(file.file, buffer)
     
     image_data = extract(file_paths)
-    id = cache_it(image_data["base_text"])
+    id = Cache(image_data["base_text"])
     background_tasks.add_task(clean_up)
 
     return {"courses" : image_data["base_reformat"],"id":id}
@@ -84,18 +73,20 @@ def process(
     courses: str = Form(...),
     id: str = Form(...),
 ):
-    courses = json.loads(courses)
     print(id)
-    print(type(courses))
+    courses = json.loads(courses)
 
-    base_text = retrieve_it(id)
-    delete_it(id)
+    base_text = Cache.retrieve(id)
+
     restructured = Restructure({"courses": base_text})
     restructured.mandate(courses)
     restructured_data = restructured.data
-    pipeline = Pipeline(restructured_data, credits=credits, morning= True if timing == "morning" else False)
-    response = pipeline.response
 
+    morning= True if timing == "morning" else False
+    base = Algorithm(morning=morning, credits_required=int(credits), data=restructured_data)
+    timetables = base.generate_schedules()
+    
+    response = Response(timetables).response
     return response
 
 

@@ -82,7 +82,7 @@ def process(
     base = Algorithm(morning=morning, credits_required=int(credits), data=restructured_data)
     timetables = base.generate_schedules()
     
-    response = Response(timetables).response
+    response = Response(timetables,base_text).response
     return response
 
 

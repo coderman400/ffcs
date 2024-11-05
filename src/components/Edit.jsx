@@ -20,7 +20,9 @@ const Edit = () => {
   const location = useLocation();
   const data = location.state || {}
   const courses = data.courses
-  const id = data.id
+  console.log(courses)
+  const id = data.id.id
+  // const id = "b6dc3fd6-db7f-41b0-949a-75866290c276"
 
   //   let courses = [
   //   {
@@ -65,6 +67,7 @@ const Edit = () => {
     setCreditsError('')
 
     let formData = new FormData()
+    console.log("ID :", id)
     formData.append('id', id)
     formData.append('credits',credits)
     formData.append('timing', timing)
@@ -85,7 +88,7 @@ const Edit = () => {
         withCredentials:true
       })
       console.log(response.data)
-      // navigate('/result', { state: response.data });
+      navigate('/result', { state: response.data });
     }catch{
       alert("error!")
     }finally{

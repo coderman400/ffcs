@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using React Router for navigation
+import { Link } from 'react-router-dom'; 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-charcoal p-4 shadow-md fixed top-0 z-50 w-full">
+    <nav className="bg-charcoal p-4 shadow-md fixed top-0 z-50 w-full flex flex-col">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-xl font-bold">
           <Link to="/">SkibidiFFCS</Link>
@@ -30,11 +30,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-persian p-4">
-          <Link to="/" className="block text-white hover:text-saffron mb-2">Home</Link>
-          <Link to="/about" className="block text-white hover:text-saffron mb-2">About</Link>
-          <Link to="/services" className="block text-white hover:text-saffron mb-2">Services</Link>
-          <Link to="/contact" className="block text-white hover:text-saffron">Contact</Link>
+        <div className="md:hidden bg-persian p-4 mt-2 rounded-lg w-3/4 self-center">
+          <Link to="/" className="text-white duration-75 hover:text-saffron mb-2 block">Upload</Link>
+          <a className="text-white duration-75 hover:text-saffron" href="https://m.media-amazon.com/images/I/41RSnrYaaaL._AC_UF894,1000_QL80_.jpg" target="_blank" rel="noopener noreferrer">Cat</a>
         </div>
       )}
     </nav>

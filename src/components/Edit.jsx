@@ -5,7 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import  {useLocation} from 'react-router-dom';
-const apiAddress = 'http://192.168.204.109:8000/process3';
+const apiAddress = 'https://ffcs-zu4x.onrender.com/process3';
 
 
 const Edit = () => {
@@ -53,6 +53,7 @@ const Edit = () => {
 
   const handleCreditsChange = (event) => {
     setCredits(event.target.value);
+    
   };
   const handleTimingChange = (event) => {
     setTiming(event.target.value);

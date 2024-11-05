@@ -1,4 +1,6 @@
+import json
 import re
+from config import HERE
 
 theory_slots = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'V1']
 lab_slots = ['L1+L2', 'L3+L4', 'L5+L6', 'L7+L8', 'L9+L10', 'L11+L12', 'L13+L14', 'L15+L16', 'L17+L18', 'L19+L20', 
@@ -9,6 +11,7 @@ lab_slots = ['L1+L2', 'L3+L4', 'L5+L6', 'L7+L8', 'L9+L10', 'L11+L12', 'L13+L14',
 
 class Restructure:
     def __init__(self,data:dict[str,list]):
+        HERE(__file__,self.__init__)
         self.data = data
         self.data = self.restructure()
     
@@ -82,3 +85,13 @@ class Restructure:
             final[course]["professors"][prof] = flatten(pairs)
 
         return final
+    
+    def mandate(self,courses:list[str]):
+        for course in self.data.keys():
+            self.data[course]["mandatory"] = True if course in courses else False
+
+# base = Restructure(json.load(open(r"core/utils/extracted_data.json","r")))
+# print(base.data)
+
+# with open('core/utils/restructured_data.json', 'w') as json_file:
+#     json.dump(base.data, json_file, indent=4)

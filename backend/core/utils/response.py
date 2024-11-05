@@ -1,13 +1,8 @@
-from ..ffcs.algorithm import CourseScheduler as Algorithm
 
-
-class Pipeline:
-    def __init__(self,data,morning:bool,credits):
-        self.data = data
-        self.results = []
-        scheduler = Algorithm(morning=morning, credits_required=credits,data=data)
-        self.results = scheduler.generate_schedules()
-        self.sample = self.sample(6)
+class Response:
+    def __init__(self,data):
+        self.results = data
+        self.sample = self.sample(30)
         self.response = self.make_response(self.sample)
 
     def sample(self,k):

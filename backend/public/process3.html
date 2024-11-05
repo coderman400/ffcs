@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Further Info</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Enter Additional Information</h1>
+    <form id="infoForm">
+        <label for="credits">Credits:</label>
+        <input type="text" id="credits" name="credits" required><br><br>
+
+        <label for="timing">Timing (morning/afternoon):</label>
+        <input type="text" id="timing" name="timing" required><br><br>
+
+        <label for="courses">Courses (JSON format):</label>
+        <textarea id="courses" name="courses" required></textarea><br><br>
+        <label for=id">id:</label>
+        <textarea id="id" name="id" required></textarea><br><br>
+
+        <button type="button" onclick="sendFurtherInfo()">Submit</button>
+    </form>
+
+    <script>
+        function sendFurtherInfo() {
+            const formData = new FormData();
+            formData.append('credits', document.getElementById("credits").value);
+            formData.append('timing', document.getElementById("timing").value);
+            formData.append('courses', document.getElementById("courses").value);
+            formData.append('id', document.getElementById("id").value);
+
+            axios.post('http://localhost:8000/process3/', formData, {
+                withCredentials: true // This ensures that cookies (session) are sent with the request
+            })
+            .then(function (response) {
+                console.log(response.data);
+                alert("Further processing completed!");
+            })
+            .catch(function (error) {
+                console.error("There was an error!", error);
+                alert("Error submitting information.");
+            });
+        }
+    </script>
+</body>
+</html>

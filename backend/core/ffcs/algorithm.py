@@ -1,8 +1,9 @@
 import json
-
+# from config import HERE
 
 class CourseScheduler:
     def __init__(self, morning:bool, credits_required, data, slots_file="core/ffcs/slots.json"):
+        # HERE(__file__,self.__init__)
         self.morning = morning
         self.credits_required = credits_required
 
@@ -27,7 +28,10 @@ class CourseScheduler:
 
         # Prepare courses_list as a list of tuples (course_code, sorted_unique_slots)
         self.courses_list = []
+        self.mandatory_courses_list=[]
+        non_mandatory_courses_list=[]
         for course_code, course_info in self.data.items():
+            
             slots = set()
             for professor, slot_list in course_info['professors'].items():
                 for slot in slot_list:
@@ -35,11 +39,14 @@ class CourseScheduler:
 
             # Sort the slots using the custom key based on morning preference
             sorted_slots = sorted(slots, key=self.sort_key)
-            self.courses_list.append((course_code, list(sorted_slots)))
+            if(course_info['mandatory']):
+                self.mandatory_courses_list.append((course_code, list(sorted_slots)))
+            if(not course_info['mandatory']):
+                non_mandatory_courses_list.append((course_code, list(sorted_slots)))
+        self.courses_list = self.mandatory_courses_list + non_mandatory_courses_list
 
     # Function to generate a sorting key based on the `morning` preference
     def sort_key(self, slot):
-        """Function to generate a sorting key based on the `morning` preference"""
         section = slot[0]
         if self.morning:
             if section[-1] == '1':
@@ -55,7 +62,6 @@ class CourseScheduler:
         return (2, section)
 
     def fittable(self, available, course):
-        """Checks if the `course` can be fit into the timetable"""
         fittableSlots = []
         for slot in course[1]:
             sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
@@ -96,7 +102,6 @@ class CourseScheduler:
         return fittableSlots
 
     def update_table(self, available, course, slot):
-        """Update the available slots table with the selected course"""
         course_code = course[0]
         sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
         sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
@@ -109,7 +114,6 @@ class CourseScheduler:
                 available[key] = f"{course_code} LAB"
 
     def remove_table(self, available, course, slot):
-        """Remove the selected course from the available slots table"""
         sections = slot[0].split("+") if "+" in slot[0] else [slot[0]]
         sub_slots = slot[1].split("+") if len(slot) > 1 and "+" in slot[1] else [slot[1]] if len(slot) > 1 else []
 
@@ -118,7 +122,6 @@ class CourseScheduler:
                 available[key] = ''
 
     def calculate_credits(self, selected):
-        """Calculate the total credits of the selected courses"""
         total_credits = 0
         seen_courses = set()
 
@@ -145,17 +148,18 @@ class CourseScheduler:
 
         return total_credits
 
-    def backtrack(self, index):
-        """Backtracking algorithm to generate all possible schedules"""
-        if len(self.results) == 200:
+    def backtrack(self, index,depth=0):
+        MAX_DEPTH =  20
+        if len(self.results) == 120 or depth>MAX_DEPTH:
             return
 
         if self.calculate_credits(self.selected) == self.credits_required:
             morningSlots = sum(1 for courseTuple in self.selected if courseTuple[1][0][1] == '1')
             afternoon = len(self.selected) - morningSlots
             if (not self.morning and afternoon - morningSlots >= 2) or (self.morning and morningSlots - afternoon >= 2):
-                self.results.append(list(self.selected))
-                return
+                if all(mandatory_course[0] in [selected[0] for selected in self.selected] for mandatory_course in self.mandatory_courses_list):
+                    self.results.append(list(self.selected))
+                    return
 
         if index >= len(self.courses_list):
             return
@@ -171,21 +175,39 @@ class CourseScheduler:
         next_course = self.courses_list[index]
         
         if(next_course[0].startswith("STS")):
-            self.backtrack(index+1)
+            self.backtrack(index+1, depth + 1)
         else:
             fitting_slots = self.fittable(self.available, next_course)
             if len(fitting_slots) > 0:
                 for fitting_slot in fitting_slots:
                     self.update_table(self.available, next_course, fitting_slot)
                     self.selected.append((next_course[0], fitting_slot))
-                    self.backtrack(index + 1)
+                    self.backtrack(index + 1,depth + 1)
                     self.selected.pop()
                     self.remove_table(self.available, next_course, fitting_slot)
 
-            self.backtrack(index + 1)
+            self.backtrack(index + 1, depth + 1)
 
     def generate_schedules(self):
-        """Generate all possible schedules"""
         self.backtrack(0)
         return self.results
 
+# # Example usage
+# with open("results-restructured.json","r") as file:
+#     data = json.load(file)
+
+
+# scheduler = CourseScheduler(morning=False, credits_required=27, data=data)
+# results = scheduler.generate_schedules()
+
+# # Display results
+# if results:
+#     for idx, res in enumerate(results):
+#         print(f"Result {idx + 1}: {res}")
+# else:
+#     print("Impossible")
+
+# results = "\n".join([f"{result}," for result in results])
+
+# with open('result.txt', 'w') as f:
+#     f.write(results)

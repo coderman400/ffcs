@@ -2,7 +2,7 @@
 class Response:
     def __init__(self,data):
         self.results = data
-        self.sample = self.sample(6)
+        self.sample = self.sample(30)
         self.response = self.make_response(self.sample)
 
     def sample(self,k):

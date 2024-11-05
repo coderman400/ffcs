@@ -4,7 +4,6 @@ import uuid
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, UploadFile, HTTPException, Cookie,Response
 from fastapi.middleware.cors import CORSMiddleware
-from itsdangerous import URLSafeSerializer
 from tqdm import tqdm
 
 from config import ROOT_DIR, UPLOADS
@@ -15,9 +14,6 @@ from core.utils.cache import Cache
 from core.ffcs.algorithm import CourseScheduler as Algorithm
 
 app = FastAPI()
-
-SECRET_KEY = "your-secret-key"
-serializer = URLSafeSerializer(SECRET_KEY)
 
 # Configure CORS to allow all origins
 app.add_middleware(

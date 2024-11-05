@@ -2,7 +2,7 @@ import json
 import re
 from config import HERE
 
-theory_slots = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'V1']
+theory_slots = ['A1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'A2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'V1','TAA1','TAA2','TCC1','TCC2','TBB2','TDD2']
 lab_slots = ['L1+L2', 'L3+L4', 'L5+L6', 'L7+L8', 'L9+L10', 'L11+L12', 'L13+L14', 'L15+L16', 'L17+L18', 'L19+L20', 
              'L21+L22', 'L23+L24', 'L25+L26', 'L27+L28', 'L29+L30', 'L31+L32', 'L33+L34', 'L35+L36', 'L37+L38', 
              'L39+L40', 'L41+L42', 'L43+L44', 'L45+L46', 'L47+L48', 'L49+L50', 'L51+L52', 'L53+L54', 'L55+L56', 
@@ -16,7 +16,7 @@ class Restructure:
         self.data = self.restructure()
     
     def is_theory_slot(self,slot):
-        return slot.startswith(('A', 'B', 'C', 'D', 'E', 'F', 'G'))
+        return slot.startswith(('A', 'B', 'C', 'D', 'E', 'F', 'G','T'))
 
 
     def is_lab_slot(self,slot):
@@ -90,7 +90,8 @@ class Restructure:
         for course in self.data.keys():
             self.data[course]["mandatory"] = True if course in courses else False
 
-# base = Restructure(json.load(open(r"core/utils/extracted_data.json","r")))
+# base = Restructure({"courses":json.load(open(r"cache\62aedc42-905e-41e3-89a0-4dc6883e2c88.json","r"))})
+# base.mandate([])
 # print(base.data)
 
 # with open('core/utils/restructured_data.json', 'w') as json_file:

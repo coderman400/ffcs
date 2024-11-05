@@ -10,13 +10,13 @@ class Cache:
     def cache_it(self,data):
         id = str(uuid.uuid4())
         with open(ROOT_DIR / "cache" / f"{id}.json", "w") as file: 
-            json.dump(data, file)
+            json.dump(data, file, indent=4)
         return id
 
     def retrieve(id):
         with open(ROOT_DIR / "cache" / f"{id}.json", "r") as file:
             data = json.load(file)
-        Cache.delete_it(id)
+        # Cache.delete_it(id)
         return data
     
     def delete_it(id):

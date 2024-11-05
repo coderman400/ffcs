@@ -149,16 +149,17 @@ class CourseScheduler:
         return total_credits
 
     def backtrack(self, index,depth=0):
-        MAX_DEPTH =  20
+        MAX_DEPTH =  200
         if len(self.results) == 120 or depth>MAX_DEPTH:
             return
-
-        if self.calculate_credits(self.selected) == self.credits_required:
+        if self.calculate_credits(self.selected) >= self.credits_required and self.calculate_credits(self.selected) <= 27:
+    
             morningSlots = sum(1 for courseTuple in self.selected if courseTuple[1][0][1] == '1')
             afternoon = len(self.selected) - morningSlots
             if (not self.morning and afternoon - morningSlots >= 2) or (self.morning and morningSlots - afternoon >= 2):
                 if all(mandatory_course[0] in [selected[0] for selected in self.selected] for mandatory_course in self.mandatory_courses_list):
                     self.results.append(list(self.selected))
+                    print(self.calculate_credits(self.selected))
                     return
 
         if index >= len(self.courses_list):
@@ -192,12 +193,12 @@ class CourseScheduler:
         self.backtrack(0)
         return self.results
 
-# # Example usage
-# with open("results-restructured.json","r") as file:
+# Example usage
+# with open("restructured_data.json","r") as file:
 #     data = json.load(file)
 
 
-# scheduler = CourseScheduler(morning=False, credits_required=27, data=data)
+# scheduler = CourseScheduler(morning=False, credits_required=21, data=data)
 # results = scheduler.generate_schedules()
 
 # # Display results

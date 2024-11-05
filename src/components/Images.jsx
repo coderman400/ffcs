@@ -27,7 +27,7 @@ const Images = () => {
     }
 
     try {
-      const response = await axios.post(`http://${apiAddress}/process2`, formData, {
+      const response = await axios.post(`${apiAddress}/process2`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

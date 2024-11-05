@@ -129,13 +129,12 @@ function Result() {
           </thead>
           <tbody>{days.map((day) => renderDayRow(day))}</tbody>
         </table>
-        {/* <table className='w-8/12 bg-white rounded-md mb-8'>
+        <table className='w-8/12 bg-white rounded-md mb-8'>
           <thead className='text-xl border-b text-white bg-charcoal'>
             <tr className=''>
               <th>Code</th>
               <th>Title</th>
               <th>Slot</th>
-              <th>Professor</th>
             </tr>
           </thead>
           <tbody className='text-center'>
@@ -143,13 +142,11 @@ function Result() {
               <tr className='border-b-gray-00 border-2' key={index}>
               <td>{data.code}</td>
               <td>{data.title}</td>
-              <td>{data.slot}</td>
-              <td>{data.professor}</td>
+              <td>{data.slot[0]}{data.slot[1]? '+'+data.slot[1] : ''}</td>
               </tr>
             ))}
-            
           </tbody>
-        </table> */}
+        </table>
       </div>
     </div>
   );

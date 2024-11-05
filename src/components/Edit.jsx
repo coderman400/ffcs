@@ -22,7 +22,7 @@ const Edit = () => {
   const courses = data.courses
   console.log(courses)
   const id = data.id.id
-  // const id = "b6dc3fd6-db7f-41b0-949a-75866290c276"
+  // const id = "0cf4d05c-95b3-4020-a77b-fe214b115801"
 
   //   let courses = [
   //   {
@@ -203,7 +203,7 @@ const Edit = () => {
       
       <div className='w-3/4 flex justify-end'>
         <button
-         className={`m-4 mr-0 w-32 flex justify-center py-4 text-lg font-bold bg-white rounded-md shadow-md hover:bg-persian hover:text-white duration-200 ${loading && 'bg-persian transition cursor-not-allowed' } `}
+         className={`m-4 mr-0 w-32 flex justify-center py-4 text-lg font-bol rounded-md shadow-md hover:bg-persian hover:text-white duration-200 ${loading? 'bg-persian transition cursor-not-allowed': 'bg-white' } `}
          onClick={()=>handleSubmit()}
          disabled={loading}
 

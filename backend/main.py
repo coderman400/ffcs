@@ -1,16 +1,18 @@
+import asyncio
 import json
-import aiofiles
-from fastapi import BackgroundTasks, FastAPI, File, Form, UploadFile, HTTPException, Cookie,Response
-from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
+import aiofiles
+from fastapi import (BackgroundTasks, Cookie, FastAPI, File, Form, Response,
+                     UploadFile)
+from fastapi.middleware.cors import CORSMiddleware
+
 from config import ROOT_DIR, UPLOADS
-from core.utils.async_extraction import TextExtraction
-from core.utils.restructure import Restructure
-from core.utils.response import Response
-from core.utils.cache import Cache
 from core.ffcs.algorithm import CourseScheduler as Algorithm
-import asyncio
+from core.utils.async_extraction import TextExtraction
+from core.utils.cache import Cache
+from core.utils.response import Response
+from core.utils.restructure import Restructure
 
 app = FastAPI()
 

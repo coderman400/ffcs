@@ -16,7 +16,6 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex space-x-6 font-bold">
           <Link to="/" className="text-white duration-75 hover:text-saffron">Upload</Link>
-          <Link to="/edit" className="text-white duration-75 hover:text-saffron">Edit</Link>
           <a className="text-white duration-75 hover:text-saffron" href="https://m.media-amazon.com/images/I/41RSnrYaaaL._AC_UF894,1000_QL80_.jpg" target="_blank" rel="noopener noreferrer">Cat</a>
         </div>
         <div className="md:hidden">
@@ -33,7 +32,6 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-persian p-4 mt-2 rounded-lg w-3/4 self-center">
           <Link to="/" className="text-white duration-75 hover:text-saffron mb-2 block">Upload</Link>
-          <Link to="/edit" className="text-white duration-75 hover:text-saffron mb-2 block">Edit</Link>
           <a className="text-white duration-75 hover:text-saffron" href="https://m.media-amazon.com/images/I/41RSnrYaaaL._AC_UF894,1000_QL80_.jpg" target="_blank" rel="noopener noreferrer">Cat</a>
         </div>
       )}

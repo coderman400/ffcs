@@ -19,6 +19,9 @@ const Edit = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state || {}
+  if(!data){
+    console.log("NO DATA")
+  }
   const courses = data.courses
   console.log(courses)
   const id = data.id.id

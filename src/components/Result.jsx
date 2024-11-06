@@ -29,6 +29,11 @@ function Result() {
   const labTimeSlots = timetableData.lab.map((slot) =>
     slot.lunch ? 'Lunch Break' : `${slot.start} - ${slot.end}`
   );
+  const handleBackClick = () => {
+    if (window.confirm("This will take you back to the edit page. Are you sure?")) {
+      navigate(-1);
+    }
+  };
 
   const renderDayRow = (day) => (
     <tr key={day}>
@@ -81,7 +86,7 @@ function Result() {
       <div className="flex justify-between items-center mt-20 w-10/12 mx-auto">
         <button
           className="p-2 m-2 bg-sienna hover:bg-sandy ease-in-out duration-75 font-bold text-white rounded"
-          onClick={() => navigate('/edit')} 
+          onClick={() => handleBackClick()} 
         >
           <ArrowLeftIcon height={30} width={60} />
         </button>

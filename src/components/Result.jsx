@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import timetableData from '../assets/small-schema.json';
-import courseData from '../assets/result.json';
+// import courseData from '../assets/result.json';
 import { ArrowLeftIcon} from '@heroicons/react/16/solid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 function Result() {
+  const location = useLocation();
+  const courseData = location.state || {}
   if (!courseData.slots) {
     alert('NO TIMETABLES MAN');
   }
   const navigate = useNavigate();
+  
 
   const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
   const [timetableIndex, setTimetableIndex] = useState(0);

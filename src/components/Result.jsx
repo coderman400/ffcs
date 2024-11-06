@@ -1,24 +1,22 @@
 import React, { useState } from 'react';
 import timetableData from '../assets/small-schema.json';
-// import courseData from '../assets/result.json';
-import { useLocation } from 'react-router-dom';
-
+import courseData from '../assets/result.json';
+import { ArrowLeftIcon} from '@heroicons/react/16/solid';
+import { useNavigate } from 'react-router-dom';
 function Result() {
-  const location = useLocation();
-  const courseData = location.state || {}
   if (!courseData.slots) {
     alert('NO TIMETABLES MAN');
   }
+  const navigate = useNavigate();
+
   const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
-  const [timetableIndex, setTimetableIndex] = useState(0);  // State for current timetable index
+  const [timetableIndex, setTimetableIndex] = useState(0);
 
-  const resultSlots = courseData.slots[timetableIndex];  // Get current timetable based on index
-
+  const resultSlots = courseData.slots[timetableIndex];
   const allSlots = [
     ...timetableData.theory.filter((slot) => slot.days),
     ...timetableData.lab.filter((slot) => slot.days),
   ];
-
   const theorySlots = [...timetableData.theory];
   const labSlots = [...timetableData.lab];
 
@@ -37,10 +35,8 @@ function Result() {
       {theorySlots.map((slot, index) => {
         if (slot.days && slot.days[day]) {
           let dispSlot;
-          // Check for both slots
           const slotDay1 = slot.days[day][0];
           const slotDay2 = slot.days[day][1];
-
           let colorSelect = 'persian';
 
           if (resultSlots[slotDay1]) {
@@ -56,7 +52,6 @@ function Result() {
 
           if (dispSlot) {
             return (
-              // Update the className to dynamically generate the class using template literals
               <td
                 style={{ backgroundColor: colorSelect === 'persian' ? '#2A9D8F' : '#264653' }}
                 className="text-white border border-gray-200 font-bold text-center p-2 sm:p-4"
@@ -67,7 +62,6 @@ function Result() {
             );
           }
 
-          // Handling when there's only one slot
           return (
             <td className="bg-cream text-black border border-gray-200 font-bold text-center p-2 sm:p-4" key={`${day}-${index}`}>
               {slotDay1} {slotDay2 ? `/ ${slotDay2}` : ''}
@@ -81,28 +75,46 @@ function Result() {
 
   return (
     <div>
-      <div className="flex justify-center mt-20 mb-4">
+      <div className="flex justify-between items-center mt-20 w-10/12 mx-auto">
         <button
-          className={`p-2 m-2 ${timetableIndex === 0 ? `bg-gray-400` : `bg-sienna hover:bg-sandy ease-in-out duration-75`} font-bold text-white rounded`}
-          disabled={timetableIndex === 0}
-          onClick={() => setTimetableIndex(timetableIndex - 1)}
+          className="p-2 m-2 bg-sienna hover:bg-sandy ease-in-out duration-75 font-bold text-white rounded"
+          onClick={() => navigate('/edit')} 
         >
-          Previous Timetable
+          <ArrowLeftIcon height={30} width={60} />
         </button>
-        <button
-          disabled={timetableIndex === courseData.slots.length - 1}
-          className={`p-2 m-2 ${timetableIndex === courseData.slots.length - 1 ? `bg-gray-400` : `bg-sienna hover:bg-sandy ease-in-out duration-75`} font-bold text-white rounded`}
-          onClick={() => setTimetableIndex(timetableIndex + 1)}
-        >
-          Next Timetable
-        </button>
+
+        <div className="flex justify-center">
+          <button
+            className={`p-2 m-2 ${timetableIndex === 0 ? 'bg-gray-400' : 'bg-sienna hover:bg-sandy ease-in-out duration-75'} font-bold text-white rounded`}
+            disabled={timetableIndex === 0}
+            onClick={() => setTimetableIndex(timetableIndex - 1)}
+          >
+            Previous Timetable
+          </button>
+          <button
+            disabled={timetableIndex === courseData.slots.length - 1}
+            className={`p-2 m-2 ${timetableIndex === courseData.slots.length - 1 ? 'bg-gray-400' : 'bg-sienna hover:bg-sandy ease-in-out duration-75'} font-bold text-white rounded`}
+            onClick={() => setTimetableIndex(timetableIndex + 1)}
+          >
+            Next Timetable
+          </button>
+        </div>
       </div>
 
       <div className="text-center">
         <span className="text-lg font-bold">Viewing Timetable {timetableIndex + 1} of {courseData.slots.length}</span>
       </div>
-
-      {/* Render timetable table */}
+      <div className="flex justify-center items-center gap-4 mt-6">
+        <div className="flex items-center gap-2">
+          <div style={{ backgroundColor: '#2A9D8F' }} className="w-4 h-4 rounded"></div>
+          <span>Theory</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div style={{ backgroundColor: '#264653' }} className="w-4 h-4 rounded"></div>
+          <span>Lab</span>
+        </div>
+      </div>
+    
       <div className="flex flex-col items-center justify-center overflow-x-auto">
         <table className="w-1/12 sm:w-10/12 bg-white m-10 shadow-xl b rounded-2xl">
           <thead className="bg-gray-300 text-center">
@@ -131,18 +143,18 @@ function Result() {
         </table>
         <table className='w-8/12 bg-white rounded-md mb-8'>
           <thead className='text-xl border-b text-white bg-charcoal'>
-            <tr className=''>
+            <tr>
               <th>Code</th>
               <th>Title</th>
               <th>Slot</th>
             </tr>
           </thead>
           <tbody className='text-center'>
-            {resultSlots.info.map((data,index)=>(
+            {resultSlots.info.map((data, index) => (
               <tr className='border-b-gray-00 border-2' key={index}>
-              <td>{data.code}</td>
-              <td>{data.title}</td>
-              <td>{data.slot[0]}{data.slot[1]? '+'+data.slot[1] : ''}</td>
+                <td>{data.code}</td>
+                <td>{data.title}</td>
+                <td>{data.slot[0]}{data.slot[1] ? '+' + data.slot[1] : ''}</td>
               </tr>
             ))}
           </tbody>

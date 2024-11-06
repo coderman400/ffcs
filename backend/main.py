@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
 from config import ROOT_DIR, UPLOADS
-from core.utils.extraction import TextExtraction
+from core.utils.async_extraction import TextExtraction
 from core.utils.restructure import Restructure
 from core.utils.response import Response
 from core.utils.cache import Cache

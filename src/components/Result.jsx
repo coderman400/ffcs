@@ -149,6 +149,9 @@ function Result() {
           </thead>
           <tbody>{days.map((day) => renderDayRow(day))}</tbody>
         </table>
+        <div className='flex justify-center mb-4 w-10/12'>
+          <p className={`text-xl font-bold ${resultSlots.credits==27 ? 'bg-saffron text-black': 'bg-persian text-white' } p-2 rounded-md`}>{resultSlots.credits} CREDITS</p>
+        </div>
         <table className='w-8/12 bg-white rounded-md mb-8'>
           <thead className='text-xl border-b text-white bg-charcoal'>
             <tr>

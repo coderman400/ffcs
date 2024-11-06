@@ -24,7 +24,7 @@ const Edit = () => {
   }
   const courses = data.courses
   console.log(courses)
-  const id = data.id.id
+  const id = data.id
   // const id = "0cf4d05c-95b3-4020-a77b-fe214b115801"
 
   //   let courses = [

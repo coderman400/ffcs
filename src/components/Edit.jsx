@@ -5,12 +5,13 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import  {useLocation} from 'react-router-dom';
-const apiAddress = 'https://ffcs-zu4x.onrender.com/process3';
+const apiAddress = 'http://192.168.165.109:8000/process3';
 
 
 const Edit = () => {
   const [expandedRows, setExpandedRows] = useState({});
   const [mandatory , setMandatory] = useState({});
+  const [project , setProject] = useState({});
   const [credits, setCredits] = useState('');
   const [creditsError, setCreditsError] = useState('');
   const [timing, setTiming] = useState('morning');
@@ -53,6 +54,12 @@ const Edit = () => {
       [index]: !prev[index]
     }))
   }
+  const selectProject = (index) => {
+    setProject((prev) => ({
+      ...prev,
+      [index]: !prev[index]
+    }))
+  }
 
   const handleCreditsChange = (event) => {
     setCredits(event.target.value);
@@ -81,8 +88,14 @@ const Edit = () => {
     .map((course)=> ({
       code: course.code
     }))
+    let result2 = courses
+    .filter((course,index)=>project[index])
+    .map((course)=> ({
+      code: course.code
+    }))
     console.log(result)
     formData.append('courses',JSON.stringify(result))
+    formData.append('projects',JSON.stringify(result2))
     try{
       setLoading(true)
       const response = await axios.post(`${apiAddress}`, formData, {
@@ -111,6 +124,7 @@ const Edit = () => {
             <th className='md:block sm:hidden'>Course title</th>
             <th className='w-56'>Slots</th>
             <th>Mandatory</th>
+            <th>Project?</th>
           </tr>
         </thead>
         <tbody>
@@ -135,6 +149,7 @@ const Edit = () => {
                 ) }
               </td>
               <td className='text-center'><input onClick={()=> selectMandatory(index)} className='w-20' type="checkbox"></input></td>
+              <td className='text-center'><input onClick={()=> selectProject(index)} className='w-20' type="checkbox"></input></td>
             </tr>
           ))
           }

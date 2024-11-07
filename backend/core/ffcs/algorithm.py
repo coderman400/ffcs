@@ -30,6 +30,7 @@ class CourseScheduler:
         # Prepare courses_list as a list of tuples (course_code, sorted_unique_slots)
         self.courses_list = []
         self.mandatory_courses_list=[]
+        self.projects_list=[]
         non_mandatory_courses_list=[]
         for course_code, course_info in self.data.items():
             
@@ -44,6 +45,9 @@ class CourseScheduler:
                 self.mandatory_courses_list.append((course_code, list(sorted_slots)))
             if(not course_info['mandatory']):
                 non_mandatory_courses_list.append((course_code, list(sorted_slots)))
+            if(course_info['project']):
+                self.projects_list.append((course_code, list(sorted_slots)))
+
         self.courses_list = self.mandatory_courses_list + non_mandatory_courses_list
 
     # Function to generate a sorting key based on the `morning` preference
@@ -144,6 +148,9 @@ class CourseScheduler:
 
             if course_code.startswith("STS"):
                 slot_credits = 1
+            
+            if course_code in [course_code for course_code,_ in self.projects_list]:
+                slot_credits += 1
 
             total_credits += slot_credits
 
@@ -160,7 +167,6 @@ class CourseScheduler:
             if (not self.morning and afternoon - morningSlots >= 2) or (self.morning and morningSlots - afternoon >= 2):
                 if all(mandatory_course[0] in [selected[0] for selected in self.selected] for mandatory_course in self.mandatory_courses_list):
                     self.results.append(list(self.selected))
-                    print(self.calculate_credits(self.selected))
                     return
 
         if index >= len(self.courses_list):

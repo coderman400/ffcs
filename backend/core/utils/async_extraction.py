@@ -28,7 +28,6 @@ class TextExtraction:
 
     async def _init_extraction(self):
         """Initialize the text extraction process asynchronously."""
-        print("Here in init extraction")
         self.text = await self.extract()  # Extract text asynchronously
         await self.post_process()  # Post-process the extracted data asynchronously
         self.reformat = await self.reformatter()  # Reformat asynchronously
@@ -40,7 +39,6 @@ class TextExtraction:
             "Extract slot detail, faculty, course type from the image. Extract the course code and title information as well. ",],
             tool_config={'function_calling_config': 'ANY'}
         )
-        print('Here in extract')
         fc = result.candidates[0].content.parts[0].function_call
         data = type(fc).to_dict(fc)
         return data["args"]

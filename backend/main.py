@@ -73,7 +73,6 @@ async def process_images(
         # Using aiofiles to handle file saving asynchronously
         async with aiofiles.open(str(file_location), 'wb') as buffer:
             await buffer.write(file.file.read())
-    print(file_paths)
     # Call the async extract function
     image_data = await extract(file_paths)
 
@@ -82,7 +81,6 @@ async def process_images(
 
     # Clean up in the background after processing
     background_tasks.add_task(lambda :clean_up(file_paths))
-    print(image_data["base_reformat"],cache.id)
 
     return {"courses": image_data["base_reformat"], "id": cache.id}
 
@@ -93,22 +91,25 @@ def process(
     credits: str = Form(...),
     timing: str = Form(...),
     courses: str = Form(...),
+    projects: str = Form(...),
     id: str = Form(...),
 ):
-    print(id)
     courses = json.loads(courses)
+    projects = json.loads(projects)
 
     base_text = Cache.retrieve(id)
 
     restructured = Restructure({"courses": base_text})
     restructured.mandate(courses)
+    restructured.projects(projects)
+
     restructured_data = restructured.data
 
     morning= True if timing == "morning" else False
     base = Algorithm(morning=morning, credits_required=int(credits), data=restructured_data)
     timetables = base.generate_schedules()
     
-    response = Response(timetables,base_text).response
+    response = Response(timetables,base_text,restructured.get_projects(projects)).response
     return response
 
 

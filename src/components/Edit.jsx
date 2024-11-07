@@ -193,9 +193,19 @@ const Edit = () => {
           </div>
           
           <div className="flex-1 p-8 md:w-1/2 sm:w-full md:mt-0 sm:mt-4 shadow-md bg-white rounded-lg">
-            <h2 className="text-3xl font-bold text-gray-800 mb-6">Advanced Options</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-6">Note</h2>
             <form className="space-y-4">
-              <div>
+              <div className='text-xl'>
+                <ul>
+                <li>Select courses you need for <b>EVERY timetable</b> as mandatory.</li>
+                <li>Select all project courses as project.</li>
+        
+                <li>If you're facing an error, try changing preferences. </li>
+                <li> If the slots extracted are wrong, try uploading clearer or different images.</li>
+                </ul>
+                
+              </div>
+              {/* <div>
                 <label htmlFor="input" className="block text-gray-600 font-medium mb-1">
                   Skibidi
                 </label>
@@ -214,7 +224,7 @@ const Edit = () => {
                   className={`w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400`}
                   placeholder='weowoeoo'
                 />
-              </div>
+              </div> */}
             </form>
           </div>
       </div>

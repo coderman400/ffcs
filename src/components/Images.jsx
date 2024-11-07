@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const apiAddress = 'https://ffcs-zu4x.onrender.com';
+const apiAddress = 'http://192.168.165.109:8000';
 
 const Images = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);

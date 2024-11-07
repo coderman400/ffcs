@@ -5,7 +5,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import  {useLocation} from 'react-router-dom';
-const apiAddress = 'https://ffcs-zu4x.onrender.com/process3';
+const apiAddress = 'http://192.168.165.109:8000/process3';
 
 
 const Edit = () => {
@@ -105,7 +105,11 @@ const Edit = () => {
         withCredentials:true
       })
       console.log(response.data)
-      navigate('/result', { state: response.data });
+      if(response.data.slots.length==0){
+        alert("Timetables could not be generated. Change preferences or refer docs.")
+      }else{
+        navigate('/result', { state: response.data });
+      }
     }catch{
       alert("error!")
     }finally{

@@ -17,13 +17,14 @@ driver = webdriver.Chrome()
 url = "https://ffcsonthego.vatz88.in/"
 driver.get(url)
 
+
 # Open advanced options
 def open_advanced_options():
     adv_opts = WebDriverWait(driver, 4).until(
         EC.presence_of_element_located((By.ID, "advanced-toggle"))
     )
     adv_opts.click()
-
+open_advanced_options()k
 # Process the courses for each set
 def process_courses(course_set, index):
     clashing_courses = []
@@ -87,7 +88,6 @@ def reset_table():
 # Test function using pytest
 @pytest.mark.parametrize("index, course_set", enumerate(course_sets))
 def test_course_clashes(index, course_set):
-    open_advanced_options()
     clashing_courses = process_courses(course_set, index)
 
     # Assertions to verify clashing courses

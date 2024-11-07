@@ -159,6 +159,8 @@ class CourseScheduler:
     def backtrack(self, index,depth=0):
         MAX_DEPTH =  200
         if len(self.results) == 120 or depth>MAX_DEPTH:
+            if depth>MAX_DEPTH:
+                print("Reached max depth")
             return
         if self.calculate_credits(self.selected) >= self.credits_required and self.calculate_credits(self.selected) <= 27:
     
@@ -200,12 +202,12 @@ class CourseScheduler:
         self.backtrack(0)
         return self.results
 
-# Example usage
+
 # with open("restructured_data.json","r") as file:
 #     data = json.load(file)
 
 
-# scheduler = CourseScheduler(morning=False, credits_required=21, data=data)
+# scheduler = CourseScheduler(morning=False, credits_required=27, data=data)
 # results = scheduler.generate_schedules()
 
 # # Display results

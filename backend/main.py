@@ -1,6 +1,7 @@
 import asyncio
 import json
 from pathlib import Path
+import math
 
 import aiofiles
 from fastapi import (BackgroundTasks, Cookie, FastAPI, File, Form, Response,
@@ -74,7 +75,10 @@ async def process_images(
         async with aiofiles.open(str(file_location), 'wb') as buffer:
             await buffer.write(file.file.read())
     # Call the async extract function
-    image_data = await extract(file_paths)
+    try:
+        image_data = await extract(file_paths)
+    except Exception as e:
+        return {"error": "An error occurred during processing."}
 
     # Process the image_data as usual
     cache = Cache(image_data["base_text"])
@@ -106,7 +110,7 @@ def process(
     restructured_data = restructured.data
 
     morning= True if timing == "morning" else False
-    base = Algorithm(morning=morning, credits_required=int(credits), data=restructured_data)
+    base = Algorithm(morning=morning, credits_required=math.floor(float(credits)), data=restructured_data)
     timetables = base.generate_schedules()
     
     response = Response(timetables,base_text,restructured.get_projects(projects)).response

@@ -100,8 +100,10 @@ class Restructure:
         projects = self.get_projects(projects)
         for course in self.data.keys():
             self.data[course]["project"] = True if course in projects else False
-# base = Restructure({"courses":json.load(open(r"cache\62aedc42-905e-41e3-89a0-4dc6883e2c88.json","r"))})
+
+# base = Restructure({"courses":json.load(open(r"cache\6000d5f5-d5dd-4dd0-b911-d5248c349ebc.json","r"))})
 # base.mandate([])
+# base.projects([{"code":"CSI4001"},{"code":"CSI4005"},{"code":"CS13013"},{"code":"CSI3006"},{"code":"MGT1022"}])
 # print(base.data)
 
 # with open('core/utils/restructured_data.json', 'w') as json_file:

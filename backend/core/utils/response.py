@@ -8,11 +8,17 @@ class Response:
         self.response = self.make_response(self.samples)
         
 
-    def sample(self,k):
+    def sample(self,sample_size):
         """Sample k timetables from the results"""
-        length = len(self.results)
-        partition = (length//2) // k
-        return [self.results[i] for i in range(0, length, partition)][:k]    
+        if len(self.results) > 0:
+            length = len(self.results)
+            if length > sample_size:
+                partition = length// sample_size
+            else:
+                partition = 1
+            return [self.results[i] for i in range(0, length, partition)][:sample_size if length > sample_size else length]
+        else:
+            return []
     
     def get_course(self,course_code):
         """Get the course details from the base"""
@@ -22,6 +28,8 @@ class Response:
             
     def make_response(self,data):
         """Structure the data for the response"""
+        if not data:
+            return {"slots":[]}
         final = {"slots" : []}
         flatten = lambda data : [(x,"+".join(y).split("+")) for x,y in data]
 

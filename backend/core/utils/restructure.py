@@ -87,10 +87,19 @@ class Restructure:
 
         return final
     
-    def mandate(self,courses:list[str]):
+    
+    def get_projects(self,projects):
+        return [object["code"] for object in projects]
+    
+    def mandate(self,courses):
+        courses = self.get_projects(courses)
         for course in self.data.keys():
             self.data[course]["mandatory"] = True if course in courses else False
-
+    
+    def projects(self,projects):
+        projects = self.get_projects(projects)
+        for course in self.data.keys():
+            self.data[course]["project"] = True if course in projects else False
 # base = Restructure({"courses":json.load(open(r"cache\62aedc42-905e-41e3-89a0-4dc6883e2c88.json","r"))})
 # base.mandate([])
 # print(base.data)

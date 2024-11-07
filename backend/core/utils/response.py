@@ -1,11 +1,12 @@
 
 class Response:
-    def __init__(self,data,base):
+    def __init__(self,data,base,projects):
         self.results = data
         self.base = base
+        self.projects_list = projects
         self.samples = self.sample(30)
-        print(self.samples)
         self.response = self.make_response(self.samples)
+        
 
     def sample(self,k):
         """Sample k timetables from the results"""
@@ -25,7 +26,7 @@ class Response:
         flatten = lambda data : [(x,"+".join(y).split("+")) for x,y in data]
 
         for index,timetable in enumerate(data):
-            credits = self.calculate_credits(timetable)
+            credits = self.calculate_credits(timetable,self.projects_list)
             data = flatten(timetable)
             response = {slot:course for course,slots in data for slot in slots}
             info = []
@@ -40,7 +41,7 @@ class Response:
 
         return final
     
-    def calculate_credits(self, selected):
+    def calculate_credits(self, selected,projects):
         total_credits = 0
         seen_courses = set()
 
@@ -62,6 +63,9 @@ class Response:
 
             if course_code.startswith("STS"):
                 slot_credits = 1
+
+            if course_code in [course_code for course_code in self.projects_list]:
+                slot_credits += 1
 
             total_credits += slot_credits
 

@@ -1,4 +1,5 @@
 import json
+
 # from config import HERE
 
 class CourseScheduler:

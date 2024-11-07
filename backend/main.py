@@ -1,17 +1,18 @@
+import asyncio
 import json
-import shutil
-import uuid
+from pathlib import Path
 
-from fastapi import BackgroundTasks, FastAPI, File, Form, UploadFile, HTTPException, Cookie,Response
+import aiofiles
+from fastapi import (BackgroundTasks, Cookie, FastAPI, File, Form, Response,
+                     UploadFile)
 from fastapi.middleware.cors import CORSMiddleware
-from tqdm import tqdm
 
 from config import ROOT_DIR, UPLOADS
-from core.utils.extraction import TextExtraction
-from core.utils.restructure import Restructure
-from core.utils.response import Response
-from core.utils.cache import Cache
 from core.ffcs.algorithm import CourseScheduler as Algorithm
+from core.utils.async_extraction import TextExtraction
+from core.utils.cache import Cache
+from core.utils.response import Response
+from core.utils.restructure import Restructure
 
 app = FastAPI()
 
@@ -24,42 +25,67 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-def clean_up():
-    for file in UPLOADS.iterdir():
-        file.unlink()
+def clean_up(file_paths: list):
+    """Delete only the files specified in the file_paths list."""
+    for file_path in file_paths:
+        file = Path(file_path)
+        if file.exists() and file.is_file():
+            file.unlink()
 
-def extract(image_paths):
-    """Extract text from images"""
+
+
+
+async def extract(image_paths):
+    """Extract text from images asynchronously."""
     reformat_data = []
     base_text = []
-    for image_path in tqdm(image_paths):
-        base = TextExtraction(image_path)
-        reformat_data.append(base.reformat)
-        base_text.append(base.text)
-    
-    return {"base_reformat":reformat_data, "base_text":base_text}
+
+    # Run text extraction concurrently for each image
+    tasks = []
+    for image_path in image_paths:
+        tasks.append(asyncio.create_task(process_image(image_path, reformat_data, base_text)))
+
+    await asyncio.gather(*tasks)
+
+    return {"base_reformat": reformat_data, "base_text": base_text}
+
+async def process_image(image_path, reformat_data, base_text):
+    """Process an image asynchronously."""
+    base = TextExtraction(image_path)  # Assuming TextExtraction is a blocking operation
+    await base._init_extraction()
+    reformat_data.append(base.reformat)
+    base_text.append(base.text)
 
 
 @app.post("/process2/")
-def process_images(
+async def process_images(
     background_tasks: BackgroundTasks,
     image: list[UploadFile] = File(...),
 ):
     """API for generating timetables from uploaded images."""
     file_paths = []
 
+    # Save files asynchronously
     for file in image:
         file_location = UPLOADS / file.filename
         file_paths.append(str(file_location))
 
-        with open(str(file_location), "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-    
-    image_data = extract(file_paths)
-    id = Cache(image_data["base_text"])
-    background_tasks.add_task(clean_up)
+        # Using aiofiles to handle file saving asynchronously
+        async with aiofiles.open(str(file_location), 'wb') as buffer:
+            await buffer.write(file.file.read())
+    print(file_paths)
+    # Call the async extract function
+    image_data = await extract(file_paths)
 
-    return {"courses" : image_data["base_reformat"],"id":id}
+    # Process the image_data as usual
+    cache = Cache(image_data["base_text"])
+
+    # Clean up in the background after processing
+    background_tasks.add_task(lambda :clean_up(file_paths))
+    print(image_data["base_reformat"],cache.id)
+
+    return {"courses": image_data["base_reformat"], "id": cache.id}
+
 
 @app.post("/process3/")
 def process(

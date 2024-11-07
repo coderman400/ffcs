@@ -8,3 +8,4 @@ sqlalchemy
 opencv-python
 python-multipart
 uvicorn
+aiofiles

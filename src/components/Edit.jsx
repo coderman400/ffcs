@@ -197,7 +197,8 @@ const Edit = () => {
             <form className="space-y-4">
               <div className='text-xl'>
                 <ul>
-                <li>Select courses you need for <b>EVERY timetable</b> as mandatory.</li>
+                <li>Try not to choose over 6-7 mandatory selections, which may lead to error.</li>
+    
                 <li>Select all project courses as project.</li>
         
                 <li>If you're facing an error, try changing preferences. </li>

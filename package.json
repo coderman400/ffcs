@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@vercel/analytics": "^1.3.2",
     "axios": "^1.7.7",
     "ffcs": "file:",
     "react": "^18.3.1",

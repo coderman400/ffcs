@@ -24,7 +24,7 @@ class TextExtraction:
         load_dotenv()
         genai.configure(api_key=os.getenv("api_key"))
         self.genai_image = genai.upload_file(str(self.image_path))
-        self.model = genai.GenerativeModel("gemini-1.5-flash-latest", tools=self.tools())
+        self.model = genai.GenerativeModel("gemini-2.0-flash", tools=self.tools())
 
     async def _init_extraction(self):
         """Initialize the text extraction process asynchronously."""
